@@ -1,0 +1,109 @@
+=== Redaquest Connector ===
+Contributors: redaquest
+Tags: content sync, woocommerce, social media, scheduling
+Requires at least: 5.8
+Tested up to: 6.8
+Requires PHP: 7.4
+Stable tag: 3.0.0
+License: GPLv2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+
+Sync WordPress and WooCommerce content with RedaQuest and schedule social posts straight from the block editor.
+
+== Description ==
+
+Redaquest Connector links your WordPress site to [RedaQuest](https://redaquest.com), an AI content marketing and social media platform. It does two things:
+
+**1. Content & product sync (API key).** RedaQuest reads your published content so you can repurpose it into social posts and plans:
+
+* WordPress pages and posts
+* Custom Post Types (portfolio, references, services, and more)
+* WooCommerce products (when WooCommerce is active)
+* Post and product categories
+* Custom Fields from ACF, Meta Box, Pods, and native WordPress meta
+
+It can also create and update posts on your site from RedaQuest when you enable writing.
+
+**2. Social scheduling from the editor (Connect).** After you connect your site to a RedaQuest workspace, a panel appears in the block editor. From any article you can:
+
+* Generate per-platform social copy from the article with AI
+* Generate a brand image and set it as the featured image
+* Pick the connected social accounts to post to
+* Schedule the social posts to publish on the article's date, in one click or automatically when you publish the article
+
+The connection uses a secure server-to-server token. No keys are typed into the browser, and you can disconnect at any time.
+
+== External services ==
+
+This plugin connects to RedaQuest to provide content sync and social scheduling. A RedaQuest account is required for these features.
+
+What data is sent, and when:
+
+* Content sync: when RedaQuest requests content through this plugin's REST API (authenticated with your API key), the selected posts, pages, and products are returned to RedaQuest.
+* Connect: when you connect a site, the site URL and site name are sent to RedaQuest to issue a connection token that is stored on this site.
+* Social scheduling: when you prepare a social post from an article, the article text and metadata (title, URL, excerpt), the chosen platforms and account IDs, the scheduled date, and optionally the featured image URL are sent to RedaQuest. RedaQuest generates the copy/image and schedules the posts through its publishing provider.
+
+Endpoints used: the RedaQuest web app at https://app.redaquest.com (connection approval screen) and the RedaQuest API at https://*.supabase.co/functions/v1 (token exchange and the editor bridge).
+
+Service provider: RedaQuest, https://redaquest.com
+Terms of Use: https://redaquest.com/terms
+Privacy Policy: https://redaquest.com/privacy
+
+== Installation ==
+
+1. Upload the plugin to `/wp-content/plugins/redaquest-connector` or install it from the Plugins screen.
+2. Activate the plugin through the **Plugins** menu in WordPress.
+3. Go to **Settings → Redaquest Connector**.
+4. For content sync: paste the API key from your RedaQuest integration (RedaQuest app, Settings → Integrations).
+5. For social scheduling: click **Connect RedaQuest** on the Connection tab and approve the connection in RedaQuest.
+
+== Frequently Asked Questions ==
+
+= Where do I get the API key? =
+
+In the RedaQuest app when you create a new WordPress integration (Settings → Integrations).
+
+= Which Custom Post Types are supported? =
+
+The plugin automatically detects all public custom post types on your site. In the settings you choose which ones to sync.
+
+= Can I publish posts to WordPress from RedaQuest? =
+
+Yes. Enable **Content writing** on the Publishing tab and RedaQuest can create and update posts on your site.
+
+= Do I need a RedaQuest account? =
+
+Yes. A RedaQuest account and workspace are required to connect and to schedule social posts.
+
+== Screenshots ==
+
+1. Unified settings page: Connection tab with the Connect button and API key.
+2. Sync tab: choose which content types to sync.
+3. Block editor panel: generate social copy from an article and schedule it.
+
+== Changelog ==
+
+= 3.0.0 =
+* New: connect the site to a RedaQuest workspace and schedule social posts from the block editor.
+* New: AI-generated per-platform social copy and a brand featured image from inside the editor.
+* New: unified settings page (Connection, Sync, Publishing, API & Debug); the old separate connection screen is gone.
+* Changed: the plugin is now fully translatable (English base) with bundled translations.
+* Fixed: output escaping, timezone-safe dates, and other code-quality issues.
+
+= 2.5.0 =
+* Update endpoint to modify existing posts from RedaQuest.
+* Get-by-RedaQuest-ID lookup endpoint.
+* Improved SEO meta updates (Yoast, Rank Math) and category/tag handling.
+
+= 2.4.0 =
+* Tab-based settings UI.
+* More accurate CPT counts.
+
+= 2.0.0 =
+* Full Custom Post Type support and content-type selection in the admin.
+* Optional content writing and default author.
+
+== Upgrade Notice ==
+
+= 3.0.0 =
+Adds social scheduling from the block editor and unifies the settings page. After updating, open Settings → Redaquest Connector and click Connect to enable scheduling.
