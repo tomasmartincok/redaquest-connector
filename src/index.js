@@ -878,7 +878,13 @@ function RedaQuestBlogModal() {
 				if ( ! ( imgRes && imgRes.imageUrl ) ) imgFailed++;
 				if ( imgRes && imgRes.imageUrl ) {
 						imgNote = ` · ${ __( 'cover image added', 'redaquest-connector' ) }`;
-						if ( imgRes.featuredMediaId ) editPost( { featured_media: imgRes.featuredMediaId } );
+						if ( imgRes.featuredMediaId ) {
+							const fid = imgRes.featuredMediaId;
+							const applyFeatured = () => { try { dataDispatch( 'core/editor' ).editPost( { featured_media: fid } ); } catch ( e ) {} };
+							applyFeatured();
+							// re-assert after a moment: the heavy article insert can trigger an autosave that clobbers the edit
+							setTimeout( applyFeatured, 2500 );
+						}
 					}
 			if ( sectionImgCount ) imgNote += ` · ${ sectionImgCount } ${ __( 'section image(s)', 'redaquest-connector' ) }`;
 			}
