@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Redaquest Connector
  * Description: Official Redaquest connector — OAuth link, sync posts, pages, CPTs and WooCommerce products to your content marketing workspace.
- * Version: 2.8.3
+ * Version: 2.8.4
  * Requires at least: 5.3
  * Requires PHP: 7.4
  * Author: Redaquest

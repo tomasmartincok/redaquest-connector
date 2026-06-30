@@ -4,7 +4,7 @@ Tags: redaquest, woocommerce, content marketing, sync, publishing, ai
 Requires at least: 5.3
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 2.8.3
+Stable tag: 2.8.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -111,6 +111,9 @@ No. Content is transmitted only between your WordPress site and Redaquest server
 
 == Changelog ==
 
+= 2.8.4 =
+* Packaging: exclude VCS files (.git, .github) from the distributed plugin
+
 = 2.8.3 =
 * WordPress.org directory assets: icon, banner, and screenshots
 * Improved plugin readme and marketing descriptions
@@ -133,6 +136,9 @@ No. Content is transmitted only between your WordPress site and Redaquest server
 * Full i18n (sk_SK, en_US), PHPUnit tests, PHPCS CI
 
 == Upgrade Notice ==
+
+= 2.8.4 =
+Packaging cleanup only. No functional changes.
 
 = 2.8.3 =
 Updated WordPress.org listing with new branding assets and improved descriptions. No code changes required.

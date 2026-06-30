@@ -1,3 +1,6 @@
+= 2.8.4 =
+* Packaging: exclude VCS files (.git, .github) from the distributed plugin
+
 = 2.6.1 =
 * Refactor: REST controller, admin settings, helpers and media in separate classes
 * PHPCS configuration and DEVELOPER.md
