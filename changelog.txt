@@ -1,0 +1,44 @@
+= 2.6.1 =
+* Refactor: REST controller, admin settings, helpers and media in separate classes
+* PHPCS configuration and DEVELOPER.md
+
+= 2.6.0 =
+* Plugin structure refactor (bootstrap + includes + admin assets)
+* REST API parameter validation via args schemas
+* Activation hook with default options
+
+= 2.5.1 =
+* SSRF protection for image downloads (HTTPS, MIME validation, size limit)
+* Post status allowlist for create/update
+* API key compared with hash_equals(); removed query-parameter auth
+* Added uninstall.php
+
+= 2.5.0 =
+* PUT endpoint for updating existing posts
+* GET by Redaquest ID endpoint
+* Bidirectional sync support, category/tag/image/SEO updates
+
+= 2.4.0 =
+* Tab-based admin UI (Connection, Sync, Publishing, Diagnostics)
+* Improved CPT sync counts and layout
+
+= 2.3.0 =
+* Extended admin layout, improved CPT validation
+
+= 2.2.0 =
+* Masked API key in admin, improved security messaging
+
+= 2.1.0 =
+* ACF, Meta Box, Pods support; extended WooCommerce data
+
+= 2.0.0 =
+* Custom post types support, write toggle, default author, SEO plugins
+
+= 1.2.0 =
+* Posts synchronization, improved logging
+
+= 1.1.0 =
+* WooCommerce product attributes, API key security
+
+= 1.0.0 =
+* Initial release

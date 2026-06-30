@@ -1,7 +1,2 @@
-node_modules/
-build/
-*.zip
-*.map
-.DS_Store
-languages/*.mo
-languages/*.json
+/vendor/
+/.phpunit.result.cache

@@ -1,0 +1,21 @@
+{
+  "name": "redaquest/connector",
+  "description": "Redaquest WordPress Connector plugin (dev tooling)",
+  "type": "wordpress-plugin",
+  "require-dev": {
+    "phpunit/phpunit": "^9.6",
+    "yoast/phpunit-polyfills": "^2.0",
+    "squizlabs/php_codesniffer": "^3.10",
+    "wp-coding-standards/wpcs": "^3.1"
+  },
+  "scripts": {
+    "test": "phpunit -c phpunit.xml.dist",
+    "lint": "phpcs -n -p --standard=phpcs.xml.dist ."
+  },
+  "config": {
+    "sort-packages": true,
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true
+    }
+  }
+}

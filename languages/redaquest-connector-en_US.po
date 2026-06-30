@@ -1,13 +1,13 @@
-# Slovak translation for Redaquest Connector
+# English translation for Redaquest Connector
 # Copyright (C) 2026 Redaquest
 msgid ""
 msgstr ""
 "Project-Id-Version: Redaquest Connector 2.7.0\n"
-"Language: sk_SK\n"
+"Language: en_US\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n>=2 && n<=4 ? 1 : 2);\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "Redaquest Connector"
 msgstr "Redaquest Connector"
@@ -16,136 +16,136 @@ msgid "Redaquest"
 msgstr "Redaquest"
 
 msgid "Pripojenie"
-msgstr "Pripojenie"
+msgstr "Connection"
 
 msgid "Synchronizácia"
-msgstr "Synchronizácia"
+msgstr "Synchronization"
 
 msgid "Publikovanie"
-msgstr "Publikovanie"
+msgstr "Publishing"
 
 msgid "API & Debug"
 msgstr "API & Debug"
 
 msgid "Stav pripojenia"
-msgstr "Stav pripojenia"
+msgstr "Connection status"
 
 msgid "API kľúč je nakonfigurovaný"
-msgstr "API kľúč je nakonfigurovaný"
+msgstr "API key is configured"
 
 msgid "API kľúč nie je nakonfigurovaný"
-msgstr "API kľúč nie je nakonfigurovaný"
+msgstr "API key is not configured"
 
 msgid "API Endpoint:"
-msgstr "API Endpoint:"
+msgstr "API endpoint:"
 
 msgid "API Kľúč"
-msgstr "API Kľúč"
+msgstr "API key"
 
 msgid "Dôležité: API kľúč získate v Redaquest aplikácii v sekcii Nastavenia → Integrácie."
-msgstr "Dôležité: API kľúč získate v Redaquest aplikácii v sekcii Nastavenia → Integrácie."
+msgstr "Important: You get the API key in the Redaquest app under Settings → Integrations."
 
 msgid "Zmeniť kľúč"
-msgstr "Zmeniť kľúč"
+msgstr "Change key"
 
 msgid "Zadajte nový API kľúč"
-msgstr "Zadajte nový API kľúč"
+msgstr "Enter a new API key"
 
 msgid "Zadajte nový kľúč pre prepísanie existujúceho."
-msgstr "Zadajte nový kľúč pre prepísanie existujúceho."
+msgstr "Enter a new key to replace the existing one."
 
 msgid "Vložte API kľúč z Redaquest"
-msgstr "Vložte API kľúč z Redaquest"
+msgstr "Paste the API key from Redaquest"
 
 msgid "Typy obsahu na synchronizáciu"
-msgstr "Typy obsahu na synchronizáciu"
+msgstr "Content types to synchronize"
 
 msgid "Vyberte typy obsahu, ktoré chcete synchronizovať s Redaquest."
-msgstr "Vyberte typy obsahu, ktoré chcete synchronizovať s Redaquest."
+msgstr "Select the content types you want to synchronize with Redaquest."
 
 msgid "WooCommerce je aktívny — produkty budú automaticky synchronizované."
-msgstr "WooCommerce je aktívny — produkty budú automaticky synchronizované."
+msgstr "WooCommerce is active — products will be synchronized automatically."
 
 msgid "Produkty:"
-msgstr "Produkty:"
+msgstr "Products:"
 
 msgid "Kategórie:"
-msgstr "Kategórie:"
+msgstr "Categories:"
 
 msgid "Zápis obsahu"
-msgstr "Zápis obsahu"
+msgstr "Content writing"
 
 msgid "Povoľte vytváranie článkov priamo z Redaquest."
-msgstr "Povoľte vytváranie článkov priamo z Redaquest."
+msgstr "Allow creating posts directly from Redaquest."
 
 msgid "Povoliť zápis"
-msgstr "Povoliť zápis"
+msgstr "Allow writing"
 
 msgid "Povoliť vytváranie a úpravu článkov z Redaquest"
-msgstr "Povoliť vytváranie a úpravu článkov z Redaquest"
+msgstr "Allow creating and editing posts from Redaquest"
 
 msgid "Umožní publikovať obsah priamo z Redaquest na váš web."
-msgstr "Umožní publikovať obsah priamo z Redaquest na váš web."
+msgstr "Lets you publish content from Redaquest directly to your site."
 
 msgid "Predvolený autor"
-msgstr "Predvolený autor"
+msgstr "Default author"
 
 msgid "— Automaticky (admin) —"
-msgstr "— Automaticky (admin) —"
+msgstr "— Automatically (admin) —"
 
 msgid "Uložiť nastavenia"
-msgstr "Uložiť nastavenia"
+msgstr "Save settings"
 
 msgid "Dostupné API endpointy"
-msgstr "Dostupné API endpointy"
+msgstr "Available API endpoints"
 
 msgid "Tieto endpointy používa Redaquest pre komunikáciu s vaším webom:"
-msgstr "Tieto endpointy používa Redaquest pre komunikáciu s vaším webom:"
+msgstr "Redaquest uses these endpoints to communicate with your site:"
 
 msgid "Endpoint"
 msgstr "Endpoint"
 
 msgid "Metóda"
-msgstr "Metóda"
+msgstr "Method"
 
 msgid "Popis"
-msgstr "Popis"
+msgstr "Description"
 
 msgid "Overenie pripojenia"
-msgstr "Overenie pripojenia"
+msgstr "Verify connection"
 
 msgid "Zoznam typov obsahu"
-msgstr "Zoznam typov obsahu"
+msgstr "List of content types"
 
 msgid "Stránky, články, CPT"
-msgstr "Stránky, články, CPT"
+msgstr "Pages, posts, CPT"
 
 msgid "Konkrétny typ"
-msgstr "Konkrétny typ"
+msgstr "Specific type"
 
 msgid "WooCommerce produkty"
-msgstr "WooCommerce produkty"
+msgstr "WooCommerce products"
 
 msgid "Kategórie"
-msgstr "Kategórie"
+msgstr "Categories"
 
 msgid "Custom fields"
 msgstr "Custom fields"
 
 msgid "Vytvorenie článku"
-msgstr "Vytvorenie článku"
+msgstr "Create post"
 
 msgid "Aktualizácia článku"
-msgstr "Aktualizácia článku"
+msgstr "Update post"
 
 msgid "Vyhľadanie podľa Redaquest ID"
-msgstr "Vyhľadanie podľa Redaquest ID"
+msgstr "Find by Redaquest ID"
 
 msgid "Podpora custom fields"
-msgstr "Podpora custom fields"
+msgstr "Custom fields support"
 
 msgid "Plugin automaticky deteguje a synchronizuje custom fields z týchto pluginov:"
-msgstr "Plugin automaticky deteguje a synchronizuje custom fields z týchto pluginov:"
+msgstr "The plugin automatically detects and synchronizes custom fields from these plugins:"
 
 msgid "Native WordPress post meta"
 msgstr "Native WordPress post meta"
@@ -154,64 +154,64 @@ msgid "Parameter:"
 msgstr "Parameter:"
 
 msgid "Neplatný stav príspevku."
-msgstr "Neplatný stav príspevku."
+msgstr "Invalid post status."
 
 msgid "Neplatná URL obrázka."
-msgstr "Neplatná URL obrázka."
+msgstr "Invalid image URL."
 
 msgid "Neplatná alebo zakázaná URL obrázka."
-msgstr "Neplatná alebo zakázaná URL obrázka."
+msgstr "Invalid or disallowed image URL."
 
 msgid "URL obrázka musí používať HTTPS."
-msgstr "URL obrázka musí používať HTTPS."
+msgstr "Image URL must use HTTPS."
 
 msgid "Nepodarilo sa stiahnuť obrázok."
-msgstr "Nepodarilo sa stiahnuť obrázok."
+msgstr "Failed to download the image."
 
 msgid "Obrázok prekračuje povolenú veľkosť."
-msgstr "Obrázok prekračuje povolenú veľkosť."
+msgstr "Image exceeds the allowed size."
 
 msgid "Nepodporovaný typ obrázka."
-msgstr "Nepodporovaný typ obrázka."
+msgstr "Unsupported image type."
 
 msgid "Chýba API kľúč. Vložte API kľúč z Redaquest integrácie do nastavení pluginu."
-msgstr "Chýba API kľúč. Vložte API kľúč z Redaquest integrácie do nastavení pluginu."
+msgstr "Missing API key. Add the API key from your Redaquest integration in the plugin settings."
 
 msgid "API kľúč nie je nakonfigurovaný v nastaveniach pluginu. Prejdite do Nastavenia → Redaquest a vložte API kľúč."
-msgstr "API kľúč nie je nakonfigurovaný v nastaveniach pluginu. Prejdite do Nastavenia → Redaquest a vložte API kľúč."
+msgstr "API key is not configured in plugin settings. Go to Settings → Redaquest and add the API key."
 
 msgid "Neplatný API kľúč. Skontrolujte, či ste vložili správny API kľúč z Redaquest integrácie."
-msgstr "Neplatný API kľúč. Skontrolujte, či ste vložili správny API kľúč z Redaquest integrácie."
+msgstr "Invalid API key. Check that you entered the correct key from your Redaquest integration."
 
 msgid "Zápis nie je povolený. Povoľte zápis v nastaveniach pluginu."
-msgstr "Zápis nie je povolený. Povoľte zápis v nastaveniach pluginu."
+msgstr "Writing is disabled. Enable writing in the plugin settings."
 
 msgid "Pripojenie úspešné."
-msgstr "Pripojenie úspešné."
+msgstr "Connection successful."
 
 msgid "Post type neexistuje."
-msgstr "Post type neexistuje."
+msgstr "Post type does not exist."
 
 msgid "Typ obsahu nie je povolený pre synchronizáciu."
-msgstr "Typ obsahu nie je povolený pre synchronizáciu."
+msgstr "Content type is not enabled for synchronization."
 
 msgid "Príspevok neexistuje."
-msgstr "Príspevok neexistuje."
+msgstr "Post does not exist."
 
 msgid "WooCommerce nie je aktívny."
-msgstr "WooCommerce nie je aktívny."
+msgstr "WooCommerce is not active."
 
 msgid "Chýba nadpis príspevku."
-msgstr "Chýba nadpis príspevku."
+msgstr "Post title is missing."
 
 msgid "%s bol vytvorený."
-msgstr "%s bol vytvorený."
+msgstr "%s was created."
 
 msgid "Článok neexistuje."
-msgstr "Článok neexistuje."
+msgstr "Post does not exist."
 
 msgid "%s bol aktualizovaný."
-msgstr "%s bol aktualizovaný."
+msgstr "%s was updated."
 
 msgid "Prekročený limit požiadaviek. Skúste znova o chvíľu."
-msgstr "Prekročený limit požiadaviek. Skúste znova o chvíľu."
+msgstr "Rate limit exceeded. Please try again shortly."

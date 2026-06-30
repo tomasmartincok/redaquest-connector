@@ -1,0 +1,61 @@
+.redaquest-settings .setup-checklist { margin-bottom: 20px; }
+.redaquest-settings .checklist { list-style: none; margin: 12px 0 0; padding: 0; }
+.redaquest-settings .checklist li { display: flex; align-items: center; gap: 8px; padding: 6px 0; }
+.redaquest-settings .checklist li.done { color: #46b450; }
+.redaquest-settings .checklist li.pending { color: #666; }
+.redaquest-settings .badge-row { margin: 12px 0; }
+.redaquest-settings .sync-badge { display: inline-block; padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: 500; }
+.redaquest-settings .badge-read { background: #f0f6fc; color: #0073aa; }
+.redaquest-settings .badge-write { background: #fff8e5; color: #996800; }
+.redaquest-settings .action-row { display: flex; gap: 10px; flex-wrap: wrap; margin: 12px 0; }
+.redaquest-settings .test-result { margin-top: 12px; }
+.redaquest-settings .test-counts { margin: 8px 0 0 20px; }
+.redaquest-settings .test-summary { margin-top: 15px; padding-top: 12px; border-top: 1px solid #eee; }
+.redaquest-settings .connect-steps { margin: 12px 0 0 20px; }
+.redaquest-settings .advanced-section { margin-top: 16px; }
+.redaquest-settings .advanced-section summary { cursor: pointer; font-weight: 500; }
+.redaquest-settings .post-type-actions { display: flex; gap: 8px; margin-bottom: 12px; }
+.redaquest-settings .cpt-badge { color: #0073aa; font-size: 11px; font-weight: 500; }
+.redaquest-settings .count-badge { color: #999; font-size: 12px; }
+.redaquest-settings .woo-stats { display: flex; gap: 30px; margin-top: 15px; }
+.redaquest-settings .plugin-detect-row { display: flex; gap: 15px; flex-wrap: wrap; margin-top: 15px; }
+.redaquest-settings .support-section summary { cursor: pointer; }
+.redaquest-settings { max-width: 1280px; }
+.redaquest-settings > .redaquest-admin-notices { width: 100%; margin: 0 0 5px; }
+.redaquest-settings > .redaquest-admin-notices:empty { display: none; margin: 0; }
+.redaquest-settings > .redaquest-admin-notices .notice { margin: 0 0 12px; }
+.redaquest-settings > .redaquest-admin-notices .notice:last-child { margin-bottom: 0; }
+.redaquest-settings .card { background: #fff; border: 1px solid #ccd0d4; padding: 24px; margin-bottom: 20px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+.redaquest-settings .card h2 { margin-top: 0; padding-bottom: 12px; border-bottom: 1px solid #eee; font-size: 16px; }
+.redaquest-settings .status-ok { color: #46b450; display: flex; align-items: center; gap: 6px; }
+.redaquest-settings .status-error { color: #dc3232; display: flex; align-items: center; gap: 6px; }
+.redaquest-settings .status-warning { color: #dba617; display: flex; align-items: center; gap: 6px; }
+.redaquest-settings .post-type-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; margin-top: 15px; }
+.redaquest-settings .post-type-item { padding: 14px 16px; background: #f9f9f9; border-radius: 6px; border: 1px solid #e5e5e5; transition: border-color 0.2s, background 0.2s; }
+.redaquest-settings .post-type-item:hover { border-color: #0073aa; background: #f5f9fc; }
+.redaquest-settings .post-type-item.checked { border-color: #0073aa; background: #f0f6fc; }
+.redaquest-settings .post-type-item label { display: flex; align-items: center; gap: 10px; cursor: pointer; font-weight: 500; }
+.redaquest-settings .post-type-item .post-type-meta { margin-left: 28px; margin-top: 6px; font-size: 12px; color: #666; }
+.redaquest-settings code { background: #f1f1f1; padding: 3px 8px; border-radius: 4px; font-size: 12px; font-family: Monaco, Consolas, monospace; }
+.redaquest-settings .info-box { background: #f0f6fc; border-left: 4px solid #0073aa; padding: 14px 18px; margin: 15px 0; border-radius: 0 4px 4px 0; }
+.redaquest-settings .warning-box { background: #fff8e5; border-left: 4px solid #dba617; padding: 14px 18px; margin: 15px 0; border-radius: 0 4px 4px 0; }
+.redaquest-settings .api-key-field { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.redaquest-settings .api-key-field input { flex: 1; min-width: 300px; }
+.redaquest-settings .form-table th { width: 200px; padding-top: 20px; }
+.redaquest-settings .form-table td { padding-top: 15px; }
+.redaquest-settings .endpoints-table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+.redaquest-settings .endpoints-table th, .redaquest-settings .endpoints-table td { padding: 10px 12px; text-align: left; border-bottom: 1px solid #eee; }
+.redaquest-settings .endpoints-table th { background: #f9f9f9; font-weight: 600; }
+.redaquest-settings .endpoints-table code { font-size: 11px; }
+.redaquest-settings .nav-tab-wrapper { border-bottom: 1px solid #ccd0d4; margin-bottom: 20px; }
+.redaquest-settings .nav-tab { padding: 10px 20px; font-size: 14px; background: #f1f1f1; border: 1px solid #ccd0d4; border-bottom: none; margin-left: -1px; cursor: pointer; text-decoration: none; color: #555; }
+.redaquest-settings .nav-tab:first-child { margin-left: 0; }
+.redaquest-settings .nav-tab-active { background: #fff; border-bottom: 1px solid #fff; margin-bottom: -1px; color: #0073aa; font-weight: 500; }
+.redaquest-settings .nav-tab:hover:not(.nav-tab-active) { background: #fafafa; color: #0073aa; }
+.redaquest-settings .tab-content { display: none; }
+.redaquest-settings .tab-content.active { display: block; }
+.redaquest-settings .header-bar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; flex-wrap: wrap; gap: 15px; }
+.redaquest-settings .header-bar h1 { margin: 0; display: flex; align-items: center; gap: 10px; }
+.redaquest-settings .version-badge { background: #0073aa; color: #fff; padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: 500; }
+.redaquest-settings .two-column { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+@media (max-width: 1100px) { .redaquest-settings .two-column { grid-template-columns: 1fr; } }

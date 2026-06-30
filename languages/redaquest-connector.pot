@@ -1,536 +1,220 @@
-# Copyright (C) 2026 RedaQuest
+# Copyright (C) 2026 Redaquest
 # This file is distributed under the GPLv2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Redaquest Connector 3.0.0\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/redaquest-connector\n"
+"Project-Id-Version: Redaquest Connector 2.7.0\n"
+"Report-Msgid-Bugs-To: https://redaquest.sk\n"
+"POT-Creation-Date: 2026-06-28 12:00+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-06-27T10:07:56+00:00\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.12.0\n"
-"X-Domain: redaquest-connector\n"
 
-#. Plugin Name of the plugin
-#: redaquest-connector.php
-#: redaquest-connector.php:1023
-#: redaquest-connector.php:1024
-#: redaquest-connector.php:1068
 msgid "Redaquest Connector"
 msgstr ""
 
-#. Plugin URI of the plugin
-#: redaquest-connector.php
-msgid "https://github.com/tomasmartincok/redaquest-connector"
+msgid "Redaquest"
 msgstr ""
 
-#. Description of the plugin
-#: redaquest-connector.php
-msgid "Connect WordPress and WooCommerce to RedaQuest: sync content and products, and schedule social posts straight from the article editor."
+msgid "Pripojenie"
 msgstr ""
 
-#. Author of the plugin
-#: redaquest-connector.php
-msgid "RedaQuest"
+msgid "Synchronizácia"
 msgstr ""
 
-#. Author URI of the plugin
-#: redaquest-connector.php
-msgid "https://redaquest.com"
+msgid "Publikovanie"
 msgstr ""
 
-#: includes/class-redaquest-connect.php:101
-msgid "Invalid or expired connection state. Please try again."
-msgstr ""
-
-#: includes/class-redaquest-connect.php:119
-msgid "Could not reach RedaQuest. Please try again."
-msgstr ""
-
-#: includes/class-redaquest-connect.php:127
-msgid "The connection could not be completed. Please try again from RedaQuest."
-msgstr ""
-
-#: includes/class-redaquest-connect.php:143
-msgid "You do not have permission to do this."
-msgstr ""
-
-#: includes/class-redaquest-connect.php:179
-msgid "Schedule social posts (RedaQuest Connect)"
-msgstr ""
-
-#: includes/class-redaquest-connect.php:182
-msgid "Your site is connected to RedaQuest."
-msgstr ""
-
-#: includes/class-redaquest-connect.php:185
-msgid "The RedaQuest connection was removed."
-msgstr ""
-
-#: includes/class-redaquest-connect.php:189
-msgid "Connected"
-msgstr ""
-
-#: includes/class-redaquest-connect.php:191
-msgid "Workspace ID:"
-msgstr ""
-
-#. translators: %s: date and time the site was connected.
-#: includes/class-redaquest-connect.php:198
-#, php-format
-msgid "Connected: %s"
-msgstr ""
-
-#: includes/class-redaquest-connect.php:204
-msgid "Disconnect"
-msgstr ""
-
-#: includes/class-redaquest-connect.php:208
-msgid "Connect this site so you can generate and schedule social posts from the article editor. You will be redirected to RedaQuest to approve and pick a workspace; a RedaQuest account is required."
-msgstr ""
-
-#: includes/class-redaquest-connect.php:211
-#: src/index.js:444
-msgid "Connect RedaQuest"
-msgstr ""
-
-#: includes/class-redaquest-proxy.php:65
-#: src/index.js:443
-msgid "This site is not connected to RedaQuest."
-msgstr ""
-
-#: includes/class-redaquest-proxy.php:78
-msgid "Could not reach RedaQuest."
-msgstr ""
-
-#: includes/class-redaquest-proxy.php:83
-msgid "The connection expired. Please reconnect your site."
-msgstr ""
-
-#: includes/class-redaquest-proxy.php:95
-msgid "RedaQuest returned an error."
-msgstr ""
-
-#: includes/class-redaquest-proxy.php:104
-#: includes/class-redaquest-proxy.php:142
-msgid "Missing article (title and content)."
-msgstr ""
-
-#: includes/class-redaquest-proxy.php:134
-#: src/index.js:414
-msgid "Generation failed."
-msgstr ""
-
-#: includes/class-redaquest-proxy.php:181
-#: src/index.js:299
-msgid "Image generation failed."
-msgstr ""
-
-#: includes/class-redaquest-proxy.php:270
-msgid "Could not save the image."
-msgstr ""
-
-#: includes/class-redaquest-proxy.php:346
-#: src/index.js:198
-msgid "Scheduling failed."
-msgstr ""
-
-#: redaquest-connector.php:194
-msgid "API key is missing. Add the API key from your RedaQuest integration in the plugin settings."
-msgstr ""
-
-#: redaquest-connector.php:200
-msgid "No API key is configured in the plugin settings. Go to Settings → Redaquest Connector and add your API key."
-msgstr ""
-
-#: redaquest-connector.php:204
-msgid "Invalid API key. Check that you pasted the correct API key from your RedaQuest integration."
-msgstr ""
-
-#: redaquest-connector.php:215
-msgid "Writing is disabled. Enable content writing in the plugin settings."
-msgstr ""
-
-#: redaquest-connector.php:264
-msgid "Connection successful."
-msgstr ""
-
-#: redaquest-connector.php:387
-#: redaquest-connector.php:762
-msgid "This post type does not exist."
-msgstr ""
-
-#: redaquest-connector.php:491
-#: redaquest-connector.php:856
-msgid "This post does not exist."
-msgstr ""
-
-#: redaquest-connector.php:595
-msgid "WooCommerce is not active."
-msgstr ""
-
-#. translators: %s: singular post type label, e.g. "Post" or "Page".
-#: redaquest-connector.php:835
-#, php-format
-msgid "%s was created."
-msgstr ""
-
-#. translators: %s: singular post type label, e.g. "Post" or "Page".
-#: redaquest-connector.php:941
-#, php-format
-msgid "%s was updated."
-msgstr ""
-
-#: redaquest-connector.php:1073
-msgid "Connect = schedule social posts from the editor. API key = sync content and products."
-msgstr ""
-
-#: redaquest-connector.php:1078
-msgid "Connection"
-msgstr ""
-
-#: redaquest-connector.php:1079
-msgid "Sync"
-msgstr ""
-
-#: redaquest-connector.php:1080
-msgid "Publishing"
-msgstr ""
-
-#: redaquest-connector.php:1081
 msgid "API & Debug"
 msgstr ""
 
-#: redaquest-connector.php:1097
-msgid "Sync status"
+msgid "Stav pripojenia"
 msgstr ""
 
-#: redaquest-connector.php:1099
-msgid "API key is configured"
+msgid "API kľúč je nakonfigurovaný"
 msgstr ""
 
-#: redaquest-connector.php:1101
-msgid "API key is not configured"
+msgid "API kľúč nie je nakonfigurovaný"
 msgstr ""
 
-#: redaquest-connector.php:1104
-msgid "API endpoint:"
+msgid "API Endpoint:"
 msgstr ""
 
-#: redaquest-connector.php:1125
-msgid "API key"
+msgid "API Kľúč"
 msgstr ""
 
-#. translators: %s: location of the API key inside the RedaQuest app, already wrapped in <strong>.
-#: redaquest-connector.php:1130
-#, php-format
-msgid "Important: get your API key in the RedaQuest app under %s."
+msgid "Dôležité: API kľúč získate v Redaquest aplikácii v sekcii Nastavenia → Integrácie."
 msgstr ""
 
-#: redaquest-connector.php:1131
-msgid "Settings → Integrations"
+msgid "Zmeniť kľúč"
 msgstr ""
 
-#: redaquest-connector.php:1139
-msgid "Change key"
+msgid "Zadajte nový API kľúč"
 msgstr ""
 
-#: redaquest-connector.php:1143
-msgid "Enter a new API key"
+msgid "Zadajte nový kľúč pre prepísanie existujúceho."
 msgstr ""
 
-#: redaquest-connector.php:1144
-msgid "Enter a new key to replace the existing one."
+msgid "Vložte API kľúč z Redaquest"
 msgstr ""
 
-#: redaquest-connector.php:1147
-msgid "Paste the API key from RedaQuest"
+msgid "Typy obsahu na synchronizáciu"
 msgstr ""
 
-#: redaquest-connector.php:1156
-msgid "Content types to sync"
+msgid "Vyberte typy obsahu, ktoré chcete synchronizovať s Redaquest."
 msgstr ""
 
-#: redaquest-connector.php:1157
-msgid "Choose which content types you want to sync with RedaQuest."
+msgid "WooCommerce je aktívny — produkty budú automaticky synchronizované."
 msgstr ""
 
-#: redaquest-connector.php:1177
-msgid "WooCommerce is active — products are synced automatically."
+msgid "Produkty:"
 msgstr ""
 
-#: redaquest-connector.php:1183
-msgid "Products:"
+msgid "Kategórie:"
 msgstr ""
 
-#: redaquest-connector.php:1184
-msgid "Categories:"
+msgid "Zápis obsahu"
 msgstr ""
 
-#: redaquest-connector.php:1193
-msgid "Content writing"
+msgid "Povoľte vytváranie článkov priamo z Redaquest."
 msgstr ""
 
-#: redaquest-connector.php:1194
-msgid "Allow creating posts directly from RedaQuest."
+msgid "Povoliť zápis"
 msgstr ""
 
-#: redaquest-connector.php:1197
-msgid "Enable writing"
+msgid "Povoliť vytváranie a úpravu článkov z Redaquest"
 msgstr ""
 
-#: redaquest-connector.php:1201
-msgid "Allow creating and updating posts from RedaQuest"
+msgid "Umožní publikovať obsah priamo z Redaquest na váš web."
 msgstr ""
 
-#: redaquest-connector.php:1203
-msgid "Lets you publish content from RedaQuest straight to your site."
+msgid "Predvolený autor"
 msgstr ""
 
-#: redaquest-connector.php:1207
-msgid "Default author"
+msgid "— Automaticky (admin) —"
 msgstr ""
 
-#: redaquest-connector.php:1210
-msgid "— Automatic (admin) —"
+msgid "Uložiť nastavenia"
 msgstr ""
 
-#: redaquest-connector.php:1221
-msgid "Save settings"
+msgid "Dostupné API endpointy"
 msgstr ""
 
-#: redaquest-connector.php:1228
-msgid "Available API endpoints"
+msgid "Tieto endpointy používa Redaquest pre komunikáciu s vaším webom:"
 msgstr ""
 
-#: redaquest-connector.php:1229
-msgid "RedaQuest uses these endpoints to communicate with your site:"
-msgstr ""
-
-#: redaquest-connector.php:1231
 msgid "Endpoint"
 msgstr ""
 
-#: redaquest-connector.php:1231
-msgid "Method"
+msgid "Metóda"
 msgstr ""
 
-#: redaquest-connector.php:1231
-msgid "Description"
+msgid "Popis"
 msgstr ""
 
-#: redaquest-connector.php:1233
-msgid "Verify connection"
+msgid "Overenie pripojenia"
 msgstr ""
 
-#: redaquest-connector.php:1234
-msgid "List of content types"
+msgid "Zoznam typov obsahu"
 msgstr ""
 
-#: redaquest-connector.php:1235
-msgid "Pages, posts, CPTs"
+msgid "Stránky, články, CPT"
 msgstr ""
 
-#: redaquest-connector.php:1236
-msgid "A specific type"
+msgid "Konkrétny typ"
 msgstr ""
 
-#: redaquest-connector.php:1237
-msgid "WooCommerce products"
+msgid "WooCommerce produkty"
 msgstr ""
 
-#: redaquest-connector.php:1238
-msgid "Categories"
+msgid "Kategórie"
 msgstr ""
 
-#: redaquest-connector.php:1239
 msgid "Custom fields"
 msgstr ""
 
-#: redaquest-connector.php:1240
-msgid "Create a post"
+msgid "Vytvorenie článku"
 msgstr ""
 
-#: redaquest-connector.php:1246
-msgid "Custom fields support"
+msgid "Aktualizácia článku"
 msgstr ""
 
-#: redaquest-connector.php:1247
-msgid "The plugin automatically detects and syncs custom fields from these plugins:"
+msgid "Vyhľadanie podľa Redaquest ID"
 msgstr ""
 
-#: redaquest-connector.php:1252
-msgid "Native WordPress"
+msgid "Podpora custom fields"
 msgstr ""
 
-#: redaquest-connector.php:1252
-msgid "post meta"
+msgid "Plugin automaticky deteguje a synchronizuje custom fields z týchto pluginov:"
 msgstr ""
 
-#: redaquest-connector.php:1254
+msgid "Native WordPress post meta"
+msgstr ""
+
 msgid "Parameter:"
 msgstr ""
 
-#: src/index.js:26
-#: src/index.js:35
-msgid "From brand manual"
+msgid "Neplatný stav príspevku."
 msgstr ""
 
-#: src/index.js:27
-msgid "Photographic / realistic"
+msgid "Neplatná URL obrázka."
 msgstr ""
 
-#: src/index.js:28
-msgid "Flat design"
+msgid "Neplatná alebo zakázaná URL obrázka."
 msgstr ""
 
-#: src/index.js:29
-msgid "3D render"
+msgid "URL obrázka musí používať HTTPS."
 msgstr ""
 
-#: src/index.js:30
-msgid "Illustration"
+msgid "Nepodarilo sa stiahnuť obrázok."
 msgstr ""
 
-#: src/index.js:36
-msgid "Modern"
+msgid "Obrázok prekračuje povolenú veľkosť."
 msgstr ""
 
-#: src/index.js:37
-msgid "Minimalist"
+msgid "Nepodporovaný typ obrázka."
 msgstr ""
 
-#: src/index.js:38
-msgid "Playful"
+msgid "Chýba API kľúč. Vložte API kľúč z Redaquest integrácie do nastavení pluginu."
 msgstr ""
 
-#: src/index.js:39
-msgid "Elegant"
+msgid "API kľúč nie je nakonfigurovaný v nastaveniach pluginu. Prejdite do Nastavenia → Redaquest a vložte API kľúč."
 msgstr ""
 
-#: src/index.js:40
-msgid "Corporate"
+msgid "Neplatný API kľúč. Skontrolujte, či ste vložili správny API kľúč z Redaquest integrácie."
 msgstr ""
 
-#: src/index.js:143
-msgid "Could not load status."
+msgid "Zápis nie je povolený. Povoľte zápis v nastaveniach pluginu."
 msgstr ""
 
-#: src/index.js:153
-msgid "Select at least one account in the RedaQuest tab."
+msgid "Pripojenie úspešné."
 msgstr ""
 
-#: src/index.js:189
-msgid "Open in RedaQuest"
+msgid "Post type neexistuje."
 msgstr ""
 
-#: src/index.js:191
-msgid "This article is already scheduled in RedaQuest."
+msgid "Typ obsahu nie je povolený pre synchronizáciu."
 msgstr ""
 
-#: src/index.js:194
-msgid "Post scheduled to RedaQuest"
+msgid "Príspevok neexistuje."
 msgstr ""
 
-#: src/index.js:294
-msgid "Featured image generated and set."
+msgid "WooCommerce nie je aktívny."
 msgstr ""
 
-#: src/index.js:296
-msgid "Image generated. Save the article and try again."
+msgid "Chýba nadpis príspevku."
 msgstr ""
 
-#: src/index.js:308
-msgid "What should the image show? (optional)"
+msgid "%s bol vytvorený."
 msgstr ""
 
-#: src/index.js:309
-msgid "Leave empty to derive it from the article. Any language works."
+msgid "Článok neexistuje."
 msgstr ""
 
-#: src/index.js:316
-msgid "Image type"
+msgid "%s bol aktualizovaný."
 msgstr ""
 
-#: src/index.js:324
-msgid "Style (mood)"
-msgstr ""
-
-#: src/index.js:338
-msgid "Generating image…"
-msgstr ""
-
-#: src/index.js:338
-msgid "Generate image (RedaQuest)"
-msgstr ""
-
-#: src/index.js:451
-msgid "No connected social accounts in this workspace."
-msgstr ""
-
-#: src/index.js:455
-msgid "Generating…"
-msgstr ""
-
-#: src/index.js:455
-msgid "Prepare post from article"
-msgstr ""
-
-#: src/index.js:458
-msgid "Preparing texts, this takes a moment…"
-msgstr ""
-
-#: src/index.js:466
-msgid "The article link is added to the first comment automatically."
-msgstr ""
-
-#: src/index.js:470
-msgid "Use the article’s featured image"
-msgstr ""
-
-#: src/index.js:476
-msgid "No image. Generate one in the “Featured image” panel."
-msgstr ""
-
-#: src/index.js:479
-msgid "Accounts"
-msgstr ""
-
-#: src/index.js:490
-msgid "Will be scheduled for the article date:"
-msgstr ""
-
-#: src/index.js:496
-msgid "Scheduling…"
-msgstr ""
-
-#: src/index.js:496
-msgid "Scheduled ✓"
-msgstr ""
-
-#: src/index.js:496
-msgid "Schedule to RedaQuest"
-msgstr ""
-
-#: src/index.js:499
-msgid "Tip: or tick “Also schedule to RedaQuest” when you publish the article."
-msgstr ""
-
-#: src/index.js:537
-msgid "✓ Also scheduled to social media."
-msgstr ""
-
-#: src/index.js:541
-msgid "Also schedule to RedaQuest (same date)"
-msgstr ""
-
-#: src/index.js:545
-msgid "accounts"
-msgstr ""
-
-#: src/index.js:549
-msgid "Prepare the post in the RedaQuest tab (right) — generate the texts and pick accounts."
+msgid "Prekročený limit požiadaviek. Skúste znova o chvíľu."
 msgstr ""

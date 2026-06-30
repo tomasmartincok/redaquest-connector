@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<ruleset name="Redaquest Connector">
+    <description>Security-focused PHPCS rules for Redaquest Connector plugin.</description>
+
+    <file>includes</file>
+    <file>redaquest-connector.php</file>
+    <file>uninstall.php</file>
+
+    <exclude-pattern>*/vendor/*</exclude-pattern>
+    <exclude-pattern>*/tests/*</exclude-pattern>
+    <exclude-pattern>*/languages/*</exclude-pattern>
+    <exclude-pattern>*/admin/*</exclude-pattern>
+
+    <rule ref="WordPress.Security"/>
+    <rule ref="WordPress.DB"/>
+    <rule ref="WordPress.PHP">
+        <exclude name="WordPress.PHP.YodaConditions"/>
+    </rule>
+    <rule ref="WordPress.WP">
+        <exclude name="WordPress.WP.AlternativeFunctions.unlink"/>
+        <exclude name="WordPress.WP.AlternativeFunctions.parse_url"/>
+        <exclude name="WordPress.WP.AlternativeFunctions.strip_tags"/>
+    </rule>
+
+    <config name="minimum_supported_wp_version" value="5.0"/>
+    <config name="testVersion" value="7.4-"/>
+    <config name="warning_severity" value="0"/>
+</ruleset>
