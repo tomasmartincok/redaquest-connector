@@ -2,7 +2,7 @@
 Contributors: tomarco
 Tags: redaquest, woocommerce, content marketing, sync, publishing, ai
 Requires at least: 5.3
-Tested up to: 7.0
+Tested up to: 6.8
 Requires PHP: 7.4
 Stable tag: 2.8.3
 License: GPLv2 or later
