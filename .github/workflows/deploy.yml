@@ -1,0 +1,59 @@
+name: Deploy to WordPress.org
+
+# Releases the plugin to the WordPress.org SVN repository (slug: redaquest-connector).
+# Runs ONLY when a semver tag is pushed (e.g. 3.1.0) or when triggered manually.
+# A plain push to main does NOT deploy — that only builds (see build.yml).
+#
+# Requires two repository secrets (Settings → Secrets and variables → Actions):
+#   SVN_USERNAME, SVN_PASSWORD  — your WordPress.org account used for plugin commits.
+
+on:
+  push:
+    tags:
+      - '[0-9]+.[0-9]+.[0-9]+'
+      - 'v[0-9]+.[0-9]+.[0-9]+'
+  workflow_dispatch:
+
+concurrency:
+  group: wp-org-deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Build and deploy to WordPress.org
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build block assets
+        run: npm run build
+
+      - name: Verify version matches tag
+        if: startsWith(github.ref, 'refs/tags/')
+        run: |
+          TAG_VERSION="${GITHUB_REF#refs/tags/}"
+          TAG_VERSION="${TAG_VERSION#v}"
+          PLUGIN_VERSION=$(grep -m1 "Version:" redaquest-connector.php | awk '{print $3}')
+          STABLE_TAG=$(grep -m1 "^Stable tag:" readme.txt | awk '{print $3}')
+          echo "Git tag: $TAG_VERSION | Plugin header: $PLUGIN_VERSION | Readme stable tag: $STABLE_TAG"
+          if [ "$TAG_VERSION" != "$PLUGIN_VERSION" ] || [ "$TAG_VERSION" != "$STABLE_TAG" ]; then
+            echo "::error::Version mismatch. The git tag, the Version: header in redaquest-connector.php and the Stable tag: in readme.txt must all match."
+            exit 1
+          fi
+
+      - name: Deploy to WordPress.org SVN
+        uses: 10up/action-wordpress-plugin-deploy@stable
+        env:
+          SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
+          SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
+          SLUG: redaquest-connector
+          ASSETS_DIR: .wordpress-org
