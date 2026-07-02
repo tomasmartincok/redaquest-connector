@@ -21,6 +21,7 @@ $redaquest_options = array(
     'redaquest_default_author',
     'redaquest_studio_token',
     'redaquest_studio_workspace',
+    'redaquest_studio_workspace_name',
     'redaquest_studio_scopes',
     'redaquest_studio_site',
     'redaquest_studio_connected_at',

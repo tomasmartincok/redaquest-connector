@@ -23,6 +23,7 @@ class Redaquest_Connect {
 
     const OPT_TOKEN        = 'redaquest_studio_token';
     const OPT_WORKSPACE    = 'redaquest_studio_workspace';
+    const OPT_WORKSPACE_NAME = 'redaquest_studio_workspace_name';
     const OPT_SCOPES       = 'redaquest_studio_scopes';
     const OPT_SITE         = 'redaquest_studio_site';
     const OPT_CONNECTED_AT = 'redaquest_studio_connected_at';
@@ -123,13 +124,23 @@ class Redaquest_Connect {
         $status = (int) wp_remote_retrieve_response_code($response);
         $body   = json_decode(wp_remote_retrieve_body($response), true);
 
-        if (200 !== $status || empty($body['token'])) {
+        $token = isset($body['token']) ? sanitize_text_field($body['token']) : '';
+        if ('' === $token && !empty($body['apiKey'])) {
+            $token = sanitize_text_field($body['apiKey']);
+        }
+
+        if (200 !== $status || '' === $token) {
             add_settings_error('redaquest_connect', 'exchange', __('The connection could not be completed. Please try again from RedaQuest.', 'redaquest-connector'), 'error');
             return;
         }
 
-        update_option(self::OPT_TOKEN, $body['token']);
-        update_option(self::OPT_WORKSPACE, isset($body['workspaceId']) ? sanitize_text_field($body['workspaceId']) : '');
+        $workspace_id = !empty($body['workspaceId']) ? sanitize_text_field($body['workspaceId']) : '';
+
+        update_option(self::OPT_TOKEN, $token);
+        update_option(self::OPT_WORKSPACE, $workspace_id);
+        if (!empty($body['workspaceName'])) {
+            update_option(self::OPT_WORKSPACE_NAME, sanitize_text_field($body['workspaceName']));
+        }
         update_option(self::OPT_SITE, isset($body['siteUrl']) ? esc_url_raw($body['siteUrl']) : home_url());
         update_option(self::OPT_SCOPES, (isset($body['scopes']) && is_array($body['scopes'])) ? array_map('sanitize_text_field', $body['scopes']) : array());
         update_option(self::OPT_CONNECTED_AT, current_time('mysql'));
@@ -138,6 +149,14 @@ class Redaquest_Connect {
         // never has to generate or paste one. Store it for the redaquest/v1 endpoints.
         if (!empty($body['apiKey'])) {
             update_option('redaquest_api_key', sanitize_text_field($body['apiKey']));
+        }
+
+        $enable_write = !isset($body['enableWrite']) || $body['enableWrite'];
+        update_option('redaquest_enable_write', $enable_write ? 1 : 0);
+
+        $default_author = (int) get_option('redaquest_default_author', 0);
+        if (!$default_author) {
+            update_option('redaquest_default_author', get_current_user_id());
         }
 
         wp_safe_redirect(add_query_arg('redaquest_connected', '1', $this->admin_page_url()));
@@ -152,6 +171,7 @@ class Redaquest_Connect {
 
         delete_option(self::OPT_TOKEN);
         delete_option(self::OPT_WORKSPACE);
+        delete_option(self::OPT_WORKSPACE_NAME);
         delete_option(self::OPT_SCOPES);
         delete_option(self::OPT_SITE);
         delete_option(self::OPT_CONNECTED_AT);
@@ -170,29 +190,22 @@ class Redaquest_Connect {
             return;
         }
 
-        settings_errors('redaquest_connect');
-
-        $connected    = self::is_connected();
-        $workspace    = (string) get_option(self::OPT_WORKSPACE, '');
-        $connected_at = (string) get_option(self::OPT_CONNECTED_AT, '');
-
-        // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Display-only success flag set by our own verified redirect.
-        $just_connected = isset($_GET['redaquest_connected']);
-        // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Display-only flag set by our own verified redirect.
-        $just_disconnected = isset($_GET['redaquest_disconnected']);
+        $connected         = self::is_connected();
+        $workspace         = (string) get_option(self::OPT_WORKSPACE, '');
+        $workspace_name    = (string) get_option(self::OPT_WORKSPACE_NAME, '');
+        $connected_at      = (string) get_option(self::OPT_CONNECTED_AT, '');
         ?>
         <div class="card" style="max-width:none;">
             <h2><span class="dashicons dashicons-rest-api" style="color:#0073aa;"></span> <?php esc_html_e('Schedule social posts (RedaQuest Connect)', 'redaquest-connector'); ?></h2>
 
-            <?php if ($just_connected) : ?>
-                <div class="notice notice-success is-dismissible" style="margin:8px 0;"><p><?php esc_html_e('Your site is connected to RedaQuest.', 'redaquest-connector'); ?></p></div>
-            <?php endif; ?>
-            <?php if ($just_disconnected) : ?>
-                <div class="notice notice-info is-dismissible" style="margin:8px 0;"><p><?php esc_html_e('The RedaQuest connection was removed.', 'redaquest-connector'); ?></p></div>
-            <?php endif; ?>
-
             <?php if ($connected) : ?>
                 <p class="status-ok"><span class="dashicons dashicons-yes-alt"></span> <?php esc_html_e('Connected', 'redaquest-connector'); ?></p>
+                <?php if ($workspace_name) : ?>
+                    <p>
+                        <strong><?php esc_html_e('Workspace:', 'redaquest-connector'); ?></strong>
+                        <?php echo esc_html($workspace_name); ?>
+                    </p>
+                <?php endif; ?>
                 <p>
                     <?php esc_html_e('Workspace ID:', 'redaquest-connector'); ?>
                     <code><?php echo esc_html($workspace); ?></code>

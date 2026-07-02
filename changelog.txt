@@ -1,3 +1,6 @@
+= 3.0.2 =
+* Workspace name in Connect status, fixed admin notices, publishing opt-in during Connect
+
 = 3.0.1 =
 * Restored v3 Gutenberg editor (Blog Writer, social scheduling) as canonical release line
 * WordPress post editor metabox for Redaquest client article approval
