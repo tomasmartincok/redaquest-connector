@@ -13,8 +13,7 @@ class Redaquest_Post_Metabox {
     }
 
     public static function register_metabox() {
-        $enabled_types = Redaquest_Helpers::get_enabled_post_types();
-        foreach ($enabled_types as $post_type) {
+        foreach (self::get_enabled_post_types() as $post_type) {
             if (in_array($post_type, array('page', 'attachment'), true)) {
                 continue;
             }
@@ -27,6 +26,20 @@ class Redaquest_Post_Metabox {
                 'high'
             );
         }
+    }
+
+    private static function get_enabled_post_types() {
+        $enabled = get_option('redaquest_enabled_post_types', array('page', 'post'));
+        if (empty($enabled) || !is_array($enabled)) {
+            return array('post');
+        }
+        $valid = array();
+        foreach ($enabled as $type) {
+            if (post_type_exists($type)) {
+                $valid[] = $type;
+            }
+        }
+        return !empty($valid) ? $valid : array('post');
     }
 
     public static function enqueue_scripts($hook) {
@@ -56,7 +69,7 @@ class Redaquest_Post_Metabox {
     }
 
     public static function render_metabox($post) {
-        if (!Redaquest_OAuth_Connect::is_connected()) {
+        if (empty(get_option('redaquest_api_key'))) {
             echo '<p class="description">' . esc_html__('Najprv pripojte Redaquest v Nastaveniach.', 'redaquest-connector') . '</p>';
             return;
         }

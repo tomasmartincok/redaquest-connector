@@ -1,53 +1,10 @@
-= 2.9.0 =
-* WordPress editor metabox for sending articles to Redaquest approval
-* GET /posts/{id} endpoint for fresh content sync
-* Outbound wp-article-approval edge function integration
+= 3.0.1 =
+* Restored v3 Gutenberg editor (Blog Writer, social scheduling) as canonical release line
+* WordPress post editor metabox for Redaquest client article approval
+* GET /redaquest/v1/posts/{id} for fresh content sync
+* Bundled editor translations (sk, cs, de, hu, pl)
 
-
-= 2.8.4 =
-* Packaging: exclude VCS files (.git, .github) from the distributed plugin
-
-= 2.6.1 =
-* Refactor: REST controller, admin settings, helpers and media in separate classes
-* PHPCS configuration and DEVELOPER.md
-
-= 2.6.0 =
-* Plugin structure refactor (bootstrap + includes + admin assets)
-* REST API parameter validation via args schemas
-* Activation hook with default options
-
-= 2.5.1 =
-* SSRF protection for image downloads (HTTPS, MIME validation, size limit)
-* Post status allowlist for create/update
-* API key compared with hash_equals(); removed query-parameter auth
-* Added uninstall.php
-
-= 2.5.0 =
-* PUT endpoint for updating existing posts
-* GET by Redaquest ID endpoint
-* Bidirectional sync support, category/tag/image/SEO updates
-
-= 2.4.0 =
-* Tab-based admin UI (Connection, Sync, Publishing, Diagnostics)
-* Improved CPT sync counts and layout
-
-= 2.3.0 =
-* Extended admin layout, improved CPT validation
-
-= 2.2.0 =
-* Masked API key in admin, improved security messaging
-
-= 2.1.0 =
-* ACF, Meta Box, Pods support; extended WooCommerce data
-
-= 2.0.0 =
-* Custom post types support, write toggle, default author, SEO plugins
-
-= 1.2.0 =
-* Posts synchronization, improved logging
-
-= 1.1.0 =
-* WooCommerce product attributes, API key security
-
-= 1.0.0 =
-* Initial release
+= 3.0.0 =
+* Connect site to RedaQuest workspace and schedule social posts from block editor
+* AI-generated per-platform social copy and brand featured image
+* Unified settings page with OAuth Connect flow

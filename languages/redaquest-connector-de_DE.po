@@ -6,12 +6,12 @@ msgstr ""
 "POT-Creation-Date: 2026-06-28T11:00:46+00:00\n"
 "PO-Revision-Date: 2026-06-28T11:00:46+00:00\n"
 "Last-Translator: RedaQuest <admin@tomarco.sk>\n"
-"Language-Team: sk\n"
-"Language: sk\n"
+"Language-Team: de\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Domain: redaquest-connector\n"
 
 #. Plugin Name of the plugin
@@ -31,8 +31,8 @@ msgid ""
 "Connect WordPress and WooCommerce to RedaQuest: sync content and products, "
 "and schedule social posts straight from the article editor."
 msgstr ""
-"Prepojí WordPress a WooCommerce s RedaQuestom: synchronizuje obsah a "
-"produkty a plánuje príspevky na sociálne siete priamo z editora článku."
+"Verbindet WordPress und WooCommerce mit RedaQuest: synchronisiert Inhalte "
+"und Produkte und plant Social-Media-Beiträge direkt aus dem Artikeleditor."
 
 #. Author of the plugin
 #: redaquest-connector.php src/index.js:1206 src/index.js:1233
@@ -46,50 +46,53 @@ msgstr ""
 
 #: includes/class-redaquest-connect.php:101
 msgid "Invalid or expired connection state. Please try again."
-msgstr "Neplatný alebo expirovaný stav pripojenia. Skús to znova."
+msgstr ""
+"Ungültiger oder abgelaufener Verbindungsstatus. Bitte versuche es erneut."
 
 #: includes/class-redaquest-connect.php:119
 msgid "Could not reach RedaQuest. Please try again."
-msgstr "Nepodarilo sa spojiť s RedaQuestom. Skús to znova."
+msgstr "RedaQuest ist nicht erreichbar. Bitte versuche es erneut."
 
 #: includes/class-redaquest-connect.php:127
 msgid ""
 "The connection could not be completed. Please try again from RedaQuest."
-msgstr "Pripojenie sa nepodarilo dokončiť. Skús to znova z RedaQuestu."
+msgstr ""
+"Die Verbindung konnte nicht abgeschlossen werden. Bitte versuche es erneut "
+"von RedaQuest aus."
 
 #: includes/class-redaquest-connect.php:149
 msgid "You do not have permission to do this."
-msgstr "Na túto akciu nemáš oprávnenie."
+msgstr "Dafür hast du keine Berechtigung."
 
 #: includes/class-redaquest-connect.php:185
 msgid "Schedule social posts (RedaQuest Connect)"
-msgstr "Plánovanie príspevkov na siete (RedaQuest Connect)"
+msgstr "Social-Media-Beiträge planen (RedaQuest Connect)"
 
 #: includes/class-redaquest-connect.php:188
 msgid "Your site is connected to RedaQuest."
-msgstr "Tvoja stránka je pripojená k RedaQuestu."
+msgstr "Deine Website ist mit RedaQuest verbunden."
 
 #: includes/class-redaquest-connect.php:191
 msgid "The RedaQuest connection was removed."
-msgstr "Pripojenie k RedaQuestu bolo odstránené."
+msgstr "Die Verbindung zu RedaQuest wurde entfernt."
 
 #: includes/class-redaquest-connect.php:195
 msgid "Connected"
-msgstr "Pripojené"
+msgstr "Verbunden"
 
 #: includes/class-redaquest-connect.php:197
 msgid "Workspace ID:"
-msgstr "ID pracovného priestoru:"
+msgstr "Arbeitsbereich-ID:"
 
 #. translators: %s: date and time the site was connected.
 #: includes/class-redaquest-connect.php:204
 #, php-format
 msgid "Connected: %s"
-msgstr "Pripojené: %s"
+msgstr "Verbunden: %s"
 
 #: includes/class-redaquest-connect.php:210
 msgid "Disconnect"
-msgstr "Odpojiť"
+msgstr "Trennen"
 
 #: includes/class-redaquest-connect.php:214
 msgid ""
@@ -97,288 +100,296 @@ msgid ""
 "article editor. You will be redirected to RedaQuest to approve and pick a "
 "workspace; a RedaQuest account is required."
 msgstr ""
-"Pripoj túto stránku, aby si mohol generovať a plánovať príspevky na siete "
-"priamo z editora článku. Presmerujeme ťa do RedaQuestu, kde pripojenie "
-"potvrdíš a vyberieš pracovný priestor. Vyžaduje sa účet v RedaQueste."
+"Verbinde diese Website, um Social-Media-Beiträge direkt aus dem "
+"Artikeleditor zu erstellen und zu planen. Du wirst zu RedaQuest "
+"weitergeleitet, um die Verbindung zu bestätigen und einen Arbeitsbereich "
+"auszuwählen. Ein RedaQuest-Konto ist erforderlich."
 
 #: includes/class-redaquest-connect.php:217 src/index.js:468 src/index.js:985
 msgid "Connect RedaQuest"
-msgstr "Pripojiť RedaQuest"
+msgstr "RedaQuest verbinden"
 
 #: includes/class-redaquest-proxy.php:81 src/index.js:467
 msgid "This site is not connected to RedaQuest."
-msgstr "Táto stránka nie je pripojená k RedaQuestu."
+msgstr "Diese Website ist nicht mit RedaQuest verbunden."
 
 #: includes/class-redaquest-proxy.php:94
 msgid "Could not reach RedaQuest."
-msgstr "Nepodarilo sa spojiť s RedaQuestom."
+msgstr "RedaQuest ist nicht erreichbar."
 
 #: includes/class-redaquest-proxy.php:99
 msgid "The connection expired. Please reconnect your site."
-msgstr "Pripojenie expirovalo. Pripoj stránku znova."
+msgstr "Die Verbindung ist abgelaufen. Bitte verbinde deine Website erneut."
 
 #: includes/class-redaquest-proxy.php:111
 msgid "RedaQuest returned an error."
-msgstr "RedaQuest vrátil chybu."
+msgstr "RedaQuest hat einen Fehler zurückgegeben."
 
 #: includes/class-redaquest-proxy.php:120
 #: includes/class-redaquest-proxy.php:158
 msgid "Missing article (title and content)."
-msgstr "Chýba článok (názov a obsah)."
+msgstr "Artikel fehlt (Titel und Inhalt)."
 
 #: includes/class-redaquest-proxy.php:150 src/index.js:438
 msgid "Generation failed."
-msgstr "Generovanie zlyhalo."
+msgstr "Generierung fehlgeschlagen."
 
 #: includes/class-redaquest-proxy.php:197 src/index.js:323
 msgid "Image generation failed."
-msgstr "Generovanie obrázka zlyhalo."
+msgstr "Bildgenerierung fehlgeschlagen."
 
 #: includes/class-redaquest-proxy.php:316
 msgid "Could not save the image."
-msgstr "Obrázok sa nepodarilo uložiť."
+msgstr "Das Bild konnte nicht gespeichert werden."
 
 #: includes/class-redaquest-proxy.php:392 src/index.js:222
 msgid "Scheduling failed."
-msgstr "Naplánovanie zlyhalo."
+msgstr "Planung fehlgeschlagen."
 
 #: redaquest-connector.php:195
 msgid ""
 "API key is missing. Add the API key from your RedaQuest integration in the "
 "plugin settings."
 msgstr ""
-"Chýba API kľúč. Pridaj API kľúč z tvojej RedaQuest integrácie v nastaveniach"
-" pluginu."
+"Der API-Schlüssel fehlt. Füge den API-Schlüssel aus deiner RedaQuest-"
+"Integration in den Plugin-Einstellungen hinzu."
 
 #: redaquest-connector.php:201
 msgid ""
 "No API key is configured in the plugin settings. Go to Settings → Redaquest "
 "Connector and add your API key."
 msgstr ""
-"V nastaveniach pluginu nie je nastavený API kľúč. Choď do Nastavenia → "
-"Redaquest Connector a pridaj svoj API kľúč."
+"In den Plugin-Einstellungen ist kein API-Schlüssel hinterlegt. Gehe zu "
+"Einstellungen → Redaquest Connector und füge deinen API-Schlüssel hinzu."
 
 #: redaquest-connector.php:205
 msgid ""
 "Invalid API key. Check that you pasted the correct API key from your "
 "RedaQuest integration."
 msgstr ""
-"Neplatný API kľúč. Skontroluj, či si vložil správny API kľúč z tvojej "
-"RedaQuest integrácie."
+"Ungültiger API-Schlüssel. Prüfe, ob du den richtigen API-Schlüssel aus "
+"deiner RedaQuest-Integration eingefügt hast."
 
 #: redaquest-connector.php:216
 msgid "Writing is disabled. Enable content writing in the plugin settings."
-msgstr "Písanie je vypnuté. Zapni tvorbu obsahu v nastaveniach pluginu."
+msgstr ""
+"Das Schreiben ist deaktiviert. Aktiviere die Inhaltserstellung in den "
+"Plugin-Einstellungen."
 
 #: redaquest-connector.php:265
 msgid "Connection successful."
-msgstr "Pripojenie úspešné."
+msgstr "Verbindung erfolgreich."
 
 #: redaquest-connector.php:388 redaquest-connector.php:763
 msgid "This post type does not exist."
-msgstr "Tento typ obsahu neexistuje."
+msgstr "Dieser Inhaltstyp existiert nicht."
 
 #: redaquest-connector.php:492 redaquest-connector.php:857
 msgid "This post does not exist."
-msgstr "Tento príspevok neexistuje."
+msgstr "Dieser Beitrag existiert nicht."
 
 #: redaquest-connector.php:596
 msgid "WooCommerce is not active."
-msgstr "WooCommerce nie je aktívny."
+msgstr "WooCommerce ist nicht aktiv."
 
 #. translators: %s: singular post type label, e.g. "Post" or "Page".
 #: redaquest-connector.php:836
 #, php-format
 msgid "%s was created."
-msgstr "%s bol vytvorený."
+msgstr "%s wurde erstellt."
 
 #. translators: %s: singular post type label, e.g. "Post" or "Page".
 #: redaquest-connector.php:942
 #, php-format
 msgid "%s was updated."
-msgstr "%s bol aktualizovaný."
+msgstr "%s wurde aktualisiert."
 
 #: redaquest-connector.php:1075
 msgid ""
 "Connect = schedule social posts from the editor. API key = sync content and "
 "products."
 msgstr ""
-"Connect = plánovanie príspevkov na siete z editora. API kľúč = "
-"synchronizácia obsahu a produktov."
+"Connect = Social-Media-Beiträge aus dem Editor planen. API-Schlüssel = "
+"Inhalte und Produkte synchronisieren."
 
 #: redaquest-connector.php:1080
 msgid "Connection"
-msgstr "Pripojenie"
+msgstr "Verbindung"
 
 #: redaquest-connector.php:1081
 msgid "Sync"
-msgstr "Synchronizácia"
+msgstr "Synchronisierung"
 
 #: redaquest-connector.php:1082
 msgid "Publishing"
-msgstr "Publikovanie"
+msgstr "Veröffentlichung"
 
 #: redaquest-connector.php:1083
 msgid "API & Debug"
-msgstr "API a ladenie"
+msgstr "API & Debug"
 
 #: redaquest-connector.php:1099
 msgid "Sync status"
-msgstr "Stav synchronizácie"
+msgstr "Synchronisierungsstatus"
 
 #: redaquest-connector.php:1101
 msgid "API key is configured"
-msgstr "API kľúč je nastavený"
+msgstr "API-Schlüssel ist konfiguriert"
 
 #: redaquest-connector.php:1103
 msgid "API key is not configured"
-msgstr "API kľúč nie je nastavený"
+msgstr "API-Schlüssel ist nicht konfiguriert"
 
 #: redaquest-connector.php:1106
 msgid "API endpoint:"
-msgstr "API endpoint:"
+msgstr "API-Endpunkt:"
 
 #: redaquest-connector.php:1137
 msgid "Settings → Integrations"
-msgstr "Nastavenia → Integrácie"
+msgstr "Einstellungen → Integrationen"
 
 #: redaquest-connector.php:1145
 msgid "Change key"
-msgstr "Zmeniť kľúč"
+msgstr "Schlüssel ändern"
 
 #: redaquest-connector.php:1149
 msgid "Enter a new API key"
-msgstr "Zadaj nový API kľúč"
+msgstr "Neuen API-Schlüssel eingeben"
 
 #: redaquest-connector.php:1150
 msgid "Enter a new key to replace the existing one."
-msgstr "Zadaj nový kľúč, ktorý nahradí existujúci."
+msgstr "Gib einen neuen Schlüssel ein, um den vorhandenen zu ersetzen."
 
 #: redaquest-connector.php:1153
 msgid "Paste the API key from RedaQuest"
-msgstr "Vlož API kľúč z RedaQuestu"
+msgstr "Füge den API-Schlüssel aus RedaQuest ein"
 
 #: redaquest-connector.php:1163
 msgid "Content types to sync"
-msgstr "Typy obsahu na synchronizáciu"
+msgstr "Zu synchronisierende Inhaltstypen"
 
 #: redaquest-connector.php:1164
 msgid "Choose which content types you want to sync with RedaQuest."
-msgstr "Vyber, ktoré typy obsahu chceš synchronizovať s RedaQuestom."
+msgstr ""
+"Wähle aus, welche Inhaltstypen du mit RedaQuest synchronisieren möchtest."
 
 #: redaquest-connector.php:1184
 msgid "WooCommerce is active — products are synced automatically."
-msgstr "WooCommerce je aktívny, produkty sa synchronizujú automaticky."
+msgstr "WooCommerce ist aktiv, Produkte werden automatisch synchronisiert."
 
 #: redaquest-connector.php:1190
 msgid "Products:"
-msgstr "Produkty:"
+msgstr "Produkte:"
 
 #: redaquest-connector.php:1191
 msgid "Categories:"
-msgstr "Kategórie:"
+msgstr "Kategorien:"
 
 #: redaquest-connector.php:1200
 msgid "Content writing"
-msgstr "Tvorba obsahu"
+msgstr "Inhaltserstellung"
 
 #: redaquest-connector.php:1201
 msgid "Allow creating posts directly from RedaQuest."
-msgstr "Povoľ vytváranie príspevkov priamo z RedaQuestu."
+msgstr "Erlaube das Erstellen von Beiträgen direkt aus RedaQuest."
 
 #: redaquest-connector.php:1204
 msgid "Enable writing"
-msgstr "Zapnúť písanie"
+msgstr "Schreiben aktivieren"
 
 #: redaquest-connector.php:1208
 msgid "Allow creating and updating posts from RedaQuest"
-msgstr "Povoliť vytváranie a úpravu príspevkov z RedaQuestu"
+msgstr "Erstellen und Aktualisieren von Beiträgen aus RedaQuest erlauben"
 
 #: redaquest-connector.php:1210
 msgid "Lets you publish content from RedaQuest straight to your site."
-msgstr "Umožní ti publikovať obsah z RedaQuestu priamo na tvoju stránku."
+msgstr ""
+"Ermöglicht dir, Inhalte aus RedaQuest direkt auf deiner Website zu "
+"veröffentlichen."
 
 #: redaquest-connector.php:1214
 msgid "Default author"
-msgstr "Predvolený autor"
+msgstr "Standardautor"
 
 #: redaquest-connector.php:1217
 msgid "— Automatic (admin) —"
-msgstr "Automaticky (admin)"
+msgstr "Automatisch (Admin)"
 
 #: redaquest-connector.php:1228
 msgid "Save settings"
-msgstr "Uložiť nastavenia"
+msgstr "Einstellungen speichern"
 
 #: redaquest-connector.php:1235
 msgid "Available API endpoints"
-msgstr "Dostupné API endpointy"
+msgstr "Verfügbare API-Endpunkte"
 
 #: redaquest-connector.php:1236
 msgid "RedaQuest uses these endpoints to communicate with your site:"
-msgstr "RedaQuest používa tieto endpointy na komunikáciu s tvojou stránkou:"
+msgstr ""
+"RedaQuest verwendet diese Endpunkte, um mit deiner Website zu kommunizieren:"
 
 #: redaquest-connector.php:1238
 msgid "Endpoint"
-msgstr "Endpoint"
+msgstr "Endpunkt"
 
 #: redaquest-connector.php:1238
 msgid "Method"
-msgstr "Metóda"
+msgstr "Methode"
 
 #: redaquest-connector.php:1238
 msgid "Description"
-msgstr "Popis"
+msgstr "Beschreibung"
 
 #: redaquest-connector.php:1240
 msgid "Verify connection"
-msgstr "Overiť pripojenie"
+msgstr "Verbindung überprüfen"
 
 #: redaquest-connector.php:1241
 msgid "List of content types"
-msgstr "Zoznam typov obsahu"
+msgstr "Liste der Inhaltstypen"
 
 #: redaquest-connector.php:1242
 msgid "Pages, posts, CPTs"
-msgstr "Stránky, príspevky, CPT"
+msgstr "Seiten, Beiträge, CPTs"
 
 #: redaquest-connector.php:1243
 msgid "A specific type"
-msgstr "Konkrétny typ"
+msgstr "Ein bestimmter Typ"
 
 #: redaquest-connector.php:1244
 msgid "WooCommerce products"
-msgstr "Produkty WooCommerce"
+msgstr "WooCommerce-Produkte"
 
 #: redaquest-connector.php:1245
 msgid "Categories"
-msgstr "Kategórie"
+msgstr "Kategorien"
 
 #: redaquest-connector.php:1246
 msgid "Custom fields"
-msgstr "Vlastné polia"
+msgstr "Benutzerdefinierte Felder"
 
 #: redaquest-connector.php:1247
 msgid "Create a post"
-msgstr "Vytvoriť príspevok"
+msgstr "Beitrag erstellen"
 
 #: redaquest-connector.php:1253
 msgid "Custom fields support"
-msgstr "Podpora vlastných polí"
+msgstr "Unterstützung benutzerdefinierter Felder"
 
 #: redaquest-connector.php:1254
 msgid ""
 "The plugin automatically detects and syncs custom fields from these plugins:"
 msgstr ""
-"Plugin automaticky rozpozná a synchronizuje vlastné polia z týchto pluginov:"
+"Das Plugin erkennt und synchronisiert benutzerdefinierte Felder dieser "
+"Plugins automatisch:"
 
 #: redaquest-connector.php:1259
 msgid "Native WordPress"
-msgstr "Natívny WordPress"
+msgstr "Natives WordPress"
 
 #: redaquest-connector.php:1259
 msgid "post meta"
-msgstr "post meta"
+msgstr "Post-Meta"
 
 #: redaquest-connector.php:1261
 msgid "Parameter:"
@@ -386,201 +397,204 @@ msgstr "Parameter:"
 
 #: src/index.js:42 src/index.js:51 src/index.js:1168
 msgid "From brand manual"
-msgstr "Z brand manuálu"
+msgstr "Aus dem Markenhandbuch"
 
 #: src/index.js:43
 msgid "Photographic / realistic"
-msgstr "Fotografický / realistický"
+msgstr "Fotografisch / realistisch"
 
 #: src/index.js:44
 msgid "Flat design"
-msgstr "Plochý dizajn"
+msgstr "Flat Design"
 
 #: src/index.js:45
 msgid "3D render"
-msgstr "3D render"
+msgstr "3D-Render"
 
 #: src/index.js:46
 msgid "Illustration"
-msgstr "Ilustrácia"
+msgstr "Illustration"
 
 #: src/index.js:52
 msgid "Modern"
-msgstr "Moderný"
+msgstr "Modern"
 
 #: src/index.js:53
 msgid "Minimalist"
-msgstr "Minimalistický"
+msgstr "Minimalistisch"
 
 #: src/index.js:54
 msgid "Playful"
-msgstr "Hravý"
+msgstr "Verspielt"
 
 #: src/index.js:55
 msgid "Elegant"
-msgstr "Elegantný"
+msgstr "Elegant"
 
 #: src/index.js:56
 msgid "Corporate"
-msgstr "Korporátny"
+msgstr "Corporate"
 
 #: src/index.js:167
 msgid "Could not load status."
-msgstr "Nepodarilo sa načítať stav."
+msgstr "Status konnte nicht geladen werden."
 
 #: src/index.js:177
 msgid "Select at least one account in the RedaQuest tab."
-msgstr "Vyber aspoň jeden účet v záložke RedaQuest."
+msgstr "Wähle mindestens ein Konto im RedaQuest-Tab aus."
 
 #: src/index.js:213
 msgid "Open in RedaQuest"
-msgstr "Otvoriť v RedaQueste"
+msgstr "In RedaQuest öffnen"
 
 #: src/index.js:215
 msgid "This article is already scheduled in RedaQuest."
-msgstr "Tento článok je už naplánovaný v RedaQueste."
+msgstr "Dieser Artikel ist bereits in RedaQuest geplant."
 
 #: src/index.js:218
 msgid "Post scheduled to RedaQuest"
-msgstr "Príspevok naplánovaný do RedaQuestu"
+msgstr "Beitrag in RedaQuest geplant"
 
 #: src/index.js:318
 msgid "Featured image generated and set."
-msgstr "Odporúčaný obrázok vygenerovaný a nastavený."
+msgstr "Beitragsbild generiert und festgelegt."
 
 #: src/index.js:320
 msgid "Image generated. Save the article and try again."
-msgstr "Obrázok vygenerovaný. Ulož článok a skús to znova."
+msgstr "Bild generiert. Speichere den Artikel und versuche es erneut."
 
 #: src/index.js:332
 msgid "What should the image show? (optional)"
-msgstr "Čo má obrázok zobrazovať? (voliteľné)"
+msgstr "Was soll das Bild zeigen? (optional)"
 
 #: src/index.js:333
 msgid "Leave empty to derive it from the article. Any language works."
-msgstr "Nechaj prázdne, nech sa odvodí z článku. Funguje akýkoľvek jazyk."
+msgstr ""
+"Leer lassen, um es aus dem Artikel abzuleiten. Jede Sprache funktioniert."
 
 #: src/index.js:340
 msgid "Image type"
-msgstr "Typ obrázka"
+msgstr "Bildtyp"
 
 #: src/index.js:348
 msgid "Style (mood)"
-msgstr "Štýl (nálada)"
+msgstr "Stil (Stimmung)"
 
 #: src/index.js:362
 msgid "Generating image…"
-msgstr "Generujem obrázok…"
+msgstr "Bild wird generiert…"
 
 #: src/index.js:362
 msgid "Generate image (RedaQuest)"
-msgstr "Generovať obrázok (RedaQuest)"
+msgstr "Bild generieren (RedaQuest)"
 
 #: src/index.js:475
 msgid "No connected social accounts in this workspace."
-msgstr "V tomto pracovnom priestore nie sú pripojené žiadne sociálne účty."
+msgstr "In diesem Arbeitsbereich sind keine Social-Media-Konten verbunden."
 
 #: src/index.js:479 src/index.js:1233
 msgid "Generating…"
-msgstr "Generujem…"
+msgstr "Wird generiert…"
 
 #: src/index.js:479
 msgid "Prepare post from article"
-msgstr "Pripraviť príspevok z článku"
+msgstr "Beitrag aus Artikel vorbereiten"
 
 #: src/index.js:482
 msgid "Preparing texts, this takes a moment…"
-msgstr "Pripravujem texty, chvíľu to potrvá…"
+msgstr "Texte werden vorbereitet, das dauert einen Moment…"
 
 #: src/index.js:490
 msgid "The article link is added to the first comment automatically."
-msgstr "Odkaz na článok sa automaticky pridá do prvého komentára."
+msgstr "Der Artikel-Link wird automatisch im ersten Kommentar hinzugefügt."
 
 #: src/index.js:494
 msgid "Use the article’s featured image"
-msgstr "Použiť odporúčaný obrázok článku"
+msgstr "Beitragsbild des Artikels verwenden"
 
 #: src/index.js:500
 msgid "No image. Generate one in the “Featured image” panel."
-msgstr "Žiadny obrázok. Vygeneruj ho v paneli „Odporúčaný obrázok“."
+msgstr "Kein Bild. Erstelle eines im Panel „Beitragsbild“."
 
 #: src/index.js:503
 msgid "Accounts"
-msgstr "Účty"
+msgstr "Konten"
 
 #: src/index.js:514
 msgid "Will be scheduled for the article date:"
-msgstr "Naplánuje sa na dátum článku:"
+msgstr "Wird für das Artikeldatum geplant:"
 
 #: src/index.js:520
 msgid "Scheduling…"
-msgstr "Plánujem…"
+msgstr "Wird geplant…"
 
 #: src/index.js:520
 msgid "Scheduled ✓"
-msgstr "Naplánované ✓"
+msgstr "Geplant ✓"
 
 #: src/index.js:520
 msgid "Schedule to RedaQuest"
-msgstr "Naplánovať do RedaQuestu"
+msgstr "In RedaQuest planen"
 
 #: src/index.js:523
 msgid ""
 "Tip: or tick “Also schedule to RedaQuest” when you publish the article."
 msgstr ""
-"Tip: alebo pri publikovaní článku zaškrtni „Naplánovať aj do RedaQuestu“."
+"Tipp: Oder aktiviere beim Veröffentlichen des Artikels „Auch in RedaQuest "
+"planen“."
 
 #: src/index.js:561
 msgid "✓ Also scheduled to social media."
-msgstr "✓ Naplánované aj na sociálne siete."
+msgstr "✓ Auch in den sozialen Medien geplant."
 
 #: src/index.js:565
 msgid "Also schedule to RedaQuest (same date)"
-msgstr "Naplánovať aj do RedaQuestu (rovnaký dátum)"
+msgstr "Auch in RedaQuest planen (gleiches Datum)"
 
 #: src/index.js:569
 msgid "accounts"
-msgstr "účty"
+msgstr "Konten"
 
 #: includes/class-redaquest-proxy.php:54
 msgid "Could not load personas."
-msgstr "Nepodarilo sa načítať persóny."
+msgstr "Personas konnten nicht geladen werden."
 
 #: includes/class-redaquest-proxy.php:403
 msgid "Missing topic."
-msgstr "Chýba téma."
+msgstr "Thema fehlt."
 
 #: includes/class-redaquest-proxy.php:426
 msgid "Outline generation failed, please try again."
-msgstr "Generovanie osnovy zlyhalo, skús to znova."
+msgstr ""
+"Die Gliederung konnte nicht erstellt werden, bitte versuche es erneut."
 
 #: includes/class-redaquest-proxy.php:438
 msgid "Missing topic or outline."
-msgstr "Chýba téma alebo osnova."
+msgstr "Thema oder Gliederung fehlt."
 
 #: includes/class-redaquest-proxy.php:473
 msgid "Article generation failed, please try again."
-msgstr "Generovanie článku zlyhalo, skús to znova."
+msgstr "Der Artikel konnte nicht erstellt werden, bitte versuche es erneut."
 
 #: includes/class-redaquest-proxy.php:485
 msgid "You cannot edit this post."
-msgstr "Tento príspevok nemôžeš upravovať."
+msgstr "Du kannst diesen Beitrag nicht bearbeiten."
 
 #: redaquest-connector.php:1127
 msgid "Content sync key"
-msgstr "Kľúč na synchronizáciu obsahu"
+msgstr "Schlüssel für Inhalts-Synchronisierung"
 
 #: redaquest-connector.php:1129
 msgid "Configured automatically via Connect."
-msgstr "Nastaví sa automaticky cez Connect."
+msgstr "Wird automatisch über Connect konfiguriert."
 
 #: redaquest-connector.php:1130
 msgid ""
 "RedaQuest set up the content-sync key when you connected. You do not need to"
 " paste anything."
 msgstr ""
-"RedaQuest nastavil kľúč na synchronizáciu obsahu pri pripojení. Nemusíš nič "
-"vkladať."
+"RedaQuest hat den Schlüssel für die Inhalts-Synchronisierung beim Verbinden "
+"eingerichtet. Du musst nichts einfügen."
 
 #. translators: %s: location of the API key inside the RedaQuest app, already
 #. wrapped in <strong>.
@@ -590,55 +604,57 @@ msgid ""
 "Tip: connecting above sets this up automatically. To configure sync manually"
 " instead, get your API key in the RedaQuest app under %s."
 msgstr ""
-"Tip: pripojenie vyššie to nastaví automaticky. Ak chceš synchronizáciu "
-"nastaviť ručne, získaj API kľúč v aplikácii RedaQuest v sekcii %s."
+"Tipp: Das Verbinden oben richtet dies automatisch ein. Wenn du die "
+"Synchronisierung stattdessen manuell einrichten möchtest, findest du deinen "
+"API-Schlüssel in der RedaQuest-App unter %s."
 
 #: src/index.js:573
 msgid ""
 "Prepare the post in the RedaQuest tab on the right. Generate the texts and "
 "pick accounts."
 msgstr ""
-"Priprav príspevok v záložke RedaQuest vpravo. Vygeneruj texty a vyber účty."
+"Bereite den Beitrag im RedaQuest-Tab rechts vor. Generiere die Texte und "
+"wähle Konten aus."
 
 #: src/index.js:657 src/index.js:658
 msgid "credits used"
-msgstr "použitých kreditov"
+msgstr "Credits verbraucht"
 
 #: src/index.js:658 src/index.js:662
 msgid "left"
-msgstr "zostáva"
+msgstr "übrig"
 
 #: src/index.js:663
 msgid "Not enough credits"
-msgstr "Nedostatok kreditov"
+msgstr "Nicht genügend Credits"
 
 #: src/index.js:663
 msgid "Top up in RedaQuest to continue."
-msgstr "Doplň kredity v RedaQueste a pokračuj."
+msgstr "Lade in RedaQuest auf, um fortzufahren."
 
 #: src/index.js:938 src/index.js:993
 msgid "Topic"
-msgstr "Téma"
+msgstr "Thema"
 
 #: src/index.js:938
 msgid "Audience"
-msgstr "Publikum"
+msgstr "Zielgruppe"
 
 #: src/index.js:938
 msgid "Outline"
-msgstr "Osnova"
+msgstr "Gliederung"
 
 #: src/index.js:938
 msgid "Image"
-msgstr "Obrázok"
+msgstr "Bild"
 
 #: src/index.js:948
 msgid ""
 "Generating can take 3 to 4 minutes, more with images. You can close this "
 "window, it keeps running in the background."
 msgstr ""
-"Generovanie môže trvať 3 až 4 minúty, s obrázkami aj dlhšie. Toto okno môžeš"
-" zavrieť, beží ďalej na pozadí."
+"Die Generierung kann 3 bis 4 Minuten dauern, mit Bildern länger. Du kannst "
+"dieses Fenster schließen, es läuft im Hintergrund weiter."
 
 #: src/index.js:955
 msgid "RedaQuest Blog Writer"
@@ -646,70 +662,72 @@ msgstr "RedaQuest Blog Writer"
 
 #: src/index.js:973
 msgid "Connected workspace"
-msgstr "Pripojený pracovný priestor"
+msgstr "Verbundener Arbeitsbereich"
 
 #: src/index.js:978
 msgid "Close"
-msgstr "Zavrieť"
+msgstr "Schließen"
 
 #: src/index.js:993
 msgid ""
 "The subject to cover. A full sentence or question works great, e.g. “How to "
 "write LinkedIn posts with AI that don’t sound robotic.”"
 msgstr ""
-"Téma, ktorú má článok pokryť. Pokojne celá veta alebo otázka, napr. „Ako "
-"písať LinkedIn príspevky pomocou AI, ktoré neznejú roboticky“."
+"Das Thema des Artikels. Ein ganzer Satz oder eine Frage funktioniert gut, z."
+" B. „Wie man mit KI LinkedIn-Beiträge schreibt, die nicht roboterhaft "
+"klingen“."
 
 #: src/index.js:993
 msgid "What is the article about?"
-msgstr "O čom je článok?"
+msgstr "Worum geht es im Artikel?"
 
 #: src/index.js:995
 msgid "Length"
-msgstr "Dĺžka"
+msgstr "Länge"
 
 #: src/index.js:995
 msgid ""
 "Detailed: a focused 800 to 1200 word article on one topic. Cornerstone: a "
 "long, in-depth pillar (2000+ words) that other posts link to."
 msgstr ""
-"Detailný: zacielený článok na jednu tému, 800 až 1200 slov. Pilierový: dlhý "
-"nosný článok do hĺbky (2000+ slov), na ktorý odkazujú ďalšie príspevky."
+"Detailliert: ein fokussierter Artikel zu einem Thema, 800 bis 1200 Wörter. "
+"Eckpfeiler: ein langer, tiefgehender Grundlagenartikel (2000+ Wörter), auf "
+"den andere Beiträge verlinken."
 
 #: src/index.js:997
 msgid "Detailed"
-msgstr "Detailný"
+msgstr "Detailliert"
 
 #: src/index.js:998
 msgid "Cornerstone"
-msgstr "Pilierový"
+msgstr "Eckpfeiler"
 
 #: src/index.js:1001
 msgid "Keywords"
-msgstr "Kľúčové slová"
+msgstr "Schlüsselwörter"
 
 #: src/index.js:1001
 msgid ""
 "1 to 3 phrases to rank for, comma-separated. Leave empty to let AI choose."
 msgstr ""
-"1 až 3 frázy, na ktoré chceš cieliť, oddelené čiarkou. Nechaj prázdne a "
-"vyberie ich AI."
+"1 bis 3 Phrasen, für die du ranken willst, durch Komma getrennt. Leer "
+"lassen, dann wählt die KI."
 
 #: src/index.js:1001
 msgid "e.g. linkedin, content marketing"
-msgstr "napr. linkedin, content marketing"
+msgstr "z. B. linkedin, content marketing"
 
 #: src/index.js:1006
 msgid "− Hide existing content"
-msgstr "− Skryť existujúci obsah"
+msgstr "− Vorhandenen Inhalt ausblenden"
 
 #: src/index.js:1006
 msgid "＋ Base it on existing content (paste or upload a doc)"
-msgstr "＋ Vychádzať z existujúceho obsahu (vlož alebo nahraj dokument)"
+msgstr "＋ Auf vorhandenem Inhalt aufbauen (Dokument einfügen oder hochladen)"
 
 #: src/index.js:1011
 msgid "Existing content"
-msgstr "Existujúci obsah"
+msgstr "Vorhandener Inhalt"
 
 #: src/index.js:1011
 msgid ""
@@ -717,273 +735,278 @@ msgid ""
 "just copy and paste). The article is rewritten and expanded from it, and "
 "keeps your facts."
 msgstr ""
-"Vlož koncept, poznámky alebo celý dokument (Word, Google Docs alebo "
-"Markdown, stačí skopírovať a vložiť). Článok sa z toho prepíše a rozšíri a "
-"zachová tvoje fakty."
+"Füge einen Entwurf, Notizen oder ein ganzes Dokument ein (Word, Google Docs "
+"oder Markdown, einfach kopieren und einfügen). Der Artikel wird daraus neu "
+"geschrieben und erweitert und behält deine Fakten."
 
 #: src/index.js:1015
 msgid "Paste your existing text here…"
-msgstr "Sem vlož svoj existujúci text…"
+msgstr "Füge hier deinen vorhandenen Text ein…"
 
 #: src/index.js:1019
 msgid "Upload .md / .txt / .html"
-msgstr "Nahrať .md / .txt / .html"
+msgstr ".md / .txt / .html hochladen"
 
 #: src/index.js:1022
 msgid "chars"
-msgstr "znakov"
+msgstr "Zeichen"
 
 #: src/index.js:1023
 msgid "Clear"
-msgstr "Vymazať"
+msgstr "Löschen"
 
 #: src/index.js:1025
 msgid "For Word or Google Docs, copy the text and paste it above."
-msgstr "Pri Worde alebo Google Docs skopíruj text a vlož ho vyššie."
+msgstr "Bei Word oder Google Docs kopiere den Text und füge ihn oben ein."
 
 #: src/index.js:742 src/index.js:758
 msgid "Add a topic or a post title first."
-msgstr "Najprv pridaj tému alebo názov príspevku."
+msgstr "Füge zuerst ein Thema oder einen Beitragstitel hinzu."
 
 #: src/index.js:1031 src/index.js:1146
 msgid "Continue"
-msgstr "Pokračovať"
+msgstr "Weiter"
 
 #: src/index.js:1039
 msgid ""
 "Pick who you’re writing for, and optionally add your own angle. It is all "
 "optional, and it improves quality."
 msgstr ""
-"Vyber, pre koho píšeš, a prípadne pridaj vlastný uhol pohľadu. Všetko je "
-"voliteľné a zlepšuje to kvalitu."
+"Wähle, für wen du schreibst, und ergänze optional deinen eigenen "
+"Blickwinkel. Alles ist optional und verbessert die Qualität."
 
 #: src/index.js:1041
 msgid "Loading personas…"
-msgstr "Načítavam persóny…"
+msgstr "Personas werden geladen…"
 
 #: src/index.js:1045
 msgid "Target persona"
-msgstr "Cieľová persóna"
+msgstr "Ziel-Persona"
 
 #: src/index.js:1045
 msgid ""
 "Personas come from your RedaQuest communication manual. The article is "
 "written for the one you pick."
 msgstr ""
-"Persóny pochádzajú z tvojho komunikačného manuálu v RedaQueste. Článok sa "
-"napíše pre tú, ktorú vyberieš."
+"Die Personas stammen aus deinem RedaQuest-Kommunikationshandbuch. Der "
+"Artikel wird für die ausgewählte geschrieben."
 
 #: src/index.js:1072
 msgid "No specific persona"
-msgstr "Bez konkrétnej persóny"
+msgstr "Keine bestimmte Persona"
 
 #: src/index.js:1079
 msgid ""
 "No personas in your brand manual yet. You can still add your own audience "
 "below."
 msgstr ""
-"V tvojom brand manuáli zatiaľ nie sú žiadne persóny. Vlastné publikum môžeš "
-"pridať nižšie."
+"In deinem Markenhandbuch gibt es noch keine Personas. Du kannst unten "
+"trotzdem deine eigene Zielgruppe angeben."
 
 #: src/index.js:1080
 msgid ""
 "No brand manual found in this workspace. Add one in RedaQuest for on-brand, "
 "audience-aware articles."
 msgstr ""
-"V tomto pracovnom priestore sa nenašiel brand manuál. Pridaj ho v RedaQueste"
-" pre články v súlade so značkou a publikom."
+"In diesem Arbeitsbereich wurde kein Markenhandbuch gefunden. Lege eines in "
+"RedaQuest an, für markenkonforme, zielgruppengerechte Artikel."
 
 #: src/index.js:1086
 msgid "Your thesis / opinion"
-msgstr "Tvoja téza / názor"
+msgstr "Deine These / Meinung"
 
 #: src/index.js:1086
 msgid ""
 "Your own claim or stance. It makes the article original, not generic AI "
 "text."
 msgstr ""
-"Tvoje vlastné tvrdenie alebo postoj. Vďaka tomu je článok originálny, nie "
-"generický AI text."
+"Deine eigene Aussage oder Haltung. Das macht den Artikel originell, nicht "
+"generischer KI-Text."
 
 #: src/index.js:1087
 msgid "Example / experience"
-msgstr "Príklad / skúsenosť"
+msgstr "Beispiel / Erfahrung"
 
 #: src/index.js:1087
 msgid "A real example or experience from practice for the AI to use."
-msgstr "Skutočný príklad alebo skúsenosť z praxe, ktorú AI použije."
+msgstr ""
+"Ein echtes Beispiel oder eine Erfahrung aus der Praxis, die die KI "
+"verwendet."
 
 #: src/index.js:1090
 msgid "Source URLs"
-msgstr "Zdrojové URL"
+msgstr "Quell-URLs"
 
 #: src/index.js:1090
 msgid ""
 "Links the AI should use as sources, one per line. Optional. It also searches"
 " the web if that is on."
 msgstr ""
-"Odkazy, ktoré má AI použiť ako zdroje, jeden na riadok. Voliteľné. Ak je "
-"zapnuté, hľadá aj na webe."
+"Links, die die KI als Quellen verwenden soll, einer pro Zeile. Optional. "
+"Wenn aktiviert, sucht sie auch im Web."
 
 #: src/index.js:1093
 msgid "Web research (find facts & sources)"
-msgstr "Webový prieskum (nájde fakty a zdroje)"
+msgstr "Web-Recherche (Fakten & Quellen finden)"
 
 #: src/index.js:1097 src/index.js:1145 src/index.js:1189
 msgid "Back"
-msgstr "Späť"
+msgstr "Zurück"
 
 #: src/index.js:769
 msgid "Outline ready."
-msgstr "Osnova je hotová."
+msgstr "Gliederung fertig."
 
 #: src/index.js:771
 msgid "Outline generation failed."
-msgstr "Generovanie osnovy zlyhalo."
+msgstr "Die Gliederung konnte nicht erstellt werden."
 
 #: src/index.js:1098
 msgid "Generate outline"
-msgstr "Vygenerovať osnovu"
+msgstr "Gliederung generieren"
 
 #: src/index.js:1106
 msgid "Preparing your outline…"
-msgstr "Pripravujem osnovu…"
+msgstr "Deine Gliederung wird vorbereitet…"
 
 #: src/index.js:1108 src/index.js:1154
 msgid "Writing your article…"
-msgstr "Píšem tvoj článok…"
+msgstr "Dein Artikel wird geschrieben…"
 
 #: src/index.js:1111
 msgid "Title"
-msgstr "Názov"
+msgstr "Titel"
 
 #: src/index.js:1112
 msgid "Article title"
-msgstr "Názov článku"
+msgstr "Artikeltitel"
 
 #: src/index.js:1113
 msgid "Short intro answer…"
-msgstr "Krátka úvodná odpoveď…"
+msgstr "Kurze einleitende Antwort…"
 
 #: src/index.js:1118
 msgid "Section"
-msgstr "Sekcia"
+msgstr "Abschnitt"
 
 #: src/index.js:1120
 msgid ""
 "We read this section and generate an illustration of what it is about. Each "
 "image costs credits."
 msgstr ""
-"Prečítame túto sekciu a vygenerujeme ilustráciu toho, o čom je. Každý "
-"obrázok stojí kredity."
+"Wir lesen diesen Abschnitt und erstellen eine Illustration zum Inhalt. Jedes"
+" Bild kostet Credits."
 
 #: src/index.js:1120
 msgid "About section images"
-msgstr "O obrázkoch k sekciám"
+msgstr "Über Abschnittsbilder"
 
 #: src/index.js:1122
 msgid "Image on"
-msgstr "Obrázok zapnutý"
+msgstr "Bild aktiv"
 
 #: src/index.js:1122
 msgid "Generate image"
-msgstr "Generovať obrázok"
+msgstr "Bild generieren"
 
 #: src/index.js:1124
 msgid "Remove section"
-msgstr "Odstrániť sekciu"
+msgstr "Abschnitt entfernen"
 
 #: src/index.js:1127
 msgid "Section heading"
-msgstr "Nadpis sekcie"
+msgstr "Abschnittsüberschrift"
 
 #: src/index.js:1128
 msgid "What this section covers…"
-msgstr "O čom je táto sekcia…"
+msgstr "Worum es in diesem Abschnitt geht…"
 
 #: src/index.js:1131
 msgid "+ Add section"
-msgstr "+ Pridať sekciu"
+msgstr "+ Abschnitt hinzufügen"
 
 #: src/index.js:1133
 msgid "FAQ questions"
-msgstr "Otázky FAQ"
+msgstr "FAQ-Fragen"
 
 #: src/index.js:1136
 msgid "Question readers ask"
-msgstr "Otázka, ktorú čitatelia kladú"
+msgstr "Frage, die Leser stellen"
 
 #: src/index.js:1140
 msgid "+ Add question"
-msgstr "+ Pridať otázku"
+msgstr "+ Frage hinzufügen"
 
 #: src/index.js:1142
 msgid "SEO meta is generated automatically and saved to your SEO plugin."
-msgstr "SEO meta sa vygeneruje automaticky a uloží do tvojho SEO pluginu."
+msgstr ""
+"Die SEO-Metadaten werden automatisch generiert und in deinem SEO-Plugin "
+"gespeichert."
 
 #: src/index.js:1157
 msgid "Cover image"
-msgstr "Titulný obrázok"
+msgstr "Titelbild"
 
 #: src/index.js:1159
 msgid "Generate a cover illustration for this article"
-msgstr "Vygenerovať titulnú ilustráciu pre tento článok"
+msgstr "Eine Titelillustration für diesen Artikel generieren"
 
 #: src/index.js:1160
 msgid "Created from the article and set as the featured image automatically."
-msgstr "Vytvorí sa z článku a automaticky sa nastaví ako odporúčaný obrázok."
+msgstr ""
+"Wird aus dem Artikel erstellt und automatisch als Beitragsbild festgelegt."
 
 #: src/index.js:1166
 msgid "Image style"
-msgstr "Štýl obrázka"
+msgstr "Bildstil"
 
 #: src/index.js:1166
 msgid ""
 "From brand manual: your brand visual style and colors. Photorealistic: a "
 "real photo. The scene comes from the article."
 msgstr ""
-"Z brand manuálu: vizuálny štýl a farby tvojej značky. Fotorealistický: "
-"skutočná fotografia. Scéna vychádza z článku."
+"Aus dem Markenhandbuch: der visuelle Stil und die Farben deiner Marke. "
+"Fotorealistisch: ein echtes Foto. Die Szene stammt aus dem Artikel."
 
 #: src/index.js:1169
 msgid "Photorealistic"
-msgstr "Fotorealistický"
+msgstr "Fotorealistisch"
 
 #: src/index.js:1175
 msgid ""
 "section image(s) selected. Each one is generated from its section and "
 "inserted after its heading."
 msgstr ""
-"vybraných obrázkov k sekciám. Každý sa vygeneruje zo svojej sekcie a vloží "
-"sa za jej nadpis."
+"Abschnittsbild(er) ausgewählt. Jedes wird aus seinem Abschnitt generiert und"
+" nach dessen Überschrift eingefügt."
 
 #: src/index.js:1180
 msgid "credits"
-msgstr "kreditov"
+msgstr "Credits"
 
 #: src/index.js:1180
 msgid "from"
-msgstr "z"
+msgstr "von"
 
 #: src/index.js:1180
 msgid "remaining"
-msgstr "zostávajúcich"
+msgstr "verbleibend"
 
 #: src/index.js:1182
 msgid "article"
-msgstr "článok"
+msgstr "Artikel"
 
 #: src/index.js:1182
 msgid "cover"
-msgstr "titulný obrázok"
+msgstr "Titelbild"
 
 #: src/index.js:1182
 msgid "sections"
-msgstr "sekcie"
+msgstr "Abschnitte"
 
 #: src/index.js:1184
 msgid "Not enough credits. Top up in RedaQuest to continue."
-msgstr "Nedostatok kreditov. Doplň ich v RedaQueste a pokračuj."
+msgstr "Nicht genügend Credits. Lade in RedaQuest auf, um fortzufahren."
 
 #: src/index.js:1187
 msgid ""
@@ -991,58 +1014,58 @@ msgid ""
 "set, and the selected images are generated. This can take 3 to 4 minutes. "
 "Each image uses credits."
 msgstr ""
-"Pri generovaní: vloží sa článok a časté otázky, nastaví sa názov a SEO meta "
-"a vygenerujú sa vybrané obrázky. Môže to trvať 3 až 4 minúty. Každý obrázok "
-"spotrebuje kredity."
+"Beim Generieren: Artikel und FAQ werden eingefügt, Titel und SEO-Metadaten "
+"werden gesetzt und die ausgewählten Bilder werden generiert. Das kann 3 bis "
+"4 Minuten dauern. Jedes Bild verbraucht Credits."
 
 #: src/index.js:880
 msgid "cover image added"
-msgstr "titulný obrázok pridaný"
+msgstr "Titelbild hinzugefügt"
 
 #: src/index.js:889
 msgid "section image(s)"
-msgstr "obrázkov k sekciám"
+msgstr "Abschnittsbild(er)"
 
 #: src/index.js:892
 msgid "image(s) failed (check credits or brand setup)"
-msgstr "obrázkov zlyhalo (skontroluj kredity alebo nastavenie značky)"
+msgstr "Bild(er) fehlgeschlagen (Credits oder Marken-Setup prüfen)"
 
 #: src/index.js:893
 msgid "SEO saved to"
-msgstr "SEO uložené do"
+msgstr "SEO gespeichert in"
 
 #: src/index.js:897
 msgid "Article + FAQ inserted."
-msgstr "Článok a časté otázky vložené."
+msgstr "Artikel und FAQ eingefügt."
 
 #: src/index.js:895
 msgid "Article inserted, but no FAQ was generated."
-msgstr "Článok vložený, ale nevygenerovali sa žiadne časté otázky."
+msgstr "Artikel eingefügt, aber es wurden keine FAQ generiert."
 
 #: src/index.js:904
 msgid "Article generation failed."
-msgstr "Generovanie článku zlyhalo."
+msgstr "Der Artikel konnte nicht erstellt werden."
 
 #: src/index.js:1190
 msgid "Generate full article"
-msgstr "Vygenerovať celý článok"
+msgstr "Vollständigen Artikel generieren"
 
 #: src/index.js:983
 msgid ""
 "Connect this site to RedaQuest to use the blog writer (Settings → Redaquest "
 "Connector → Connection)."
 msgstr ""
-"Pripoj túto stránku k RedaQuestu, aby si mohol používať blog writer "
-"(Nastavenia → Redaquest Connector → Pripojenie)."
+"Verbinde diese Website mit RedaQuest, um den Blog Writer zu nutzen "
+"(Einstellungen → Redaquest Connector → Verbindung)."
 
 #: src/index.js:1208
 msgid "Write an article"
-msgstr "Napísať článok"
+msgstr "Artikel schreiben"
 
 #: src/index.js:1210
 msgid "Generate a GEO article from your brand voice & audience."
-msgstr "Vygeneruj GEO článok z hlasu tvojej značky a publika."
+msgstr "Generiere einen GEO-Artikel aus deiner Markenstimme & Zielgruppe."
 
 #: src/index.js:800
 msgid "Frequently asked questions"
-msgstr "Často kladené otázky"
+msgstr "Häufig gestellte Fragen"

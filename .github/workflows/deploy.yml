@@ -41,6 +41,7 @@ jobs:
           composer lint
 
       - name: PHPUnit
+        if: ${{ hashFiles('tests/**/*.php') != '' }}
         run: composer test
 
       - name: Verify version matches tag
