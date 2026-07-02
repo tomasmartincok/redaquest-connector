@@ -4,7 +4,7 @@ Tags: redaquest, woocommerce, content marketing, sync, publishing, ai
 Requires at least: 5.3
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 2.8.4
+Stable tag: 2.9.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -111,6 +111,11 @@ No. Content is transmitted only between your WordPress site and Redaquest server
 
 == Changelog ==
 
+= 2.9.0 =
+* WordPress post editor metabox: send articles to Redaquest client approval
+* GET /posts/{id} REST endpoint for fresh article content
+* Outbound integration with Redaquest wp-article-approval API
+
 = 2.8.4 =
 * Packaging: exclude VCS files (.git, .github) from the distributed plugin
 
@@ -136,6 +141,9 @@ No. Content is transmitted only between your WordPress site and Redaquest server
 * Full i18n (sk_SK, en_US), PHPUnit tests, PHPCS CI
 
 == Upgrade Notice ==
+
+= 2.9.0 =
+Send WordPress articles to Redaquest for client approval from the post editor.
 
 = 2.8.4 =
 Packaging cleanup only. No functional changes.

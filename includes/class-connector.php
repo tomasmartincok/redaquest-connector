@@ -32,5 +32,6 @@ class Redaquest_Connector {
 
         Redaquest_OAuth_Connect::init();
         Redaquest_Admin_Ajax::init();
+        Redaquest_Post_Metabox::init();
     }
 }

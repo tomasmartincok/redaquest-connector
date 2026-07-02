@@ -1,3 +1,9 @@
+= 2.9.0 =
+* WordPress editor metabox for sending articles to Redaquest approval
+* GET /posts/{id} endpoint for fresh content sync
+* Outbound wp-article-approval edge function integration
+
+
 = 2.8.4 =
 * Packaging: exclude VCS files (.git, .github) from the distributed plugin
 

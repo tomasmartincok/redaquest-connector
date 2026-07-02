@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Redaquest Connector
  * Description: Official Redaquest connector — OAuth link, sync posts, pages, CPTs and WooCommerce products to your content marketing workspace.
- * Version: 2.8.4
+ * Version: 2.9.0
  * Requires at least: 5.3
  * Requires PHP: 7.4
  * Author: Redaquest
@@ -15,7 +15,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-define('REDAQUEST_VERSION', '2.8.3');
+define('REDAQUEST_VERSION', '2.9.0');
 define('REDAQUEST_PLUGIN_FILE', __FILE__);
 define('REDAQUEST_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('REDAQUEST_PLUGIN_URL', plugin_dir_url(__FILE__));
@@ -28,6 +28,8 @@ require_once REDAQUEST_PLUGIN_DIR . 'includes/class-media.php';
 require_once REDAQUEST_PLUGIN_DIR . 'includes/class-custom-fields.php';
 require_once REDAQUEST_PLUGIN_DIR . 'includes/class-rate-limiter.php';
 require_once REDAQUEST_PLUGIN_DIR . 'includes/class-oauth-connect.php';
+require_once REDAQUEST_PLUGIN_DIR . 'includes/class-api-client.php';
+require_once REDAQUEST_PLUGIN_DIR . 'includes/class-post-metabox.php';
 require_once REDAQUEST_PLUGIN_DIR . 'includes/class-admin-ajax.php';
 require_once REDAQUEST_PLUGIN_DIR . 'includes/class-rest-schema.php';
 require_once REDAQUEST_PLUGIN_DIR . 'includes/class-rest-controller.php';
