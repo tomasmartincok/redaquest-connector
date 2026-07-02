@@ -4,7 +4,7 @@ Tags: content sync, woocommerce, social media, scheduling
 Requires at least: 5.8
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 3.0.1
+Stable tag: 3.0.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -82,6 +82,13 @@ Yes. A RedaQuest account and workspace are required to connect and to schedule s
 3. Block editor panel: generate social copy from an article and schedule it.
 
 == Changelog ==
+
+= 3.0.2 =
+* Show connected workspace name (not just ID) after Connect
+* Fix admin notices (Settings saved, connect success) to display in standard WordPress position
+* Connect onboarding: opt-in to enable content publishing from RedaQuest (default on)
+* Auto-set default post author to the WordPress admin who completes the connection
+* After connect, open Publishing tab to review writing settings
 
 = 3.0.1 =
 * Restored v3 Gutenberg editor (Blog Writer, social scheduling, header panel) as the canonical plugin line.

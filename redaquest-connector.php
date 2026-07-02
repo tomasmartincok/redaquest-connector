@@ -3,7 +3,7 @@
  * Plugin Name: Redaquest Connector
  * Plugin URI: https://github.com/tomasmartincok/redaquest-connector
  * Description: Connect WordPress and WooCommerce to RedaQuest: sync content and products, and schedule social posts straight from the article editor.
- * Version: 3.0.1
+ * Version: 3.0.2
  * Requires at least: 5.8
  * Requires PHP: 7.4
  * Author: RedaQuest
@@ -18,7 +18,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-define('REDAQUEST_VERSION', '3.0.1');
+define('REDAQUEST_VERSION', '3.0.2');
 define('REDAQUEST_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('REDAQUEST_PLUGIN_URL', plugin_dir_url(__FILE__));
 define('REDAQUEST_SUPABASE_ANON_KEY', apply_filters('redaquest_supabase_anon_key', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZxbWFlcnFzdnNrcWJ5aWdlZmJlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM1Njk3NTUsImV4cCI6MjA4OTE0NTc1NX0.VaXsFw1i-NBQLRj8VGBnlUv0NaqDo9L2IhZTStifMH0'));
@@ -55,6 +55,7 @@ class Redaquest_Connector {
         
         wp_add_inline_style('wp-admin', '
             .redaquest-settings { max-width: 1280px; }
+            .redaquest-settings > .notice { margin: 0 0 16px; }
             .redaquest-settings .card { background: #fff; border: 1px solid #ccd0d4; padding: 24px; margin-bottom: 20px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
             .redaquest-settings .card h2 { margin-top: 0; padding-bottom: 12px; border-bottom: 1px solid #eee; font-size: 16px; }
             .redaquest-settings .status-ok { color: #46b450; display: flex; align-items: center; gap: 6px; }
@@ -110,6 +111,9 @@ class Redaquest_Connector {
                 
                 // Restore last active tab
                 var savedTab = localStorage.getItem("redaquest_active_tab");
+                if (window.location.search.indexOf("redaquest_connected=1") !== -1) {
+                    savedTab = "publish";
+                }
                 if (savedTab && $(".nav-tab[data-tab=\"" + savedTab + "\"]").length) {
                     $(".nav-tab[data-tab=\"" + savedTab + "\"]").trigger("click");
                 }
@@ -1097,8 +1101,29 @@ class Redaquest_Connector {
         $woo_active = class_exists('WooCommerce');
         $acf_active = function_exists('get_fields');
         $studio_connected = class_exists('Redaquest_Connect') && Redaquest_Connect::is_connected();
+
+        // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Display-only flags from our own redirects.
+        if (isset($_GET['redaquest_connected'])) {
+            add_settings_error(
+                'redaquest_settings',
+                'connected',
+                __('Your site is connected to RedaQuest. Review publishing settings below.', 'redaquest-connector'),
+                'success'
+            );
+        }
+        // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Display-only flags from our own redirects.
+        if (isset($_GET['redaquest_disconnected'])) {
+            add_settings_error(
+                'redaquest_settings',
+                'disconnected',
+                __('The RedaQuest connection was removed.', 'redaquest-connector'),
+                'info'
+            );
+        }
         ?>
         <div class="wrap redaquest-settings">
+            <?php settings_errors('redaquest_settings'); ?>
+            <?php settings_errors('redaquest_connect'); ?>
             <div class="header-bar">
                 <h1><span class="dashicons dashicons-admin-plugins"></span> <?php esc_html_e('Redaquest Connector', 'redaquest-connector'); ?></h1>
                 <span class="version-badge">v<?php echo esc_html(REDAQUEST_VERSION); ?></span>
