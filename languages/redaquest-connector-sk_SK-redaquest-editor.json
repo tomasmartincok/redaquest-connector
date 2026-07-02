@@ -1,0 +1,438 @@
+{
+    "translation-revision-date": "2026-06-28T11:00:46+00:00",
+    "generator": "WP-CLI\/2.12.0",
+    "source": "src\/index.js",
+    "domain": "messages",
+    "locale_data": {
+        "messages": {
+            "": {
+                "domain": "messages",
+                "lang": "sk",
+                "plural-forms": "nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;"
+            },
+            "RedaQuest": [
+                ""
+            ],
+            "Connect RedaQuest": [
+                "Pripoji\u0165 RedaQuest"
+            ],
+            "This site is not connected to RedaQuest.": [
+                "T\u00e1to str\u00e1nka nie je pripojen\u00e1 k RedaQuestu."
+            ],
+            "Generation failed.": [
+                "Generovanie zlyhalo."
+            ],
+            "Image generation failed.": [
+                "Generovanie obr\u00e1zka zlyhalo."
+            ],
+            "Scheduling failed.": [
+                "Napl\u00e1novanie zlyhalo."
+            ],
+            "From brand manual": [
+                "Z brand manu\u00e1lu"
+            ],
+            "Photographic \/ realistic": [
+                "Fotografick\u00fd \/ realistick\u00fd"
+            ],
+            "Flat design": [
+                "Ploch\u00fd dizajn"
+            ],
+            "3D render": [
+                "3D render"
+            ],
+            "Illustration": [
+                "Ilustr\u00e1cia"
+            ],
+            "Modern": [
+                "Modern\u00fd"
+            ],
+            "Minimalist": [
+                "Minimalistick\u00fd"
+            ],
+            "Playful": [
+                "Hrav\u00fd"
+            ],
+            "Elegant": [
+                "Elegantn\u00fd"
+            ],
+            "Corporate": [
+                "Korpor\u00e1tny"
+            ],
+            "Could not load status.": [
+                "Nepodarilo sa na\u010d\u00edta\u0165 stav."
+            ],
+            "Select at least one account in the RedaQuest tab.": [
+                "Vyber aspo\u0148 jeden \u00fa\u010det v z\u00e1lo\u017eke RedaQuest."
+            ],
+            "Open in RedaQuest": [
+                "Otvori\u0165 v RedaQueste"
+            ],
+            "This article is already scheduled in RedaQuest.": [
+                "Tento \u010dl\u00e1nok je u\u017e napl\u00e1novan\u00fd v RedaQueste."
+            ],
+            "Post scheduled to RedaQuest": [
+                "Pr\u00edspevok napl\u00e1novan\u00fd do RedaQuestu"
+            ],
+            "Featured image generated and set.": [
+                "Odpor\u00fa\u010dan\u00fd obr\u00e1zok vygenerovan\u00fd a nastaven\u00fd."
+            ],
+            "Image generated. Save the article and try again.": [
+                "Obr\u00e1zok vygenerovan\u00fd. Ulo\u017e \u010dl\u00e1nok a sk\u00fas to znova."
+            ],
+            "What should the image show? (optional)": [
+                "\u010co m\u00e1 obr\u00e1zok zobrazova\u0165? (volite\u013en\u00e9)"
+            ],
+            "Leave empty to derive it from the article. Any language works.": [
+                "Nechaj pr\u00e1zdne, nech sa odvod\u00ed z \u010dl\u00e1nku. Funguje ak\u00fdko\u013evek jazyk."
+            ],
+            "Image type": [
+                "Typ obr\u00e1zka"
+            ],
+            "Style (mood)": [
+                "\u0160t\u00fdl (n\u00e1lada)"
+            ],
+            "Generating image\u2026": [
+                "Generujem obr\u00e1zok\u2026"
+            ],
+            "Generate image (RedaQuest)": [
+                "Generova\u0165 obr\u00e1zok (RedaQuest)"
+            ],
+            "No connected social accounts in this workspace.": [
+                "V tomto pracovnom priestore nie s\u00fa pripojen\u00e9 \u017eiadne soci\u00e1lne \u00fa\u010dty."
+            ],
+            "Generating\u2026": [
+                "Generujem\u2026"
+            ],
+            "Prepare post from article": [
+                "Pripravi\u0165 pr\u00edspevok z \u010dl\u00e1nku"
+            ],
+            "Preparing texts, this takes a moment\u2026": [
+                "Pripravujem texty, chv\u00ed\u013eu to potrv\u00e1\u2026"
+            ],
+            "The article link is added to the first comment automatically.": [
+                "Odkaz na \u010dl\u00e1nok sa automaticky prid\u00e1 do prv\u00e9ho koment\u00e1ra."
+            ],
+            "Use the article\u2019s featured image": [
+                "Pou\u017ei\u0165 odpor\u00fa\u010dan\u00fd obr\u00e1zok \u010dl\u00e1nku"
+            ],
+            "No image. Generate one in the \u201cFeatured image\u201d panel.": [
+                "\u017diadny obr\u00e1zok. Vygeneruj ho v paneli \u201eOdpor\u00fa\u010dan\u00fd obr\u00e1zok\u201c."
+            ],
+            "Accounts": [
+                "\u00da\u010dty"
+            ],
+            "Will be scheduled for the article date:": [
+                "Napl\u00e1nuje sa na d\u00e1tum \u010dl\u00e1nku:"
+            ],
+            "Scheduling\u2026": [
+                "Pl\u00e1nujem\u2026"
+            ],
+            "Scheduled \u2713": [
+                "Napl\u00e1novan\u00e9 \u2713"
+            ],
+            "Schedule to RedaQuest": [
+                "Napl\u00e1nova\u0165 do RedaQuestu"
+            ],
+            "Tip: or tick \u201cAlso schedule to RedaQuest\u201d when you publish the article.": [
+                "Tip: alebo pri publikovan\u00ed \u010dl\u00e1nku za\u0161krtni \u201eNapl\u00e1nova\u0165 aj do RedaQuestu\u201c."
+            ],
+            "\u2713 Also scheduled to social media.": [
+                "\u2713 Napl\u00e1novan\u00e9 aj na soci\u00e1lne siete."
+            ],
+            "Also schedule to RedaQuest (same date)": [
+                "Napl\u00e1nova\u0165 aj do RedaQuestu (rovnak\u00fd d\u00e1tum)"
+            ],
+            "accounts": [
+                "\u00fa\u010dty"
+            ],
+            "Prepare the post in the RedaQuest tab on the right. Generate the texts and pick accounts.": [
+                "Priprav pr\u00edspevok v z\u00e1lo\u017eke RedaQuest vpravo. Vygeneruj texty a vyber \u00fa\u010dty."
+            ],
+            "credits used": [
+                "pou\u017eit\u00fdch kreditov"
+            ],
+            "left": [
+                "zost\u00e1va"
+            ],
+            "Not enough credits": [
+                "Nedostatok kreditov"
+            ],
+            "Top up in RedaQuest to continue.": [
+                "Dopl\u0148 kredity v RedaQueste a pokra\u010duj."
+            ],
+            "Topic": [
+                "T\u00e9ma"
+            ],
+            "Audience": [
+                "Publikum"
+            ],
+            "Outline": [
+                "Osnova"
+            ],
+            "Image": [
+                "Obr\u00e1zok"
+            ],
+            "Generating can take 3 to 4 minutes, more with images. You can close this window, it keeps running in the background.": [
+                "Generovanie m\u00f4\u017ee trva\u0165 3 a\u017e 4 min\u00faty, s obr\u00e1zkami aj dlh\u0161ie. Toto okno m\u00f4\u017ee\u0161 zavrie\u0165, be\u017e\u00ed \u010falej na pozad\u00ed."
+            ],
+            "RedaQuest Blog Writer": [
+                "RedaQuest Blog Writer"
+            ],
+            "Connected workspace": [
+                "Pripojen\u00fd pracovn\u00fd priestor"
+            ],
+            "Close": [
+                "Zavrie\u0165"
+            ],
+            "The subject to cover. A full sentence or question works great, e.g. \u201cHow to write LinkedIn posts with AI that don\u2019t sound robotic.\u201d": [
+                "T\u00e9ma, ktor\u00fa m\u00e1 \u010dl\u00e1nok pokry\u0165. Pokojne cel\u00e1 veta alebo ot\u00e1zka, napr. \u201eAko p\u00edsa\u0165 LinkedIn pr\u00edspevky pomocou AI, ktor\u00e9 neznej\u00fa roboticky\u201c."
+            ],
+            "What is the article about?": [
+                "O \u010dom je \u010dl\u00e1nok?"
+            ],
+            "Length": [
+                "D\u013a\u017eka"
+            ],
+            "Detailed: a focused 800 to 1200 word article on one topic. Cornerstone: a long, in-depth pillar (2000+ words) that other posts link to.": [
+                "Detailn\u00fd: zacielen\u00fd \u010dl\u00e1nok na jednu t\u00e9mu, 800 a\u017e 1200 slov. Pilierov\u00fd: dlh\u00fd nosn\u00fd \u010dl\u00e1nok do h\u013abky (2000+ slov), na ktor\u00fd odkazuj\u00fa \u010fal\u0161ie pr\u00edspevky."
+            ],
+            "Detailed": [
+                "Detailn\u00fd"
+            ],
+            "Cornerstone": [
+                "Pilierov\u00fd"
+            ],
+            "Keywords": [
+                "K\u013e\u00fa\u010dov\u00e9 slov\u00e1"
+            ],
+            "1 to 3 phrases to rank for, comma-separated. Leave empty to let AI choose.": [
+                "1 a\u017e 3 fr\u00e1zy, na ktor\u00e9 chce\u0161 cieli\u0165, oddelen\u00e9 \u010diarkou. Nechaj pr\u00e1zdne a vyberie ich AI."
+            ],
+            "e.g. linkedin, content marketing": [
+                "napr. linkedin, content marketing"
+            ],
+            "\u2212 Hide existing content": [
+                "\u2212 Skry\u0165 existuj\u00faci obsah"
+            ],
+            "\uff0b Base it on existing content (paste or upload a doc)": [
+                "\uff0b Vych\u00e1dza\u0165 z existuj\u00faceho obsahu (vlo\u017e alebo nahraj dokument)"
+            ],
+            "Existing content": [
+                "Existuj\u00faci obsah"
+            ],
+            "Paste a draft, notes or a whole document (Word, Google Docs or Markdown, just copy and paste). The article is rewritten and expanded from it, and keeps your facts.": [
+                "Vlo\u017e koncept, pozn\u00e1mky alebo cel\u00fd dokument (Word, Google Docs alebo Markdown, sta\u010d\u00ed skop\u00edrova\u0165 a vlo\u017ei\u0165). \u010cl\u00e1nok sa z toho prep\u00ed\u0161e a roz\u0161\u00edri a zachov\u00e1 tvoje fakty."
+            ],
+            "Paste your existing text here\u2026": [
+                "Sem vlo\u017e svoj existuj\u00faci text\u2026"
+            ],
+            "Upload .md \/ .txt \/ .html": [
+                "Nahra\u0165 .md \/ .txt \/ .html"
+            ],
+            "chars": [
+                "znakov"
+            ],
+            "Clear": [
+                "Vymaza\u0165"
+            ],
+            "For Word or Google Docs, copy the text and paste it above.": [
+                "Pri Worde alebo Google Docs skop\u00edruj text a vlo\u017e ho vy\u0161\u0161ie."
+            ],
+            "Add a topic or a post title first.": [
+                "Najprv pridaj t\u00e9mu alebo n\u00e1zov pr\u00edspevku."
+            ],
+            "Continue": [
+                "Pokra\u010dova\u0165"
+            ],
+            "Pick who you\u2019re writing for, and optionally add your own angle. It is all optional, and it improves quality.": [
+                "Vyber, pre koho p\u00ed\u0161e\u0161, a pr\u00edpadne pridaj vlastn\u00fd uhol poh\u013eadu. V\u0161etko je volite\u013en\u00e9 a zlep\u0161uje to kvalitu."
+            ],
+            "Loading personas\u2026": [
+                "Na\u010d\u00edtavam pers\u00f3ny\u2026"
+            ],
+            "Target persona": [
+                "Cie\u013eov\u00e1 pers\u00f3na"
+            ],
+            "Personas come from your RedaQuest communication manual. The article is written for the one you pick.": [
+                "Pers\u00f3ny poch\u00e1dzaj\u00fa z tvojho komunika\u010dn\u00e9ho manu\u00e1lu v RedaQueste. \u010cl\u00e1nok sa nap\u00ed\u0161e pre t\u00fa, ktor\u00fa vyberie\u0161."
+            ],
+            "No specific persona": [
+                "Bez konkr\u00e9tnej pers\u00f3ny"
+            ],
+            "No personas in your brand manual yet. You can still add your own audience below.": [
+                "V tvojom brand manu\u00e1li zatia\u013e nie s\u00fa \u017eiadne pers\u00f3ny. Vlastn\u00e9 publikum m\u00f4\u017ee\u0161 prida\u0165 ni\u017e\u0161ie."
+            ],
+            "No brand manual found in this workspace. Add one in RedaQuest for on-brand, audience-aware articles.": [
+                "V tomto pracovnom priestore sa nena\u0161iel brand manu\u00e1l. Pridaj ho v RedaQueste pre \u010dl\u00e1nky v s\u00falade so zna\u010dkou a publikom."
+            ],
+            "Your thesis \/ opinion": [
+                "Tvoja t\u00e9za \/ n\u00e1zor"
+            ],
+            "Your own claim or stance. It makes the article original, not generic AI text.": [
+                "Tvoje vlastn\u00e9 tvrdenie alebo postoj. V\u010faka tomu je \u010dl\u00e1nok origin\u00e1lny, nie generick\u00fd AI text."
+            ],
+            "Example \/ experience": [
+                "Pr\u00edklad \/ sk\u00fasenos\u0165"
+            ],
+            "A real example or experience from practice for the AI to use.": [
+                "Skuto\u010dn\u00fd pr\u00edklad alebo sk\u00fasenos\u0165 z praxe, ktor\u00fa AI pou\u017eije."
+            ],
+            "Source URLs": [
+                "Zdrojov\u00e9 URL"
+            ],
+            "Links the AI should use as sources, one per line. Optional. It also searches the web if that is on.": [
+                "Odkazy, ktor\u00e9 m\u00e1 AI pou\u017ei\u0165 ako zdroje, jeden na riadok. Volite\u013en\u00e9. Ak je zapnut\u00e9, h\u013ead\u00e1 aj na webe."
+            ],
+            "Web research (find facts & sources)": [
+                "Webov\u00fd prieskum (n\u00e1jde fakty a zdroje)"
+            ],
+            "Back": [
+                "Sp\u00e4\u0165"
+            ],
+            "Outline ready.": [
+                "Osnova je hotov\u00e1."
+            ],
+            "Outline generation failed.": [
+                "Generovanie osnovy zlyhalo."
+            ],
+            "Generate outline": [
+                "Vygenerova\u0165 osnovu"
+            ],
+            "Preparing your outline\u2026": [
+                "Pripravujem osnovu\u2026"
+            ],
+            "Writing your article\u2026": [
+                "P\u00ed\u0161em tvoj \u010dl\u00e1nok\u2026"
+            ],
+            "Title": [
+                "N\u00e1zov"
+            ],
+            "Article title": [
+                "N\u00e1zov \u010dl\u00e1nku"
+            ],
+            "Short intro answer\u2026": [
+                "Kr\u00e1tka \u00favodn\u00e1 odpove\u010f\u2026"
+            ],
+            "Section": [
+                "Sekcia"
+            ],
+            "We read this section and generate an illustration of what it is about. Each image costs credits.": [
+                "Pre\u010d\u00edtame t\u00fato sekciu a vygenerujeme ilustr\u00e1ciu toho, o \u010dom je. Ka\u017ed\u00fd obr\u00e1zok stoj\u00ed kredity."
+            ],
+            "About section images": [
+                "O obr\u00e1zkoch k sekci\u00e1m"
+            ],
+            "Image on": [
+                "Obr\u00e1zok zapnut\u00fd"
+            ],
+            "Generate image": [
+                "Generova\u0165 obr\u00e1zok"
+            ],
+            "Remove section": [
+                "Odstr\u00e1ni\u0165 sekciu"
+            ],
+            "Section heading": [
+                "Nadpis sekcie"
+            ],
+            "What this section covers\u2026": [
+                "O \u010dom je t\u00e1to sekcia\u2026"
+            ],
+            "+ Add section": [
+                "+ Prida\u0165 sekciu"
+            ],
+            "FAQ questions": [
+                "Ot\u00e1zky FAQ"
+            ],
+            "Question readers ask": [
+                "Ot\u00e1zka, ktor\u00fa \u010ditatelia klad\u00fa"
+            ],
+            "+ Add question": [
+                "+ Prida\u0165 ot\u00e1zku"
+            ],
+            "SEO meta is generated automatically and saved to your SEO plugin.": [
+                "SEO meta sa vygeneruje automaticky a ulo\u017e\u00ed do tvojho SEO pluginu."
+            ],
+            "Cover image": [
+                "Tituln\u00fd obr\u00e1zok"
+            ],
+            "Generate a cover illustration for this article": [
+                "Vygenerova\u0165 tituln\u00fa ilustr\u00e1ciu pre tento \u010dl\u00e1nok"
+            ],
+            "Created from the article and set as the featured image automatically.": [
+                "Vytvor\u00ed sa z \u010dl\u00e1nku a automaticky sa nastav\u00ed ako odpor\u00fa\u010dan\u00fd obr\u00e1zok."
+            ],
+            "Image style": [
+                "\u0160t\u00fdl obr\u00e1zka"
+            ],
+            "From brand manual: your brand visual style and colors. Photorealistic: a real photo. The scene comes from the article.": [
+                "Z brand manu\u00e1lu: vizu\u00e1lny \u0161t\u00fdl a farby tvojej zna\u010dky. Fotorealistick\u00fd: skuto\u010dn\u00e1 fotografia. Sc\u00e9na vych\u00e1dza z \u010dl\u00e1nku."
+            ],
+            "Photorealistic": [
+                "Fotorealistick\u00fd"
+            ],
+            "section image(s) selected. Each one is generated from its section and inserted after its heading.": [
+                "vybran\u00fdch obr\u00e1zkov k sekci\u00e1m. Ka\u017ed\u00fd sa vygeneruje zo svojej sekcie a vlo\u017e\u00ed sa za jej nadpis."
+            ],
+            "credits": [
+                "kreditov"
+            ],
+            "from": [
+                "z"
+            ],
+            "remaining": [
+                "zost\u00e1vaj\u00facich"
+            ],
+            "article": [
+                "\u010dl\u00e1nok"
+            ],
+            "cover": [
+                "tituln\u00fd obr\u00e1zok"
+            ],
+            "sections": [
+                "sekcie"
+            ],
+            "Not enough credits. Top up in RedaQuest to continue.": [
+                "Nedostatok kreditov. Dopl\u0148 ich v RedaQueste a pokra\u010duj."
+            ],
+            "On generate: the article and FAQ are inserted, the title and SEO meta are set, and the selected images are generated. This can take 3 to 4 minutes. Each image uses credits.": [
+                "Pri generovan\u00ed: vlo\u017e\u00ed sa \u010dl\u00e1nok a \u010dast\u00e9 ot\u00e1zky, nastav\u00ed sa n\u00e1zov a SEO meta a vygeneruj\u00fa sa vybran\u00e9 obr\u00e1zky. M\u00f4\u017ee to trva\u0165 3 a\u017e 4 min\u00faty. Ka\u017ed\u00fd obr\u00e1zok spotrebuje kredity."
+            ],
+            "cover image added": [
+                "tituln\u00fd obr\u00e1zok pridan\u00fd"
+            ],
+            "section image(s)": [
+                "obr\u00e1zkov k sekci\u00e1m"
+            ],
+            "image(s) failed (check credits or brand setup)": [
+                "obr\u00e1zkov zlyhalo (skontroluj kredity alebo nastavenie zna\u010dky)"
+            ],
+            "SEO saved to": [
+                "SEO ulo\u017een\u00e9 do"
+            ],
+            "Article + FAQ inserted.": [
+                "\u010cl\u00e1nok a \u010dast\u00e9 ot\u00e1zky vlo\u017een\u00e9."
+            ],
+            "Article inserted, but no FAQ was generated.": [
+                "\u010cl\u00e1nok vlo\u017een\u00fd, ale nevygenerovali sa \u017eiadne \u010dast\u00e9 ot\u00e1zky."
+            ],
+            "Article generation failed.": [
+                "Generovanie \u010dl\u00e1nku zlyhalo."
+            ],
+            "Generate full article": [
+                "Vygenerova\u0165 cel\u00fd \u010dl\u00e1nok"
+            ],
+            "Connect this site to RedaQuest to use the blog writer (Settings \u2192 Redaquest Connector \u2192 Connection).": [
+                "Pripoj t\u00fato str\u00e1nku k RedaQuestu, aby si mohol pou\u017e\u00edva\u0165 blog writer (Nastavenia \u2192 Redaquest Connector \u2192 Pripojenie)."
+            ],
+            "Write an article": [
+                "Nap\u00edsa\u0165 \u010dl\u00e1nok"
+            ],
+            "Generate a GEO article from your brand voice & audience.": [
+                "Vygeneruj GEO \u010dl\u00e1nok z hlasu tvojej zna\u010dky a publika."
+            ],
+            "Frequently asked questions": [
+                "\u010casto kladen\u00e9 ot\u00e1zky"
+            ]
+        }
+    }
+}

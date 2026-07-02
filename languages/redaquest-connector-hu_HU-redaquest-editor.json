@@ -1,0 +1,438 @@
+{
+    "translation-revision-date": "2026-06-28T11:00:46+00:00",
+    "generator": "WP-CLI\/2.12.0",
+    "source": "src\/index.js",
+    "domain": "messages",
+    "locale_data": {
+        "messages": {
+            "": {
+                "domain": "messages",
+                "lang": "hu",
+                "plural-forms": "nplurals=2; plural=(n != 1);"
+            },
+            "RedaQuest": [
+                ""
+            ],
+            "Connect RedaQuest": [
+                "RedaQuest csatlakoztat\u00e1sa"
+            ],
+            "This site is not connected to RedaQuest.": [
+                "Ez a webhely nincs csatlakoztatva a RedaQuesthez."
+            ],
+            "Generation failed.": [
+                "A gener\u00e1l\u00e1s sikertelen."
+            ],
+            "Image generation failed.": [
+                "A k\u00e9p gener\u00e1l\u00e1sa sikertelen."
+            ],
+            "Scheduling failed.": [
+                "Az \u00fctemez\u00e9s sikertelen."
+            ],
+            "From brand manual": [
+                "A m\u00e1rkak\u00e9zik\u00f6nyvb\u0151l"
+            ],
+            "Photographic \/ realistic": [
+                "Fot\u00f3szer\u0171 \/ val\u00f3s\u00e1gh\u0171"
+            ],
+            "Flat design": [
+                "Lapos diz\u00e1jn"
+            ],
+            "3D render": [
+                "3D-render"
+            ],
+            "Illustration": [
+                "Illusztr\u00e1ci\u00f3"
+            ],
+            "Modern": [
+                "Modern"
+            ],
+            "Minimalist": [
+                "Minimalista"
+            ],
+            "Playful": [
+                "J\u00e1t\u00e9kos"
+            ],
+            "Elegant": [
+                "Eleg\u00e1ns"
+            ],
+            "Corporate": [
+                "V\u00e1llalati"
+            ],
+            "Could not load status.": [
+                "Az \u00e1llapot bet\u00f6lt\u00e9se nem siker\u00fclt."
+            ],
+            "Select at least one account in the RedaQuest tab.": [
+                "V\u00e1lassz legal\u00e1bb egy fi\u00f3kot a RedaQuest f\u00fcl\u00f6n."
+            ],
+            "Open in RedaQuest": [
+                "Megnyit\u00e1s a RedaQuestben"
+            ],
+            "This article is already scheduled in RedaQuest.": [
+                "Ez a cikk m\u00e1r \u00fctemezve van a RedaQuestben."
+            ],
+            "Post scheduled to RedaQuest": [
+                "Bejegyz\u00e9s \u00fctemezve a RedaQuestbe"
+            ],
+            "Featured image generated and set.": [
+                "Kiemelt k\u00e9p l\u00e9trehozva \u00e9s be\u00e1ll\u00edtva."
+            ],
+            "Image generated. Save the article and try again.": [
+                "A k\u00e9p elk\u00e9sz\u00fclt. Mentsd el a cikket, \u00e9s pr\u00f3b\u00e1ld \u00fajra."
+            ],
+            "What should the image show? (optional)": [
+                "Mit \u00e1br\u00e1zoljon a k\u00e9p? (nem k\u00f6telez\u0151)"
+            ],
+            "Leave empty to derive it from the article. Any language works.": [
+                "Hagyd \u00fcresen, hogy a cikkb\u0151l vegye. B\u00e1rmilyen nyelv m\u0171k\u00f6dik."
+            ],
+            "Image type": [
+                "K\u00e9p t\u00edpusa"
+            ],
+            "Style (mood)": [
+                "St\u00edlus (hangulat)"
+            ],
+            "Generating image\u2026": [
+                "K\u00e9p gener\u00e1l\u00e1sa\u2026"
+            ],
+            "Generate image (RedaQuest)": [
+                "K\u00e9p gener\u00e1l\u00e1sa (RedaQuest)"
+            ],
+            "No connected social accounts in this workspace.": [
+                "Ebben a munkater\u00fcletben nincsenek csatlakoztatott k\u00f6z\u00f6ss\u00e9gi fi\u00f3kok."
+            ],
+            "Generating\u2026": [
+                "Gener\u00e1l\u00e1s\u2026"
+            ],
+            "Prepare post from article": [
+                "Bejegyz\u00e9s el\u0151k\u00e9sz\u00edt\u00e9se a cikkb\u0151l"
+            ],
+            "Preparing texts, this takes a moment\u2026": [
+                "Sz\u00f6vegek el\u0151k\u00e9sz\u00edt\u00e9se, ez eltart egy pillanatig\u2026"
+            ],
+            "The article link is added to the first comment automatically.": [
+                "A cikk linkje automatikusan az els\u0151 hozz\u00e1sz\u00f3l\u00e1sba ker\u00fcl."
+            ],
+            "Use the article\u2019s featured image": [
+                "A cikk kiemelt k\u00e9p\u00e9nek haszn\u00e1lata"
+            ],
+            "No image. Generate one in the \u201cFeatured image\u201d panel.": [
+                "Nincs k\u00e9p. Hozz l\u00e9tre egyet a \u201eKiemelt k\u00e9p\u201c panelen."
+            ],
+            "Accounts": [
+                "Fi\u00f3kok"
+            ],
+            "Will be scheduled for the article date:": [
+                "A cikk d\u00e1tum\u00e1ra lesz \u00fctemezve:"
+            ],
+            "Scheduling\u2026": [
+                "\u00dctemez\u00e9s\u2026"
+            ],
+            "Scheduled \u2713": [
+                "\u00dctemezve \u2713"
+            ],
+            "Schedule to RedaQuest": [
+                "\u00dctemez\u00e9s a RedaQuestbe"
+            ],
+            "Tip: or tick \u201cAlso schedule to RedaQuest\u201d when you publish the article.": [
+                "Tipp: vagy a cikk k\u00f6zz\u00e9t\u00e9telekor jel\u00f6ld be a \u201e\u00dctemez\u00e9s a RedaQuestbe is\u201c lehet\u0151s\u00e9get."
+            ],
+            "\u2713 Also scheduled to social media.": [
+                "\u2713 K\u00f6z\u00f6ss\u00e9gi m\u00e9di\u00e1ba is \u00fctemezve."
+            ],
+            "Also schedule to RedaQuest (same date)": [
+                "\u00dctemez\u00e9s a RedaQuestbe is (ugyanaz a d\u00e1tum)"
+            ],
+            "accounts": [
+                "fi\u00f3k"
+            ],
+            "Prepare the post in the RedaQuest tab on the right. Generate the texts and pick accounts.": [
+                "K\u00e9sz\u00edtsd el\u0151 a bejegyz\u00e9st a jobb oldali RedaQuest f\u00fcl\u00f6n. Gener\u00e1ld a sz\u00f6vegeket \u00e9s v\u00e1lassz fi\u00f3kokat."
+            ],
+            "credits used": [
+                "felhaszn\u00e1lt kredit"
+            ],
+            "left": [
+                "maradt"
+            ],
+            "Not enough credits": [
+                "Nincs el\u00e9g kredit"
+            ],
+            "Top up in RedaQuest to continue.": [
+                "T\u00f6lts fel a RedaQuestben a folytat\u00e1shoz."
+            ],
+            "Topic": [
+                "T\u00e9ma"
+            ],
+            "Audience": [
+                "K\u00f6z\u00f6ns\u00e9g"
+            ],
+            "Outline": [
+                "V\u00e1zlat"
+            ],
+            "Image": [
+                "K\u00e9p"
+            ],
+            "Generating can take 3 to 4 minutes, more with images. You can close this window, it keeps running in the background.": [
+                "A gener\u00e1l\u00e1s 3-4 percig tarthat, k\u00e9pekkel tov\u00e1bb. Bez\u00e1rhatod ezt az ablakot, a h\u00e1tt\u00e9rben tov\u00e1bb fut."
+            ],
+            "RedaQuest Blog Writer": [
+                "RedaQuest Blog Writer"
+            ],
+            "Connected workspace": [
+                "Csatlakoztatott munkater\u00fclet"
+            ],
+            "Close": [
+                "Bez\u00e1r\u00e1s"
+            ],
+            "The subject to cover. A full sentence or question works great, e.g. \u201cHow to write LinkedIn posts with AI that don\u2019t sound robotic.\u201d": [
+                "A cikk t\u00e9m\u00e1ja. Egy teljes mondat vagy k\u00e9rd\u00e9s is j\u00f3l m\u0171k\u00f6dik, pl. \u201eHogyan \u00edrjunk AI-val LinkedIn-bejegyz\u00e9seket, amelyek nem hangzanak g\u00e9piesen\u201c."
+            ],
+            "What is the article about?": [
+                "Mir\u0151l sz\u00f3l a cikk?"
+            ],
+            "Length": [
+                "Hossz"
+            ],
+            "Detailed: a focused 800 to 1200 word article on one topic. Cornerstone: a long, in-depth pillar (2000+ words) that other posts link to.": [
+                "R\u00e9szletes: egy t\u00e9m\u00e1ra f\u00f3kusz\u00e1l\u00f3 cikk, 800-1200 sz\u00f3. Pill\u00e9r: hossz\u00fa, m\u00e9lyrehat\u00f3 alapcikk (2000+ sz\u00f3), amelyre m\u00e1s bejegyz\u00e9sek hivatkoznak."
+            ],
+            "Detailed": [
+                "R\u00e9szletes"
+            ],
+            "Cornerstone": [
+                "Pill\u00e9r"
+            ],
+            "Keywords": [
+                "Kulcsszavak"
+            ],
+            "1 to 3 phrases to rank for, comma-separated. Leave empty to let AI choose.": [
+                "1-3 kifejez\u00e9s, amelyre rangsorolni szeretn\u00e9l, vessz\u0151vel elv\u00e1lasztva. Hagyd \u00fcresen, \u00e9s az AI v\u00e1laszt."
+            ],
+            "e.g. linkedin, content marketing": [
+                "pl. linkedin, content marketing"
+            ],
+            "\u2212 Hide existing content": [
+                "\u2212 Megl\u00e9v\u0151 tartalom elrejt\u00e9se"
+            ],
+            "\uff0b Base it on existing content (paste or upload a doc)": [
+                "\uff0b Megl\u00e9v\u0151 tartalomra \u00e9p\u00edtve (illessz be vagy t\u00f6lts fel dokumentumot)"
+            ],
+            "Existing content": [
+                "Megl\u00e9v\u0151 tartalom"
+            ],
+            "Paste a draft, notes or a whole document (Word, Google Docs or Markdown, just copy and paste). The article is rewritten and expanded from it, and keeps your facts.": [
+                "Illessz be v\u00e1zlatot, jegyzeteket vagy eg\u00e9sz dokumentumot (Word, Google Docs vagy Markdown, csak m\u00e1sold \u00e9s illeszd be). A cikk ebb\u0151l \u00edr\u00f3dik \u00fajra \u00e9s b\u0151v\u00fcl, megtartva a t\u00e9nyeidet."
+            ],
+            "Paste your existing text here\u2026": [
+                "Ide illeszd be a megl\u00e9v\u0151 sz\u00f6veged\u2026"
+            ],
+            "Upload .md \/ .txt \/ .html": [
+                ".md \/ .txt \/ .html felt\u00f6lt\u00e9se"
+            ],
+            "chars": [
+                "karakter"
+            ],
+            "Clear": [
+                "T\u00f6rl\u00e9s"
+            ],
+            "For Word or Google Docs, copy the text and paste it above.": [
+                "Word vagy Google Docs eset\u00e9n m\u00e1sold ki a sz\u00f6veget, \u00e9s illeszd be fent."
+            ],
+            "Add a topic or a post title first.": [
+                "El\u0151sz\u00f6r adj meg egy t\u00e9m\u00e1t vagy bejegyz\u00e9sc\u00edmet."
+            ],
+            "Continue": [
+                "Tov\u00e1bb"
+            ],
+            "Pick who you\u2019re writing for, and optionally add your own angle. It is all optional, and it improves quality.": [
+                "V\u00e1laszd ki, kinek \u00edrsz, \u00e9s ig\u00e9ny szerint add hozz\u00e1 a saj\u00e1t n\u00e9z\u0151pontodat. Minden opcion\u00e1lis, \u00e9s jav\u00edtja a min\u0151s\u00e9get."
+            ],
+            "Loading personas\u2026": [
+                "Person\u00e1k bet\u00f6lt\u00e9se\u2026"
+            ],
+            "Target persona": [
+                "C\u00e9l-persona"
+            ],
+            "Personas come from your RedaQuest communication manual. The article is written for the one you pick.": [
+                "A person\u00e1k a RedaQuest kommunik\u00e1ci\u00f3s k\u00e9zik\u00f6nyvedb\u0151l sz\u00e1rmaznak. A cikk a kiv\u00e1lasztottnak k\u00e9sz\u00fcl."
+            ],
+            "No specific persona": [
+                "Nincs konkr\u00e9t persona"
+            ],
+            "No personas in your brand manual yet. You can still add your own audience below.": [
+                "A m\u00e1rkak\u00e9zik\u00f6nyvedben m\u00e9g nincsenek person\u00e1k. Lentebb \u00edgy is megadhatod a saj\u00e1t k\u00f6z\u00f6ns\u00e9ged."
+            ],
+            "No brand manual found in this workspace. Add one in RedaQuest for on-brand, audience-aware articles.": [
+                "Ebben a munkater\u00fcletben nincs m\u00e1rkak\u00e9zik\u00f6nyv. Hozz l\u00e9tre egyet a RedaQuestben a m\u00e1rkah\u0171, k\u00f6z\u00f6ns\u00e9gre szabott cikkek\u00e9rt."
+            ],
+            "Your thesis \/ opinion": [
+                "A t\u00e9zised \/ v\u00e9lem\u00e9nyed"
+            ],
+            "Your own claim or stance. It makes the article original, not generic AI text.": [
+                "A saj\u00e1t \u00e1ll\u00edt\u00e1sod vagy \u00e1ll\u00e1spontod. Ett\u0151l lesz a cikk eredeti, nem generikus AI-sz\u00f6veg."
+            ],
+            "Example \/ experience": [
+                "P\u00e9lda \/ tapasztalat"
+            ],
+            "A real example or experience from practice for the AI to use.": [
+                "Val\u00f3s p\u00e9lda vagy gyakorlati tapasztalat, amelyet az AI felhaszn\u00e1l."
+            ],
+            "Source URLs": [
+                "Forr\u00e1s-URL-ek"
+            ],
+            "Links the AI should use as sources, one per line. Optional. It also searches the web if that is on.": [
+                "Linkek, amelyeket az AI forr\u00e1sk\u00e9nt haszn\u00e1ljon, soronk\u00e9nt egy. Nem k\u00f6telez\u0151. Ha be van kapcsolva, a weben is keres."
+            ],
+            "Web research (find facts & sources)": [
+                "Webes kutat\u00e1s (t\u00e9nyek \u00e9s forr\u00e1sok keres\u00e9se)"
+            ],
+            "Back": [
+                "Vissza"
+            ],
+            "Outline ready.": [
+                "A v\u00e1zlat elk\u00e9sz\u00fclt."
+            ],
+            "Outline generation failed.": [
+                "A v\u00e1zlat gener\u00e1l\u00e1sa sikertelen."
+            ],
+            "Generate outline": [
+                "V\u00e1zlat gener\u00e1l\u00e1sa"
+            ],
+            "Preparing your outline\u2026": [
+                "A v\u00e1zlatod k\u00e9sz\u00fcl\u2026"
+            ],
+            "Writing your article\u2026": [
+                "A cikked \u00edr\u00e1sa\u2026"
+            ],
+            "Title": [
+                "C\u00edm"
+            ],
+            "Article title": [
+                "Cikk c\u00edme"
+            ],
+            "Short intro answer\u2026": [
+                "R\u00f6vid bevezet\u0151 v\u00e1lasz\u2026"
+            ],
+            "Section": [
+                "Szakasz"
+            ],
+            "We read this section and generate an illustration of what it is about. Each image costs credits.": [
+                "Elolvassuk ezt a szakaszt, \u00e9s illusztr\u00e1ci\u00f3t k\u00e9sz\u00edt\u00fcnk a tartalm\u00e1r\u00f3l. Minden k\u00e9p kreditbe ker\u00fcl."
+            ],
+            "About section images": [
+                "A szakaszk\u00e9pekr\u0151l"
+            ],
+            "Image on": [
+                "K\u00e9p bekapcsolva"
+            ],
+            "Generate image": [
+                "K\u00e9p gener\u00e1l\u00e1sa"
+            ],
+            "Remove section": [
+                "Szakasz elt\u00e1vol\u00edt\u00e1sa"
+            ],
+            "Section heading": [
+                "Szakasz c\u00edme"
+            ],
+            "What this section covers\u2026": [
+                "Mir\u0151l sz\u00f3l ez a szakasz\u2026"
+            ],
+            "+ Add section": [
+                "+ Szakasz hozz\u00e1ad\u00e1sa"
+            ],
+            "FAQ questions": [
+                "GYIK k\u00e9rd\u00e9sek"
+            ],
+            "Question readers ask": [
+                "K\u00e9rd\u00e9s, amit az olvas\u00f3k feltesznek"
+            ],
+            "+ Add question": [
+                "+ K\u00e9rd\u00e9s hozz\u00e1ad\u00e1sa"
+            ],
+            "SEO meta is generated automatically and saved to your SEO plugin.": [
+                "A SEO-metaadatok automatikusan elk\u00e9sz\u00fclnek, \u00e9s a SEO-b\u0151v\u00edtm\u00e9nyedbe ment\u0151dnek."
+            ],
+            "Cover image": [
+                "Bor\u00edt\u00f3k\u00e9p"
+            ],
+            "Generate a cover illustration for this article": [
+                "Bor\u00edt\u00f3illusztr\u00e1ci\u00f3 gener\u00e1l\u00e1sa ehhez a cikkhez"
+            ],
+            "Created from the article and set as the featured image automatically.": [
+                "A cikkb\u0151l k\u00e9sz\u00fcl, \u00e9s automatikusan kiemelt k\u00e9pk\u00e9nt lesz be\u00e1ll\u00edtva."
+            ],
+            "Image style": [
+                "K\u00e9p st\u00edlusa"
+            ],
+            "From brand manual: your brand visual style and colors. Photorealistic: a real photo. The scene comes from the article.": [
+                "A m\u00e1rkak\u00e9zik\u00f6nyvb\u0151l: a m\u00e1rk\u00e1d vizu\u00e1lis st\u00edlusa \u00e9s sz\u00ednei. Fot\u00f3realisztikus: val\u00f3di fot\u00f3. A jelenet a cikkb\u0151l sz\u00e1rmazik."
+            ],
+            "Photorealistic": [
+                "Fot\u00f3realisztikus"
+            ],
+            "section image(s) selected. Each one is generated from its section and inserted after its heading.": [
+                "kiv\u00e1lasztott szakaszk\u00e9p. Mindegyik a saj\u00e1t szakasz\u00e1b\u00f3l k\u00e9sz\u00fcl, \u00e9s a c\u00edme ut\u00e1n ker\u00fcl beilleszt\u00e9sre."
+            ],
+            "credits": [
+                "kredit"
+            ],
+            "from": [
+                "ebb\u0151l"
+            ],
+            "remaining": [
+                "el\u00e9rhet\u0151"
+            ],
+            "article": [
+                "cikk"
+            ],
+            "cover": [
+                "bor\u00edt\u00f3"
+            ],
+            "sections": [
+                "szakaszok"
+            ],
+            "Not enough credits. Top up in RedaQuest to continue.": [
+                "Nincs el\u00e9g kredit. T\u00f6lts fel a RedaQuestben a folytat\u00e1shoz."
+            ],
+            "On generate: the article and FAQ are inserted, the title and SEO meta are set, and the selected images are generated. This can take 3 to 4 minutes. Each image uses credits.": [
+                "Gener\u00e1l\u00e1skor: beillesztj\u00fck a cikket \u00e9s a GYIK-ot, be\u00e1ll\u00edtjuk a c\u00edmet \u00e9s a SEO-metaadatokat, \u00e9s elk\u00e9sz\u00edtj\u00fck a kiv\u00e1lasztott k\u00e9peket. Ez 3-4 percig tarthat. Minden k\u00e9p kreditet haszn\u00e1l."
+            ],
+            "cover image added": [
+                "bor\u00edt\u00f3k\u00e9p hozz\u00e1adva"
+            ],
+            "section image(s)": [
+                "szakaszk\u00e9p(ek)"
+            ],
+            "image(s) failed (check credits or brand setup)": [
+                "k\u00e9p sikertelen (ellen\u0151rizd a krediteket vagy a m\u00e1rkabe\u00e1ll\u00edt\u00e1st)"
+            ],
+            "SEO saved to": [
+                "SEO mentve ide:"
+            ],
+            "Article + FAQ inserted.": [
+                "Cikk \u00e9s GYIK beillesztve."
+            ],
+            "Article inserted, but no FAQ was generated.": [
+                "A cikk beillesztve, de nem k\u00e9sz\u00fclt GYIK."
+            ],
+            "Article generation failed.": [
+                "A cikk gener\u00e1l\u00e1sa sikertelen."
+            ],
+            "Generate full article": [
+                "Teljes cikk gener\u00e1l\u00e1sa"
+            ],
+            "Connect this site to RedaQuest to use the blog writer (Settings \u2192 Redaquest Connector \u2192 Connection).": [
+                "Csatlakoztasd ezt a webhelyet a RedaQuesthez a blog writer haszn\u00e1lat\u00e1hoz (Be\u00e1ll\u00edt\u00e1sok \u2192 Redaquest Connector \u2192 Kapcsolat)."
+            ],
+            "Write an article": [
+                "Cikk \u00edr\u00e1sa"
+            ],
+            "Generate a GEO article from your brand voice & audience.": [
+                "K\u00e9sz\u00edts GEO-cikket a m\u00e1rkahangod \u00e9s k\u00f6z\u00f6ns\u00e9ged alapj\u00e1n."
+            ],
+            "Frequently asked questions": [
+                "Gyakran ism\u00e9telt k\u00e9rd\u00e9sek"
+            ]
+        }
+    }
+}

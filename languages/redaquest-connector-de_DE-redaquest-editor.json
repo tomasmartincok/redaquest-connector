@@ -1,0 +1,438 @@
+{
+    "translation-revision-date": "2026-06-28T11:00:46+00:00",
+    "generator": "WP-CLI\/2.12.0",
+    "source": "src\/index.js",
+    "domain": "messages",
+    "locale_data": {
+        "messages": {
+            "": {
+                "domain": "messages",
+                "lang": "de",
+                "plural-forms": "nplurals=2; plural=(n != 1);"
+            },
+            "RedaQuest": [
+                ""
+            ],
+            "Connect RedaQuest": [
+                "RedaQuest verbinden"
+            ],
+            "This site is not connected to RedaQuest.": [
+                "Diese Website ist nicht mit RedaQuest verbunden."
+            ],
+            "Generation failed.": [
+                "Generierung fehlgeschlagen."
+            ],
+            "Image generation failed.": [
+                "Bildgenerierung fehlgeschlagen."
+            ],
+            "Scheduling failed.": [
+                "Planung fehlgeschlagen."
+            ],
+            "From brand manual": [
+                "Aus dem Markenhandbuch"
+            ],
+            "Photographic \/ realistic": [
+                "Fotografisch \/ realistisch"
+            ],
+            "Flat design": [
+                "Flat Design"
+            ],
+            "3D render": [
+                "3D-Render"
+            ],
+            "Illustration": [
+                "Illustration"
+            ],
+            "Modern": [
+                "Modern"
+            ],
+            "Minimalist": [
+                "Minimalistisch"
+            ],
+            "Playful": [
+                "Verspielt"
+            ],
+            "Elegant": [
+                "Elegant"
+            ],
+            "Corporate": [
+                "Corporate"
+            ],
+            "Could not load status.": [
+                "Status konnte nicht geladen werden."
+            ],
+            "Select at least one account in the RedaQuest tab.": [
+                "W\u00e4hle mindestens ein Konto im RedaQuest-Tab aus."
+            ],
+            "Open in RedaQuest": [
+                "In RedaQuest \u00f6ffnen"
+            ],
+            "This article is already scheduled in RedaQuest.": [
+                "Dieser Artikel ist bereits in RedaQuest geplant."
+            ],
+            "Post scheduled to RedaQuest": [
+                "Beitrag in RedaQuest geplant"
+            ],
+            "Featured image generated and set.": [
+                "Beitragsbild generiert und festgelegt."
+            ],
+            "Image generated. Save the article and try again.": [
+                "Bild generiert. Speichere den Artikel und versuche es erneut."
+            ],
+            "What should the image show? (optional)": [
+                "Was soll das Bild zeigen? (optional)"
+            ],
+            "Leave empty to derive it from the article. Any language works.": [
+                "Leer lassen, um es aus dem Artikel abzuleiten. Jede Sprache funktioniert."
+            ],
+            "Image type": [
+                "Bildtyp"
+            ],
+            "Style (mood)": [
+                "Stil (Stimmung)"
+            ],
+            "Generating image\u2026": [
+                "Bild wird generiert\u2026"
+            ],
+            "Generate image (RedaQuest)": [
+                "Bild generieren (RedaQuest)"
+            ],
+            "No connected social accounts in this workspace.": [
+                "In diesem Arbeitsbereich sind keine Social-Media-Konten verbunden."
+            ],
+            "Generating\u2026": [
+                "Wird generiert\u2026"
+            ],
+            "Prepare post from article": [
+                "Beitrag aus Artikel vorbereiten"
+            ],
+            "Preparing texts, this takes a moment\u2026": [
+                "Texte werden vorbereitet, das dauert einen Moment\u2026"
+            ],
+            "The article link is added to the first comment automatically.": [
+                "Der Artikel-Link wird automatisch im ersten Kommentar hinzugef\u00fcgt."
+            ],
+            "Use the article\u2019s featured image": [
+                "Beitragsbild des Artikels verwenden"
+            ],
+            "No image. Generate one in the \u201cFeatured image\u201d panel.": [
+                "Kein Bild. Erstelle eines im Panel \u201eBeitragsbild\u201c."
+            ],
+            "Accounts": [
+                "Konten"
+            ],
+            "Will be scheduled for the article date:": [
+                "Wird f\u00fcr das Artikeldatum geplant:"
+            ],
+            "Scheduling\u2026": [
+                "Wird geplant\u2026"
+            ],
+            "Scheduled \u2713": [
+                "Geplant \u2713"
+            ],
+            "Schedule to RedaQuest": [
+                "In RedaQuest planen"
+            ],
+            "Tip: or tick \u201cAlso schedule to RedaQuest\u201d when you publish the article.": [
+                "Tipp: Oder aktiviere beim Ver\u00f6ffentlichen des Artikels \u201eAuch in RedaQuest planen\u201c."
+            ],
+            "\u2713 Also scheduled to social media.": [
+                "\u2713 Auch in den sozialen Medien geplant."
+            ],
+            "Also schedule to RedaQuest (same date)": [
+                "Auch in RedaQuest planen (gleiches Datum)"
+            ],
+            "accounts": [
+                "Konten"
+            ],
+            "Prepare the post in the RedaQuest tab on the right. Generate the texts and pick accounts.": [
+                "Bereite den Beitrag im RedaQuest-Tab rechts vor. Generiere die Texte und w\u00e4hle Konten aus."
+            ],
+            "credits used": [
+                "Credits verbraucht"
+            ],
+            "left": [
+                "\u00fcbrig"
+            ],
+            "Not enough credits": [
+                "Nicht gen\u00fcgend Credits"
+            ],
+            "Top up in RedaQuest to continue.": [
+                "Lade in RedaQuest auf, um fortzufahren."
+            ],
+            "Topic": [
+                "Thema"
+            ],
+            "Audience": [
+                "Zielgruppe"
+            ],
+            "Outline": [
+                "Gliederung"
+            ],
+            "Image": [
+                "Bild"
+            ],
+            "Generating can take 3 to 4 minutes, more with images. You can close this window, it keeps running in the background.": [
+                "Die Generierung kann 3 bis 4 Minuten dauern, mit Bildern l\u00e4nger. Du kannst dieses Fenster schlie\u00dfen, es l\u00e4uft im Hintergrund weiter."
+            ],
+            "RedaQuest Blog Writer": [
+                "RedaQuest Blog Writer"
+            ],
+            "Connected workspace": [
+                "Verbundener Arbeitsbereich"
+            ],
+            "Close": [
+                "Schlie\u00dfen"
+            ],
+            "The subject to cover. A full sentence or question works great, e.g. \u201cHow to write LinkedIn posts with AI that don\u2019t sound robotic.\u201d": [
+                "Das Thema des Artikels. Ein ganzer Satz oder eine Frage funktioniert gut, z. B. \u201eWie man mit KI LinkedIn-Beitr\u00e4ge schreibt, die nicht roboterhaft klingen\u201c."
+            ],
+            "What is the article about?": [
+                "Worum geht es im Artikel?"
+            ],
+            "Length": [
+                "L\u00e4nge"
+            ],
+            "Detailed: a focused 800 to 1200 word article on one topic. Cornerstone: a long, in-depth pillar (2000+ words) that other posts link to.": [
+                "Detailliert: ein fokussierter Artikel zu einem Thema, 800 bis 1200 W\u00f6rter. Eckpfeiler: ein langer, tiefgehender Grundlagenartikel (2000+ W\u00f6rter), auf den andere Beitr\u00e4ge verlinken."
+            ],
+            "Detailed": [
+                "Detailliert"
+            ],
+            "Cornerstone": [
+                "Eckpfeiler"
+            ],
+            "Keywords": [
+                "Schl\u00fcsselw\u00f6rter"
+            ],
+            "1 to 3 phrases to rank for, comma-separated. Leave empty to let AI choose.": [
+                "1 bis 3 Phrasen, f\u00fcr die du ranken willst, durch Komma getrennt. Leer lassen, dann w\u00e4hlt die KI."
+            ],
+            "e.g. linkedin, content marketing": [
+                "z. B. linkedin, content marketing"
+            ],
+            "\u2212 Hide existing content": [
+                "\u2212 Vorhandenen Inhalt ausblenden"
+            ],
+            "\uff0b Base it on existing content (paste or upload a doc)": [
+                "\uff0b Auf vorhandenem Inhalt aufbauen (Dokument einf\u00fcgen oder hochladen)"
+            ],
+            "Existing content": [
+                "Vorhandener Inhalt"
+            ],
+            "Paste a draft, notes or a whole document (Word, Google Docs or Markdown, just copy and paste). The article is rewritten and expanded from it, and keeps your facts.": [
+                "F\u00fcge einen Entwurf, Notizen oder ein ganzes Dokument ein (Word, Google Docs oder Markdown, einfach kopieren und einf\u00fcgen). Der Artikel wird daraus neu geschrieben und erweitert und beh\u00e4lt deine Fakten."
+            ],
+            "Paste your existing text here\u2026": [
+                "F\u00fcge hier deinen vorhandenen Text ein\u2026"
+            ],
+            "Upload .md \/ .txt \/ .html": [
+                ".md \/ .txt \/ .html hochladen"
+            ],
+            "chars": [
+                "Zeichen"
+            ],
+            "Clear": [
+                "L\u00f6schen"
+            ],
+            "For Word or Google Docs, copy the text and paste it above.": [
+                "Bei Word oder Google Docs kopiere den Text und f\u00fcge ihn oben ein."
+            ],
+            "Add a topic or a post title first.": [
+                "F\u00fcge zuerst ein Thema oder einen Beitragstitel hinzu."
+            ],
+            "Continue": [
+                "Weiter"
+            ],
+            "Pick who you\u2019re writing for, and optionally add your own angle. It is all optional, and it improves quality.": [
+                "W\u00e4hle, f\u00fcr wen du schreibst, und erg\u00e4nze optional deinen eigenen Blickwinkel. Alles ist optional und verbessert die Qualit\u00e4t."
+            ],
+            "Loading personas\u2026": [
+                "Personas werden geladen\u2026"
+            ],
+            "Target persona": [
+                "Ziel-Persona"
+            ],
+            "Personas come from your RedaQuest communication manual. The article is written for the one you pick.": [
+                "Die Personas stammen aus deinem RedaQuest-Kommunikationshandbuch. Der Artikel wird f\u00fcr die ausgew\u00e4hlte geschrieben."
+            ],
+            "No specific persona": [
+                "Keine bestimmte Persona"
+            ],
+            "No personas in your brand manual yet. You can still add your own audience below.": [
+                "In deinem Markenhandbuch gibt es noch keine Personas. Du kannst unten trotzdem deine eigene Zielgruppe angeben."
+            ],
+            "No brand manual found in this workspace. Add one in RedaQuest for on-brand, audience-aware articles.": [
+                "In diesem Arbeitsbereich wurde kein Markenhandbuch gefunden. Lege eines in RedaQuest an, f\u00fcr markenkonforme, zielgruppengerechte Artikel."
+            ],
+            "Your thesis \/ opinion": [
+                "Deine These \/ Meinung"
+            ],
+            "Your own claim or stance. It makes the article original, not generic AI text.": [
+                "Deine eigene Aussage oder Haltung. Das macht den Artikel originell, nicht generischer KI-Text."
+            ],
+            "Example \/ experience": [
+                "Beispiel \/ Erfahrung"
+            ],
+            "A real example or experience from practice for the AI to use.": [
+                "Ein echtes Beispiel oder eine Erfahrung aus der Praxis, die die KI verwendet."
+            ],
+            "Source URLs": [
+                "Quell-URLs"
+            ],
+            "Links the AI should use as sources, one per line. Optional. It also searches the web if that is on.": [
+                "Links, die die KI als Quellen verwenden soll, einer pro Zeile. Optional. Wenn aktiviert, sucht sie auch im Web."
+            ],
+            "Web research (find facts & sources)": [
+                "Web-Recherche (Fakten & Quellen finden)"
+            ],
+            "Back": [
+                "Zur\u00fcck"
+            ],
+            "Outline ready.": [
+                "Gliederung fertig."
+            ],
+            "Outline generation failed.": [
+                "Die Gliederung konnte nicht erstellt werden."
+            ],
+            "Generate outline": [
+                "Gliederung generieren"
+            ],
+            "Preparing your outline\u2026": [
+                "Deine Gliederung wird vorbereitet\u2026"
+            ],
+            "Writing your article\u2026": [
+                "Dein Artikel wird geschrieben\u2026"
+            ],
+            "Title": [
+                "Titel"
+            ],
+            "Article title": [
+                "Artikeltitel"
+            ],
+            "Short intro answer\u2026": [
+                "Kurze einleitende Antwort\u2026"
+            ],
+            "Section": [
+                "Abschnitt"
+            ],
+            "We read this section and generate an illustration of what it is about. Each image costs credits.": [
+                "Wir lesen diesen Abschnitt und erstellen eine Illustration zum Inhalt. Jedes Bild kostet Credits."
+            ],
+            "About section images": [
+                "\u00dcber Abschnittsbilder"
+            ],
+            "Image on": [
+                "Bild aktiv"
+            ],
+            "Generate image": [
+                "Bild generieren"
+            ],
+            "Remove section": [
+                "Abschnitt entfernen"
+            ],
+            "Section heading": [
+                "Abschnitts\u00fcberschrift"
+            ],
+            "What this section covers\u2026": [
+                "Worum es in diesem Abschnitt geht\u2026"
+            ],
+            "+ Add section": [
+                "+ Abschnitt hinzuf\u00fcgen"
+            ],
+            "FAQ questions": [
+                "FAQ-Fragen"
+            ],
+            "Question readers ask": [
+                "Frage, die Leser stellen"
+            ],
+            "+ Add question": [
+                "+ Frage hinzuf\u00fcgen"
+            ],
+            "SEO meta is generated automatically and saved to your SEO plugin.": [
+                "Die SEO-Metadaten werden automatisch generiert und in deinem SEO-Plugin gespeichert."
+            ],
+            "Cover image": [
+                "Titelbild"
+            ],
+            "Generate a cover illustration for this article": [
+                "Eine Titelillustration f\u00fcr diesen Artikel generieren"
+            ],
+            "Created from the article and set as the featured image automatically.": [
+                "Wird aus dem Artikel erstellt und automatisch als Beitragsbild festgelegt."
+            ],
+            "Image style": [
+                "Bildstil"
+            ],
+            "From brand manual: your brand visual style and colors. Photorealistic: a real photo. The scene comes from the article.": [
+                "Aus dem Markenhandbuch: der visuelle Stil und die Farben deiner Marke. Fotorealistisch: ein echtes Foto. Die Szene stammt aus dem Artikel."
+            ],
+            "Photorealistic": [
+                "Fotorealistisch"
+            ],
+            "section image(s) selected. Each one is generated from its section and inserted after its heading.": [
+                "Abschnittsbild(er) ausgew\u00e4hlt. Jedes wird aus seinem Abschnitt generiert und nach dessen \u00dcberschrift eingef\u00fcgt."
+            ],
+            "credits": [
+                "Credits"
+            ],
+            "from": [
+                "von"
+            ],
+            "remaining": [
+                "verbleibend"
+            ],
+            "article": [
+                "Artikel"
+            ],
+            "cover": [
+                "Titelbild"
+            ],
+            "sections": [
+                "Abschnitte"
+            ],
+            "Not enough credits. Top up in RedaQuest to continue.": [
+                "Nicht gen\u00fcgend Credits. Lade in RedaQuest auf, um fortzufahren."
+            ],
+            "On generate: the article and FAQ are inserted, the title and SEO meta are set, and the selected images are generated. This can take 3 to 4 minutes. Each image uses credits.": [
+                "Beim Generieren: Artikel und FAQ werden eingef\u00fcgt, Titel und SEO-Metadaten werden gesetzt und die ausgew\u00e4hlten Bilder werden generiert. Das kann 3 bis 4 Minuten dauern. Jedes Bild verbraucht Credits."
+            ],
+            "cover image added": [
+                "Titelbild hinzugef\u00fcgt"
+            ],
+            "section image(s)": [
+                "Abschnittsbild(er)"
+            ],
+            "image(s) failed (check credits or brand setup)": [
+                "Bild(er) fehlgeschlagen (Credits oder Marken-Setup pr\u00fcfen)"
+            ],
+            "SEO saved to": [
+                "SEO gespeichert in"
+            ],
+            "Article + FAQ inserted.": [
+                "Artikel und FAQ eingef\u00fcgt."
+            ],
+            "Article inserted, but no FAQ was generated.": [
+                "Artikel eingef\u00fcgt, aber es wurden keine FAQ generiert."
+            ],
+            "Article generation failed.": [
+                "Der Artikel konnte nicht erstellt werden."
+            ],
+            "Generate full article": [
+                "Vollst\u00e4ndigen Artikel generieren"
+            ],
+            "Connect this site to RedaQuest to use the blog writer (Settings \u2192 Redaquest Connector \u2192 Connection).": [
+                "Verbinde diese Website mit RedaQuest, um den Blog Writer zu nutzen (Einstellungen \u2192 Redaquest Connector \u2192 Verbindung)."
+            ],
+            "Write an article": [
+                "Artikel schreiben"
+            ],
+            "Generate a GEO article from your brand voice & audience.": [
+                "Generiere einen GEO-Artikel aus deiner Markenstimme & Zielgruppe."
+            ],
+            "Frequently asked questions": [
+                "H\u00e4ufig gestellte Fragen"
+            ]
+        }
+    }
+}

@@ -1,5 +1,9 @@
 /.git
 /.github
+/package.json
+/package-lock.json
+/node_modules/
+/src/
 /tests/
 /vendor/
 composer.json
@@ -9,7 +13,7 @@ phpcs.xml.dist
 DEVELOPER.md
 .gitignore
 .phpunit.result.cache
-/languages/.gitkeep
 /languages/*.po
 /languages/*.pot
 /.wordpress-org/
+/README.md

@@ -1,158 +1,118 @@
 === Redaquest Connector ===
-Contributors: tomarco
-Tags: redaquest, woocommerce, content marketing, sync, publishing, ai
-Requires at least: 5.3
+Contributors: redaquest
+Tags: content sync, woocommerce, social media, scheduling
+Requires at least: 5.8
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 2.9.0
+Stable tag: 3.0.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Official Redaquest connector — link WordPress & WooCommerce to your content marketing workspace with OAuth.
+Sync WordPress and WooCommerce content with RedaQuest and schedule social posts straight from the block editor.
 
 == Description ==
 
-**Redaquest Connector** is the official WordPress plugin from [Redaquest](https://redaquest.com), the AI-powered content marketing platform for teams in Central Europe and beyond.
+Redaquest Connector links your WordPress site to [RedaQuest](https://redaquest.com), an AI content marketing and social media platform. It does two things:
 
-Install the plugin, connect your site in one click, and let Redaquest read (and optionally publish) content on your WordPress site through a secure REST API — without copying API keys by hand.
+**1. Content & product sync (API key).** RedaQuest reads your published content so you can repurpose it into social posts and plans:
 
-= Who is this for? =
+* WordPress pages and posts
+* Custom Post Types (portfolio, references, services, and more)
+* WooCommerce products (when WooCommerce is active)
+* Post and product categories
+* Custom Fields from ACF, Meta Box, Pods, and native WordPress meta
 
-* **Marketing teams** using Redaquest for social posts, articles, and campaigns who need live data from their WordPress site
-* **Agencies** managing multiple client websites from one Redaquest workspace
-* **WooCommerce shops** that want product catalog sync for AI-assisted product descriptions and ads
-* **Site owners** with custom post types (portfolio, references, services) who want them available in Redaquest
+It can also create and update posts on your site from RedaQuest when you enable writing.
 
-= What you can sync =
+**2. Social scheduling from the editor (Connect).** After you connect your site to a RedaQuest workspace, a panel appears in the block editor. From any article you can:
 
-* **Posts and pages** — titles, content, excerpts, featured images, categories, tags
-* **Public custom post types** — portfolio, references, services, and any other public CPT on your site
-* **WooCommerce products** — when WooCommerce is active (title, description, price, categories, images)
-* **Taxonomies** — categories, tags, and product categories
-* **Custom fields** — ACF, Meta Box, Pods, and native WordPress meta (with sensitive fields filtered out)
+* Generate per-platform social copy from the article with AI
+* Generate a brand image and set it as the featured image
+* Pick the connected social accounts to post to
+* Schedule the social posts to publish on the article's date, in one click or automatically when you publish the article
 
-= Key features =
+The connection uses a secure server-to-server token. No keys are typed into the browser, and you can disconnect at any time.
 
-* **OAuth connection** — sign in to Redaquest, pick a workspace, done. No manual API key copy-paste.
-* **Granular sync controls** — choose which post types Redaquest can access; enable write access only when you need publishing back to WordPress.
-* **WooCommerce toggle** — include or exclude products independently from posts and pages.
-* **Rate-limited REST API** — protects your site from excessive automated requests (120 req/min).
-* **Admin diagnostics** — connection test, REST checks, and a clear disconnect flow.
-* **Security-first** — API keys stored locally; sensitive meta masked; SSRF protection for media imports.
+== External services ==
 
-= How it works =
+This plugin connects to RedaQuest to provide content sync and social scheduling. A RedaQuest account is required for these features.
 
-1. Install and activate the plugin on your WordPress site.
-2. Go to **Settings → Redaquest** and click **Connect to Redaquest**.
-3. Sign in, authorize the connection, and select your workspace.
-4. Choose post types (and optional write access), then run **Test connection**.
-5. In Redaquest, your site content is available for planning, AI generation, and publishing workflows.
+What data is sent, and when:
 
-= External service =
+* Content sync: when RedaQuest requests content through this plugin's REST API (authenticated with your API key), the selected posts, pages, and products are returned to RedaQuest.
+* Connect: when you connect a site, the site URL and site name are sent to RedaQuest to issue a connection token that is stored on this site.
+* Social scheduling: when you prepare a social post from an article, the article text and metadata (title, URL, excerpt), the chosen platforms and account IDs, the scheduled date, and optionally the featured image URL are sent to RedaQuest. RedaQuest generates the copy/image and schedules the posts through its publishing provider.
 
-This plugin requires a [Redaquest](https://redaquest.com) account (free trial available). When connected, the plugin communicates with Redaquest servers (`app.redaquest.com` and related API endpoints) to authenticate your site and enable synchronization.
+Endpoints used: the RedaQuest web app at https://app.redaquest.com (connection approval screen) and the RedaQuest API at https://*.supabase.co/functions/v1 (token exchange and the editor bridge).
 
-By connecting, you agree to Redaquest's [Terms of Use](https://app.redaquest.com/legal/terms) and [Privacy Policy](https://app.redaquest.com/legal/privacy).
-
-= Privacy =
-
-The plugin stores an API key and connection metadata locally in your WordPress database. When connected, Redaquest accesses only the content types you explicitly enable. The plugin does **not** track site visitors or inject frontend analytics scripts.
+Service provider: RedaQuest, https://redaquest.com
+Terms of Use: https://redaquest.com/terms
+Privacy Policy: https://redaquest.com/privacy
 
 == Installation ==
 
-1. Upload the plugin folder to `/wp-content/plugins/redaquest-connector`, or install the ZIP via **Plugins → Add New → Upload Plugin**.
-2. Activate **Redaquest Connector**.
-3. Open **Settings → Redaquest**.
-4. Click **Connect to Redaquest**, sign in, and select your workspace.
-5. Enable the post types you want to sync and save settings.
-6. Click **Test connection** to verify the link works.
-
-For manual setup (advanced): generate an API key in Redaquest under **Settings → Integrations → WordPress** and paste it on the Connection tab.
+1. Upload the plugin to `/wp-content/plugins/redaquest-connector` or install it from the Plugins screen.
+2. Activate the plugin through the **Plugins** menu in WordPress.
+3. Go to **Settings → Redaquest Connector**.
+4. For content sync: paste the API key from your RedaQuest integration (RedaQuest app, Settings → Integrations).
+5. For social scheduling: click **Connect RedaQuest** on the Connection tab and approve the connection in RedaQuest.
 
 == Frequently Asked Questions ==
 
-= Do I need a Redaquest account? =
+= Where do I get the API key? =
 
-Yes. This plugin connects your WordPress site to the Redaquest platform. Sign up at [redaquest.com](https://redaquest.com).
+In the RedaQuest app when you create a new WordPress integration (Settings → Integrations).
 
-= Is WooCommerce required? =
+= Which Custom Post Types are supported? =
 
-No. The plugin works with standard WordPress. WooCommerce product sync is an optional feature when WooCommerce is installed and enabled in plugin settings.
+The plugin automatically detects all public custom post types on your site. In the settings you choose which ones to sync.
 
-= Which custom post types are supported? =
+= Can I publish posts to WordPress from RedaQuest? =
 
-All **public** post types registered on your site. Select which ones to expose under **Settings → Redaquest → Synchronization**.
+Yes. Enable **Content writing** on the Publishing tab and RedaQuest can create and update posts on your site.
 
-= Can Redaquest publish content back to my site? =
+= Do I need a RedaQuest account? =
 
-Yes. Enable **Write access** in plugin settings. Redaquest can then create or update posts, pages, and products via the REST API according to your workspace permissions.
-
-= Can I use a manual API key instead of OAuth? =
-
-OAuth is recommended. Advanced users can paste an API key from **Redaquest → Settings → Integrations → WordPress** if needed.
-
-= Does the plugin slow down my site? =
-
-No frontend scripts are added. The REST API is only called when Redaquest requests data from your workspace, with built-in rate limiting.
-
-= What happens when I disconnect? =
-
-The local API key is removed from WordPress. Redaquest can no longer access your site until you connect again.
-
-= Is my data sent to third parties other than Redaquest? =
-
-No. Content is transmitted only between your WordPress site and Redaquest servers when you have an active connection.
+Yes. A RedaQuest account and workspace are required to connect and to schedule social posts.
 
 == Screenshots ==
 
-1. Connect your WordPress site to Redaquest with secure OAuth — no API key copy-paste.
-2. Choose which post types and WooCommerce products Redaquest can access.
-3. Run connection diagnostics to verify REST API, tokens, and webhooks.
+1. Unified settings page: Connection tab with the Connect button and API key.
+2. Sync tab: choose which content types to sync.
+3. Block editor panel: generate social copy from an article and schedule it.
 
 == Changelog ==
 
-= 2.9.0 =
-* WordPress post editor metabox: send articles to Redaquest client approval
-* GET /posts/{id} REST endpoint for fresh article content
-* Outbound integration with Redaquest wp-article-approval API
+= 3.0.1 =
+* Restored v3 Gutenberg editor (Blog Writer, social scheduling, header panel) as the canonical plugin line.
+* New: WordPress post editor metabox to send articles to Redaquest client approval.
+* New: GET /redaquest/v1/posts/{id} for fresh content sync before approval.
+* Bundled editor translations (sk, cs, de, hu, pl).
 
-= 2.8.4 =
-* Packaging: exclude VCS files (.git, .github) from the distributed plugin
+= 3.0.0 =
+* New: connect the site to a RedaQuest workspace and schedule social posts from the block editor.
+* New: AI-generated per-platform social copy and a brand featured image from inside the editor.
+* New: unified settings page (Connection, Sync, Publishing, API & Debug); the old separate connection screen is gone.
+* Changed: the plugin is now fully translatable (English base) with bundled translations.
+* Fixed: output escaping, timezone-safe dates, and other code-quality issues.
 
-= 2.8.3 =
-* WordPress.org directory assets: icon, banner, and screenshots
-* Improved plugin readme and marketing descriptions
+= 2.5.0 =
+* Update endpoint to modify existing posts from RedaQuest.
+* Get-by-RedaQuest-ID lookup endpoint.
+* Improved SEO meta updates (Yoast, Rank Math) and category/tag handling.
 
-= 2.8.2 =
-* Fix Terms and Privacy URLs in readme (app.redaquest.com/legal/*)
+= 2.4.0 =
+* Tab-based settings UI.
+* More accurate CPT counts.
 
-= 2.8.1 =
-* WordPress.org readiness: English readme, Tested up to 7.0, coding standards fixes
-* Use wp_delete_file(), wp_parse_url(), wp_strip_all_tags(), wp_date()
-
-= 2.8.0 =
-* OAuth connection via Redaquest (login + workspace selection)
-* Setup checklist, connection test, disconnect, diagnostics tab
-* WooCommerce sync toggle, custom fields checkbox, admin UX improvements
-
-= 2.7.0 =
-* Custom fields class with sensitive meta filtering
-* REST API rate limiting (120 requests/minute)
-* Full i18n (sk_SK, en_US), PHPUnit tests, PHPCS CI
+= 2.0.0 =
+* Full Custom Post Type support and content-type selection in the admin.
+* Optional content writing and default author.
 
 == Upgrade Notice ==
 
-= 2.9.0 =
-Send WordPress articles to Redaquest for client approval from the post editor.
+= 3.0.1 =
+Restores the Gutenberg editor integration and adds client article approval. Requires Redaquest backend with wp-article-approval deployed.
 
-= 2.8.4 =
-Packaging cleanup only. No functional changes.
-
-= 2.8.3 =
-Updated WordPress.org listing with new branding assets and improved descriptions. No code changes required.
-
-= 2.8.2 =
-Fix for WordPress.org review: corrected legal URLs in readme.
-
-= 2.8.1 =
-Maintenance release for WordPress.org compatibility. Recommended before publishing.
+= 3.0.0 =
+Adds social scheduling from the block editor and unifies the settings page. After updating, open Settings → Redaquest Connector and click Connect to enable scheduling.

@@ -15,15 +15,23 @@ class Redaquest_Api_Client {
             return new WP_Error('not_connected', __('Redaquest nie je pripojený.', 'redaquest-connector'));
         }
 
+        $functions_url = class_exists('Redaquest_Connect')
+            ? Redaquest_Connect::functions_url()
+            : rtrim(apply_filters('redaquest_functions_url', 'https://fqmaerqsvskqbyigefbe.supabase.co/functions/v1'), '/');
+
+        $anon_key = defined('REDAQUEST_SUPABASE_ANON_KEY')
+            ? REDAQUEST_SUPABASE_ANON_KEY
+            : apply_filters('redaquest_supabase_anon_key', '');
+
         $body = array_merge(array('action' => $action), $payload);
         $response = wp_remote_post(
-            REDAQUEST_FUNCTIONS_URL . '/wp-article-approval',
+            $functions_url . '/wp-article-approval',
             array(
                 'timeout' => 30,
                 'headers' => array(
                     'Content-Type' => 'application/json',
                     'X-Redaquest-Key' => $api_key,
-                    'apikey' => REDAQUEST_SUPABASE_ANON_KEY,
+                    'apikey' => $anon_key,
                 ),
                 'body' => wp_json_encode($body),
             )
