@@ -55,11 +55,18 @@ class Redaquest_REST_Controller {
             'args' => Redaquest_REST_Schema::custom_fields_args(),
         ));
         
-        register_rest_route($namespace, '/posts', array(
-            'methods' => 'POST',
-            'callback' => array($this, 'create_post'),
-            'permission_callback' => array($this, 'check_write_permission'),
-            'args' => Redaquest_REST_Schema::create_post_args(),
+        register_rest_route($namespace, '/posts/(?P<id>\d+)', array(
+            'methods' => 'GET',
+            'callback' => array($this, 'get_post'),
+            'permission_callback' => array($this, 'check_api_key'),
+            'args' => array(
+                'id' => array(
+                    'required' => true,
+                    'validate_callback' => function ($param) {
+                        return is_numeric($param) && (int) $param > 0;
+                    },
+                ),
+            ),
         ));
         
         register_rest_route($namespace, '/posts/(?P<id>\d+)', array(
@@ -67,6 +74,13 @@ class Redaquest_REST_Controller {
             'callback' => array($this, 'update_post'),
             'permission_callback' => array($this, 'check_write_permission'),
             'args' => Redaquest_REST_Schema::update_post_args(),
+        ));
+        
+        register_rest_route($namespace, '/posts', array(
+            'methods' => 'POST',
+            'callback' => array($this, 'create_post'),
+            'permission_callback' => array($this, 'check_write_permission'),
+            'args' => Redaquest_REST_Schema::create_post_args(),
         ));
         
         register_rest_route($namespace, '/posts/by-redaquest/(?P<redaquest_id>[a-zA-Z0-9-]+)', array(
@@ -537,6 +551,26 @@ class Redaquest_REST_Controller {
         }
         
         return rest_ensure_response(array('success' => true, 'data' => $categories));
+    }
+    
+    public function get_post($request) {
+        $post_id = (int) $request->get_param('id');
+        $post = get_post($post_id);
+
+        if (!$post) {
+            return new WP_Error('post_not_found', __('Príspevok neexistuje.', 'redaquest-connector'), array('status' => 404));
+        }
+
+        if (!Redaquest_Helpers::is_post_type_enabled($post->post_type)) {
+            return new WP_Error('post_type_disabled', __('Typ obsahu nie je povolený pre synchronizáciu.', 'redaquest-connector'), array('status' => 403));
+        }
+
+        $include_custom_fields = (bool) get_option('redaquest_include_custom_fields', 0);
+
+        return rest_ensure_response(array(
+            'success' => true,
+            'data' => $this->format_content_item($post, $include_custom_fields),
+        ));
     }
     
     public function create_post($request) {
