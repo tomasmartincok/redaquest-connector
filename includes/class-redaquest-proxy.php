@@ -61,6 +61,50 @@ class Redaquest_Proxy {
         return current_user_can('edit_posts');
     }
 
+    /**
+     * Outline/draft AI calls can run 90–120s upstream. Without this, default PHP
+     * max_execution_time (30–60s) kills the REST handler and the editor sees
+     * "The response is not a valid JSON response."
+     */
+    private function extend_runtime($seconds = 300) {
+        if (function_exists('ignore_user_abort')) {
+            ignore_user_abort(true);
+        }
+        if (function_exists('set_time_limit')) {
+            @set_time_limit((int) $seconds);
+        }
+    }
+
+    /** Strip invalid UTF-8 so wp_json_encode does not break the REST envelope. */
+    private function sanitize_for_json($data) {
+        if (is_array($data)) {
+            foreach ($data as $key => $value) {
+                $data[$key] = $this->sanitize_for_json($value);
+            }
+            return $data;
+        }
+        if (is_string($data)) {
+            if (function_exists('mb_convert_encoding')) {
+                $clean = mb_convert_encoding($data, 'UTF-8', 'UTF-8');
+                return false !== $clean ? $clean : '';
+            }
+            return wp_check_invalid_utf8($data, true);
+        }
+        return $data;
+    }
+
+    /** Wrap a successful wp-bridge payload for REST output. */
+    private function rest_bridge_body($body) {
+        if (!is_array($body)) {
+            return new WP_Error(
+                'redaquest_upstream',
+                __('RedaQuest returned an empty response.', 'redaquest-connector'),
+                array('status' => 502)
+            );
+        }
+        return rest_ensure_response($this->sanitize_for_json($body));
+    }
+
     public function get_status() {
         return rest_ensure_response(array(
             'connected'   => Redaquest_Connect::is_connected(),
@@ -91,7 +135,10 @@ class Redaquest_Proxy {
         ));
 
         if (is_wp_error($response)) {
-            return new WP_Error('redaquest_upstream', __('Could not reach RedaQuest.', 'redaquest-connector'), array('status' => 502));
+            $msg = ('http_request_failed' === $response->get_error_code())
+                ? __('Could not reach RedaQuest (timeout or network error).', 'redaquest-connector')
+                : __('Could not reach RedaQuest.', 'redaquest-connector');
+            return new WP_Error('redaquest_upstream', $msg, array('status' => 502));
         }
 
         $status = (int) wp_remote_retrieve_response_code($response);
@@ -99,7 +146,17 @@ class Redaquest_Proxy {
             return new WP_Error('redaquest_not_connected', __('The connection expired. Please reconnect your site.', 'redaquest-connector'), array('status' => 409));
         }
 
-        return array('status' => $status, 'body' => json_decode(wp_remote_retrieve_body($response), true));
+        $raw_body = wp_remote_retrieve_body($response);
+        $decoded  = json_decode($raw_body, true);
+        if (JSON_ERROR_NONE !== json_last_error()) {
+            return new WP_Error(
+                'redaquest_upstream',
+                __('RedaQuest returned an invalid response.', 'redaquest-connector'),
+                array('status' => 502)
+            );
+        }
+
+        return array('status' => $status, 'body' => $decoded);
     }
 
     public function get_accounts() {
@@ -398,6 +455,8 @@ class Redaquest_Proxy {
      * Blog writer: generate a GEO article OUTLINE (brake step). Forwards to wp-bridge.
      */
     public function post_blog_outline(WP_REST_Request $request) {
+        $this->extend_runtime(300);
+
         $topic = trim((string) $request->get_param('topic'));
         if ('' === $topic) {
             return new WP_Error('redaquest_bad_request', __('Missing topic.', 'redaquest-connector'), array('status' => 400));
@@ -415,7 +474,7 @@ class Redaquest_Proxy {
             $payload['notes'] = sanitize_textarea_field($notes);
         }
 
-        $r = $this->call_bridge($payload, 120); // search + model can take a while
+        $r = $this->call_bridge($payload, 180); // research + model can exceed 90s
         if (is_wp_error($r)) {
             return $r;
         }
@@ -425,13 +484,15 @@ class Redaquest_Proxy {
         if (200 !== $r['status']) {
             return new WP_Error('redaquest_blog_outline_failed', __('Outline generation failed, please try again.', 'redaquest-connector') . $this->blog_error_reason($r['body']), array('status' => 502));
         }
-        return rest_ensure_response($r['body']);
+        return $this->rest_bridge_body($r['body']);
     }
 
     /**
      * Blog writer: generate the full article from an approved outline. Forwards to wp-bridge.
      */
     public function post_blog_draft(WP_REST_Request $request) {
+        $this->extend_runtime(360);
+
         $topic = trim((string) $request->get_param('topic'));
         $outline = (string) $request->get_param('approvedOutline');
         if ('' === $topic || '' === trim($outline)) {
@@ -462,7 +523,7 @@ class Redaquest_Proxy {
             if ($clean) $payload['sources'] = $clean;
         }
 
-        $r = $this->call_bridge($payload, 180); // long-form generation
+        $r = $this->call_bridge($payload, 240); // long-form generation
         if (is_wp_error($r)) {
             return $r;
         }
@@ -472,7 +533,7 @@ class Redaquest_Proxy {
         if (200 !== $r['status']) {
             return new WP_Error('redaquest_blog_draft_failed', __('Article generation failed, please try again.', 'redaquest-connector') . $this->blog_error_reason($r['body']), array('status' => 502));
         }
-        return rest_ensure_response($r['body']);
+        return $this->rest_bridge_body($r['body']);
     }
 
     /**

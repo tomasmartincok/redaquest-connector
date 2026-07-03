@@ -1,3 +1,7 @@
+= 3.0.3 =
+* Fix blog outline REST timeout: extend PHP runtime, longer upstream timeout, UTF-8 sanitization
+* Web research off by default in Blog Writer (opt-in) to keep outline generation fast
+
 = 3.0.2 =
 * Workspace name in Connect status, fixed admin notices, publishing opt-in during Connect
 
