@@ -4,7 +4,7 @@ Tags: content sync, woocommerce, social media, scheduling
 Requires at least: 5.8
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 3.0.2
+Stable tag: 3.0.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -83,6 +83,11 @@ Yes. A RedaQuest account and workspace are required to connect and to schedule s
 
 == Changelog ==
 
+= 3.0.3 =
+* Fix blog outline REST timeout: extend PHP runtime and upstream timeout for slow AI calls
+* Sanitize UTF-8 in REST responses so the block editor no longer sees invalid JSON
+* Web research off by default in Blog Writer (opt in when you need it)
+
 = 3.0.2 =
 * Show connected workspace name (not just ID) after Connect
 * Fix admin notices (Settings saved, connect success) to display in standard WordPress position
@@ -117,6 +122,9 @@ Yes. A RedaQuest account and workspace are required to connect and to schedule s
 * Optional content writing and default author.
 
 == Upgrade Notice ==
+
+= 3.0.3 =
+Fixes Blog Writer outline generation timeouts and invalid JSON responses. Update recommended for all connected sites.
 
 = 3.0.1 =
 Restores the Gutenberg editor integration and adds client article approval. Requires Redaquest backend with wp-article-approval deployed.
