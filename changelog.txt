@@ -1,3 +1,6 @@
+= 3.0.4 =
+* Async blog outline: start job + poll status (fixes invalid JSON on 60s proxy timeouts)
+
 = 3.0.3 =
 * Fix blog outline REST timeout: extend PHP runtime, longer upstream timeout, UTF-8 sanitization
 * Web research off by default in Blog Writer (opt-in) to keep outline generation fast

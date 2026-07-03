@@ -39,6 +39,17 @@ class Redaquest_Proxy {
         register_rest_route(self::NS, '/generate-image', array('methods' => 'POST', 'callback' => array($this, 'post_generate_image'), 'permission_callback' => $perm));
         register_rest_route(self::NS, '/schedule', array('methods' => 'POST', 'callback' => array($this, 'post_schedule'), 'permission_callback' => $perm));
         register_rest_route(self::NS, '/blog/outline', array('methods' => 'POST', 'callback' => array($this, 'post_blog_outline'), 'permission_callback' => $perm));
+        register_rest_route(self::NS, '/blog/outline/status', array(
+            'methods'             => 'GET',
+            'callback'            => array($this, 'get_blog_outline_status'),
+            'permission_callback' => $perm,
+            'args'                => array(
+                'jobId' => array(
+                    'required'          => true,
+                    'sanitize_callback' => 'sanitize_text_field',
+                ),
+            ),
+        ));
         register_rest_route(self::NS, '/blog/draft', array('methods' => 'POST', 'callback' => array($this, 'post_blog_draft'), 'permission_callback' => $perm));
         register_rest_route(self::NS, '/blog/apply-meta', array('methods' => 'POST', 'callback' => array($this, 'post_blog_apply_meta'), 'permission_callback' => $perm));
         register_rest_route(self::NS, '/brand/personas', array('methods' => 'GET', 'callback' => array($this, 'get_brand_personas'), 'permission_callback' => $perm));
@@ -455,7 +466,7 @@ class Redaquest_Proxy {
      * Blog writer: generate a GEO article OUTLINE (brake step). Forwards to wp-bridge.
      */
     public function post_blog_outline(WP_REST_Request $request) {
-        $this->extend_runtime(300);
+        $this->extend_runtime(60);
 
         $topic = trim((string) $request->get_param('topic'));
         if ('' === $topic) {
@@ -474,7 +485,8 @@ class Redaquest_Proxy {
             $payload['notes'] = sanitize_textarea_field($notes);
         }
 
-        $r = $this->call_bridge($payload, 180); // research + model can exceed 90s
+        // Async job: returns { jobId, status: pending } in ~1s; editor polls status endpoint.
+        $r = $this->call_bridge($payload, 30);
         if (is_wp_error($r)) {
             return $r;
         }
@@ -483,6 +495,36 @@ class Redaquest_Proxy {
         }
         if (200 !== $r['status']) {
             return new WP_Error('redaquest_blog_outline_failed', __('Outline generation failed, please try again.', 'redaquest-connector') . $this->blog_error_reason($r['body']), array('status' => 502));
+        }
+        return $this->rest_bridge_body($r['body']);
+    }
+
+    /** Poll async outline job started by post_blog_outline. */
+    public function get_blog_outline_status(WP_REST_Request $request) {
+        $job_id = trim((string) $request->get_param('jobId'));
+        if ('' === $job_id) {
+            return new WP_Error('redaquest_bad_request', __('Missing jobId.', 'redaquest-connector'), array('status' => 400));
+        }
+
+        $r = $this->call_bridge(
+            array(
+                'action' => 'blog_outline_poll',
+                'jobId'  => sanitize_text_field($job_id),
+            ),
+            20
+        );
+        if (is_wp_error($r)) {
+            return $r;
+        }
+        if (402 === $r['status']) {
+            return new WP_REST_Response($r['body'], 402);
+        }
+        if (200 !== $r['status']) {
+            return new WP_Error(
+                'redaquest_blog_outline_failed',
+                __('Outline generation failed, please try again.', 'redaquest-connector') . $this->blog_error_reason($r['body']),
+                array('status' => 502)
+            );
         }
         return $this->rest_bridge_body($r['body']);
     }
