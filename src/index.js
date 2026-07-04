@@ -302,16 +302,12 @@ function FeaturedGenerateButton() {
 	const onClick = async () => {
 		setBusy( true );
 		try {
-			const res = await apiFetch( {
-				path: '/redaquest/v2/generate-image',
-				method: 'POST',
-				data: {
-					article: { title, body: stripHtml( content ) },
-					postId,
-					instruction: hint.trim() || undefined,
-					type: imgType || undefined,
-					style: imgStyle || undefined,
-				},
+			const res = await generateRedaquestImage( {
+				article: { title, body: stripHtml( content ) },
+				postId,
+				instruction: hint.trim() || undefined,
+				type: imgType || undefined,
+				style: imgStyle || undefined,
 			} );
 			if ( res && res.featuredMediaId ) {
 				editPost( { featured_media: res.featuredMediaId } );
@@ -621,6 +617,47 @@ const OUTLINE_POLL_MS = 2000;
 const OUTLINE_POLL_MAX_MS = 5 * 60 * 1000;
 const DRAFT_POLL_MS = 3000;
 const DRAFT_POLL_MAX_MS = 10 * 60 * 1000;
+const IMAGE_POLL_MS = 3000;
+const IMAGE_POLL_MAX_MS = 6 * 60 * 1000;
+
+function isValidImageResult( res ) {
+	return !! ( res && ( res.mediaUrl || res.featuredMediaId || res.imageUrl ) );
+}
+
+async function fetchImageResult( startResponse ) {
+	if ( startResponse && startResponse.jobId ) {
+		const deadline = Date.now() + IMAGE_POLL_MAX_MS;
+		while ( Date.now() < deadline ) {
+			const polled = await apiFetch( {
+				path: `/redaquest/v2/generate-image/status?jobId=${ encodeURIComponent( startResponse.jobId ) }`,
+			} );
+			if ( polled && polled.code === 'INSUFFICIENT_CREDITS' ) {
+				throw polled;
+			}
+			if ( isValidImageResult( polled ) ) {
+				return polled;
+			}
+			if ( polled && polled.status === 'failed' ) {
+				throw new Error( __( 'Image generation failed.', 'redaquest-connector' ) );
+			}
+			await new Promise( ( resolve ) => setTimeout( resolve, IMAGE_POLL_MS ) );
+		}
+		throw new Error( __( 'Image generation timed out. Please try again.', 'redaquest-connector' ) );
+	}
+	if ( isValidImageResult( startResponse ) ) {
+		return startResponse;
+	}
+	throw new Error( __( 'Image generation failed.', 'redaquest-connector' ) );
+}
+
+async function generateRedaquestImage( data ) {
+	const start = await apiFetch( {
+		path: '/redaquest/v2/generate-image',
+		method: 'POST',
+		data,
+	} );
+	return fetchImageResult( start );
+}
 
 function isValidDraftResult( res ) {
 	return !! ( res && typeof res.articleHtml === 'string' && res.articleHtml.trim().length > 100 );
@@ -1089,10 +1126,11 @@ function RedaQuestBlogModal() {
 				for ( const s of flaggedSections ) {
 					const secBody = sectionBodyFromArticleHtml( res.articleHtml, s.h2, s.brief || s.h2 );
 					try {
-						const imgRes = await apiFetch( {
-							path: '/redaquest/v2/generate-image',
-							method: 'POST',
-							data: { postId: savedPostId, setFeatured: false, article: { title: s.h2, body: secBody, excerpt: s.brief || '' }, type: imageStyle === 'photo' ? 'photo' : '' },
+						const imgRes = await generateRedaquestImage( {
+							postId: savedPostId,
+							setFeatured: false,
+							article: { title: s.h2, body: secBody, excerpt: s.brief || '' },
+							type: imageStyle === 'photo' ? 'photo' : '',
 						} );
 						if ( imgRes && imgRes.mediaUrl ) {
 							const imgBlock = createBlock( 'core/image', { id: imgRes.mediaId, url: imgRes.mediaUrl, alt: imgRes.altText || s.h2, sizeSlug: 'large' } );
@@ -1124,14 +1162,10 @@ function RedaQuestBlogModal() {
 			let imgNote = '';
 			if ( genImage && savedPostId ) {
 				try {
-					const imgRes = await apiFetch( {
-						path: '/redaquest/v2/generate-image',
-						method: 'POST',
-						data: {
-							postId: savedPostId,
-							article: { title: finalTitle || base.topic, body: stripHtml( res.articleHtml ), excerpt: res.excerpt },
-							type: imageStyle === 'photo' ? 'photo' : '',
-						},
+					const imgRes = await generateRedaquestImage( {
+						postId: savedPostId,
+						article: { title: finalTitle || base.topic, body: stripHtml( res.articleHtml ), excerpt: res.excerpt },
+						type: imageStyle === 'photo' ? 'photo' : '',
 					} );
 					if ( imgRes && ( imgRes.featuredMediaId || imgRes.imageUrl ) ) {
 						imgNote = ` · ${ __( 'cover image added', 'redaquest-connector' ) }`;

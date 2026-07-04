@@ -37,6 +37,17 @@ class Redaquest_Proxy {
         register_rest_route(self::NS, '/accounts', array('methods' => 'GET',  'callback' => array($this, 'get_accounts'), 'permission_callback' => $perm));
         register_rest_route(self::NS, '/generate', array('methods' => 'POST', 'callback' => array($this, 'post_generate'), 'permission_callback' => $perm));
         register_rest_route(self::NS, '/generate-image', array('methods' => 'POST', 'callback' => array($this, 'post_generate_image'), 'permission_callback' => $perm));
+        register_rest_route(self::NS, '/generate-image/status', array(
+            'methods'             => 'GET',
+            'callback'            => array($this, 'get_generate_image_status'),
+            'permission_callback' => $perm,
+            'args'                => array(
+                'jobId' => array(
+                    'required'          => true,
+                    'sanitize_callback' => 'sanitize_text_field',
+                ),
+            ),
+        ));
         register_rest_route(self::NS, '/schedule', array('methods' => 'POST', 'callback' => array($this, 'post_schedule'), 'permission_callback' => $perm));
         register_rest_route(self::NS, '/blog/outline', array('methods' => 'POST', 'callback' => array($this, 'post_blog_outline'), 'permission_callback' => $perm));
         register_rest_route(self::NS, '/blog/outline/status', array(
@@ -232,12 +243,9 @@ class Redaquest_Proxy {
         return rest_ensure_response($r['body']);
     }
 
-    public function post_generate_image(WP_REST_Request $request) {
+    /** Build wp-bridge payload for async image generation. */
+    private function build_generate_image_bridge_payload(WP_REST_Request $request) {
         $article = $request->get_param('article');
-        if (!is_array($article) || empty($article['title']) || !isset($article['body'])) {
-            return new WP_Error('redaquest_bad_request', __('Missing article (title and content).', 'redaquest-connector'), array('status' => 400));
-        }
-
         $payload = array(
             'action'  => 'generate_image',
             'article' => array(
@@ -264,63 +272,141 @@ class Redaquest_Proxy {
         if ('fast' === $quality || 'quality' === $quality) {
             $payload['imageQuality'] = $quality;
         }
+        return $payload;
+    }
 
-        $r = $this->call_bridge($payload, 120); // image generation can take a while
+    /** Start async image job (poll via get_generate_image_status). */
+    public function post_generate_image(WP_REST_Request $request) {
+        $article = $request->get_param('article');
+        if (!is_array($article) || empty($article['title']) || !isset($article['body'])) {
+            return new WP_Error('redaquest_bad_request', __('Missing article (title and content).', 'redaquest-connector'), array('status' => 400));
+        }
+
+        $payload = $this->build_generate_image_bridge_payload($request);
+        $r = $this->call_bridge($payload, 30);
         if (is_wp_error($r)) {
             return $r;
         }
         if (402 === $r['status']) {
             return new WP_REST_Response($r['body'], 402);
         }
-        if (200 !== $r['status'] || empty($r['body']['imageUrl'])) {
+        if (200 !== $r['status'] || empty($r['body']['jobId'])) {
             $code = ( is_array($r['body']) && ! empty($r['body']['error_code']) ) ? ' (' . $r['body']['error_code'] . ')' : '';
             return new WP_Error('redaquest_image_failed', __('Image generation failed.', 'redaquest-connector') . $code, array('status' => 502));
         }
 
-        $image_url = $r['body']['imageUrl'];
-        $alt       = isset($r['body']['altText']) ? sanitize_text_field($r['body']['altText']) : '';
-        $post_id   = (int) $request->get_param('postId');
+        $job_id = sanitize_text_field((string) $r['body']['jobId']);
+        $set_featured_param = $request->get_param('setFeatured');
+        set_transient(
+            'redaquest_img_' . $job_id,
+            array(
+                'postId'      => (int) $request->get_param('postId'),
+                'setFeatured' => (null === $set_featured_param) ? true : filter_var($set_featured_param, FILTER_VALIDATE_BOOLEAN),
+                'article'     => array(
+                    'title'   => sanitize_text_field($article['title']),
+                    'excerpt' => ! empty($article['excerpt']) ? sanitize_textarea_field($article['excerpt']) : '',
+                ),
+            ),
+            HOUR_IN_SECONDS
+        );
 
-        // Alt / caption / description from the article (or section) text we sent — already in the
-        // generation language — so the media item is described properly, not left blank.
-        $article_in  = $request->get_param('article');
-        $art_title   = ( is_array($article_in) && ! empty($article_in['title']) ) ? sanitize_text_field($article_in['title']) : $alt;
-        $art_excerpt = ( is_array($article_in) && ! empty($article_in['excerpt']) ) ? sanitize_textarea_field($article_in['excerpt']) : '';
+        return rest_ensure_response(array(
+            'jobId'  => $job_id,
+            'status' => isset($r['body']['status']) ? $r['body']['status'] : 'pending',
+        ));
+    }
+
+    /** Poll async image job; sideload into media library when done. */
+    public function get_generate_image_status(WP_REST_Request $request) {
+        $job_id = trim((string) $request->get_param('jobId'));
+        if ('' === $job_id) {
+            return new WP_Error('redaquest_bad_request', __('Missing jobId.', 'redaquest-connector'), array('status' => 400));
+        }
+
+        $r = $this->call_bridge(
+            array(
+                'action' => 'generate_image_poll',
+                'jobId'  => sanitize_text_field($job_id),
+            ),
+            20
+        );
+        if (is_wp_error($r)) {
+            return $r;
+        }
+        if (402 === $r['status']) {
+            return new WP_REST_Response($r['body'], 402);
+        }
+        if (200 !== $r['status']) {
+            return new WP_Error(
+                'redaquest_image_failed',
+                __('Image generation failed.', 'redaquest-connector') . $this->blog_error_reason($r['body']),
+                array('status' => 502)
+            );
+        }
+
+        $body = is_array($r['body']) ? $r['body'] : array();
+        $status = isset($body['status']) ? (string) $body['status'] : '';
+        if ('pending' === $status || 'running' === $status) {
+            return rest_ensure_response(array('status' => $status));
+        }
+        if ('done' !== $status || empty($body['imageUrl'])) {
+            return new WP_Error('redaquest_image_failed', __('Image generation failed.', 'redaquest-connector'), array('status' => 502));
+        }
+
+        $context = get_transient('redaquest_img_' . sanitize_text_field($job_id));
+        if (is_array($context)) {
+            delete_transient('redaquest_img_' . sanitize_text_field($job_id));
+        } else {
+            $context = array();
+        }
+
+        return $this->finalize_generated_image_from_context($body, $context);
+    }
+
+    /**
+     * Sideload a generated image URL into the WP media library (featured or section block).
+     *
+     * @param array $body    Bridge result with imageUrl + altText.
+     * @param array $context postId, setFeatured, article title/excerpt from job start.
+     */
+    private function finalize_generated_image_from_context($body, $context) {
+        $image_url = $body['imageUrl'];
+        $alt       = isset($body['altText']) ? sanitize_text_field($body['altText']) : '';
+        $post_id   = isset($context['postId']) ? (int) $context['postId'] : 0;
+
+        $article_in  = isset($context['article']) && is_array($context['article']) ? $context['article'] : array();
+        $art_title   = ! empty($article_in['title']) ? sanitize_text_field($article_in['title']) : $alt;
+        $art_excerpt = ! empty($article_in['excerpt']) ? sanitize_textarea_field($article_in['excerpt']) : '';
         if ('' === $alt) {
             $alt = $art_title;
         }
         $caption     = $art_excerpt;
         $description = $art_excerpt;
 
-        $set_featured_param = $request->get_param('setFeatured');
-        $set_featured = (null === $set_featured_param) ? true : filter_var($set_featured_param, FILTER_VALIDATE_BOOLEAN);
+        $set_featured = ! isset($context['setFeatured']) || $context['setFeatured'];
 
-        // Section image (setFeatured=false): add to the media library and return a block descriptor;
-        // never touch the post's featured image. The editor inserts it as a core/image after the heading.
         if ($post_id && !$set_featured) {
             $att_id = $this->sideload_compressed_image($image_url, $post_id, $alt, $caption, $description);
             if (!is_wp_error($att_id)) {
                 return rest_ensure_response(array(
+                    'status'   => 'done',
                     'mediaId'  => (int) $att_id,
                     'mediaUrl' => wp_get_attachment_url($att_id),
                     'altText'  => $alt,
                     'imageUrl' => $image_url,
                 ));
             }
-            return rest_ensure_response(array('imageUrl' => $image_url, 'altText' => $alt));
+            return rest_ensure_response(array('status' => 'done', 'imageUrl' => $image_url, 'altText' => $alt));
         }
 
-        // Download, RE-ENCODE to WebP (or JPEG) to cut the size, add to the media library and set it as
-        // the post's featured image (shows immediately + becomes the social post media).
         if ($post_id) {
             $att_id = $this->sideload_compressed_image($image_url, $post_id, $alt, $caption, $description);
             if (!is_wp_error($att_id)) {
                 set_post_thumbnail($post_id, (int) $att_id);
-                // Keep the ORIGINAL (robust PNG/JPEG) for the social post; the WP featured stays a small
-                // WebP for the site. On schedule we send the original to RedaQuest, not the WebP.
                 update_post_meta($post_id, '_redaquest_social_image', esc_url_raw($image_url));
                 update_post_meta($post_id, '_redaquest_social_image_att', (int) $att_id);
                 return rest_ensure_response(array(
+                    'status'          => 'done',
                     'featuredMediaId' => (int) $att_id,
                     'imageUrl'        => wp_get_attachment_image_url($att_id, 'medium'),
                     'altText'         => $alt,
@@ -328,8 +414,7 @@ class Redaquest_Proxy {
             }
         }
 
-        // Couldn't sideload (e.g. unsaved post) — return the remote URL so the panel can still use it.
-        return rest_ensure_response(array('imageUrl' => $image_url, 'altText' => $alt));
+        return rest_ensure_response(array('status' => 'done', 'imageUrl' => $image_url, 'altText' => $alt));
     }
 
     /**
