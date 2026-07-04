@@ -17,7 +17,7 @@ import { PluginDocumentSettingPanel, PluginPrePublishPanel } from '@wordpress/ed
 import { useState, useEffect, createRoot, render as wpRender } from '@wordpress/element';
 import { createReduxStore, register, useSelect, useDispatch, select as dataSelect, dispatch as dataDispatch, subscribe } from '@wordpress/data';
 import { addFilter } from '@wordpress/hooks';
-import { rawHandler, createBlock } from '@wordpress/blocks';
+import { rawHandler, createBlock, serialize } from '@wordpress/blocks';
 import apiFetch from '@wordpress/api-fetch';
 import { __ } from '@wordpress/i18n';
 import { Spinner, Button, ButtonGroup, Tooltip, Notice, TextareaControl, TextControl, SelectControl, CheckboxControl, ToggleControl, Modal } from '@wordpress/components';
@@ -639,6 +639,41 @@ function htmlToEditorBlocks( html ) {
 	return [ createBlock( 'core/html', { content: trimmed } ) ];
 }
 
+/** Persist block markup via PHP (wp_update_post) — avoids fragile client savePost from modal. */
+async function persistArticleToPost( postId, blocks, title, { resetBlocks: resetBlocksFn } ) {
+	if ( ! postId || ! blocks.length ) {
+		throw new Error( __( 'Cannot save article: missing post or content.', 'redaquest-connector' ) );
+	}
+	const markup = serialize( blocks );
+	await apiFetch( {
+		path: '/redaquest/v2/blog/apply-content',
+		method: 'POST',
+		data: {
+			postId,
+			content: markup,
+			title: title || undefined,
+		},
+	} );
+	if ( resetBlocksFn ) {
+		resetBlocksFn( blocks );
+	}
+}
+
+function formatFlowError( e, fallback ) {
+	if ( ! e ) {
+		return fallback;
+	}
+	if ( typeof e === 'string' ) {
+		return e;
+	}
+	if ( e.code === 'INSUFFICIENT_CREDITS' ) {
+		const have = typeof e.available === 'number' ? ` (${ e.available } ${ __( 'left', 'redaquest-connector' ) })` : '';
+		return __( 'Not enough credits', 'redaquest-connector' ) + have + '. ' + __( 'Top up in RedaQuest to continue.', 'redaquest-connector' );
+	}
+	const parts = [ e.message, e.code && e.code !== e.message ? e.code : '' ].filter( Boolean );
+	return parts.length ? parts.join( ' · ' ) : fallback;
+}
+
 async function fetchOutlineResult( startResponse ) {
 	if ( startResponse && startResponse.jobId ) {
 		const deadline = Date.now() + OUTLINE_POLL_MAX_MS;
@@ -710,7 +745,7 @@ function RedaQuestBlogModal() {
 	const { setBlogOpen, setBlogBusy } = useDispatch( STORE );
 	const { createSuccessNotice, createErrorNotice, createWarningNotice } = useDispatch( 'core/notices' );
 	const { insertBlocks, resetBlocks } = useDispatch( 'core/block-editor' );
-	const { editPost, savePost } = useDispatch( 'core/editor' );
+	const { editPost } = useDispatch( 'core/editor' );
 	const { postId, currentTitle } = useSelect( ( select ) => {
 		const ed = select( 'core/editor' );
 		return { postId: ed.getCurrentPostId(), currentTitle: ed.getEditedPostAttribute( 'title' ) };
@@ -927,11 +962,16 @@ function RedaQuestBlogModal() {
 			}
 
 			const finalTitle = ( outline && outline.title ) ? outline.title : ( res.metaTitle || '' );
-			if ( finalTitle ) {
-				editPost( { title: finalTitle } );
+
+			if ( ! postId ) {
+				throw new Error( __( 'Save the post as a draft first, then generate the article.', 'redaquest-connector' ) );
 			}
-			resetBlocks( contentBlocks );
-			await savePost();
+
+			// Close modal so Gutenberg can receive blocks; persist via PHP (savePost from modal is unreliable).
+			setBlogOpen( false );
+			await new Promise( ( resolve ) => requestAnimationFrame( () => requestAnimationFrame( resolve ) ) );
+
+			await persistArticleToPost( postId, contentBlocks, finalTitle, { resetBlocks } );
 
 			// Section images after content is saved — failures no longer block article insertion.
 			if ( flaggedSections.length && postId ) {
@@ -1025,21 +1065,26 @@ function RedaQuestBlogModal() {
 				createWarningNotice( __( 'Some images could not be generated.', 'redaquest-connector' ) + imgNote, { id: 'rq-blog-images', type: 'snackbar' } );
 			}
 
-			if ( sectionImgCount || ( genImage && postId ) ) {
-				await savePost();
+			if ( sectionImgCount ) {
+				await persistArticleToPost(
+					postId,
+					dataSelect( 'core/block-editor' ).getBlocks(),
+					finalTitle,
+					{ resetBlocks: null }
+				);
 			}
+
 			const seoNote = seoPlugin ? ` · ${ __( 'SEO saved to', 'redaquest-connector' ) } ${ seoPlugin }` : '';
 			if ( ! Array.isArray( res.faq ) || res.faq.length === 0 ) {
 				createWarningNotice( __( 'Article inserted, but no FAQ was generated.', 'redaquest-connector' ) + creditSuffix( res ) + seoNote + imgNote, { id: 'rq-blog', type: 'snackbar' } );
 			} else {
 				createSuccessNotice( __( 'Article + FAQ inserted.', 'redaquest-connector' ) + creditSuffix( res ) + seoNote + imgNote, { id: 'rq-blog', type: 'snackbar' } );
 			}
-			// done → close + reset to a clean slate (the article is now in the editor)
-			setBlogOpen( false );
+			// done → reset wizard state (modal already closed before insert)
 			setStep( 1 );
 			setOutline( null );
 		} catch ( e ) {
-			createErrorNotice( creditError( e ) || ( e && ( e.message || e.error ) ) || __( 'Article generation failed.', 'redaquest-connector' ), { id: 'rq-blog' } );
+			createErrorNotice( formatFlowError( e, __( 'Article generation failed.', 'redaquest-connector' ) ), { id: 'rq-blog', type: 'snackbar' } );
 		} finally {
 			setBusyDraft( false );
 			setBlogBusy( false );

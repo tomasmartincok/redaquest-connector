@@ -62,6 +62,7 @@ class Redaquest_Proxy {
                 ),
             ),
         ));
+		register_rest_route(self::NS, '/blog/apply-content', array('methods' => 'POST', 'callback' => array($this, 'post_blog_apply_content'), 'permission_callback' => $perm));
         register_rest_route(self::NS, '/blog/apply-meta', array('methods' => 'POST', 'callback' => array($this, 'post_blog_apply_meta'), 'permission_callback' => $perm));
         register_rest_route(self::NS, '/brand/personas', array('methods' => 'GET', 'callback' => array($this, 'get_brand_personas'), 'permission_callback' => $perm));
     }
@@ -621,8 +622,46 @@ class Redaquest_Proxy {
     }
 
     /**
+     * Blog writer: persist generated block markup + title server-side (reliable vs client savePost).
+     */
+    public function post_blog_apply_content(WP_REST_Request $request) {
+        $post_id = (int) $request->get_param('postId');
+        if (!$post_id || !current_user_can('edit_post', $post_id)) {
+            return new WP_Error('redaquest_forbidden', __('You cannot edit this post.', 'redaquest-connector'), array('status' => 403));
+        }
+
+        $content = $request->get_param('content');
+        if (!is_string($content) || '' === trim($content)) {
+            return new WP_Error('redaquest_bad_request', __('Missing article content.', 'redaquest-connector'), array('status' => 400));
+        }
+
+        $update = array(
+            'ID'           => $post_id,
+            'post_content' => wp_slash($content),
+        );
+        $title = $request->get_param('title');
+        if (is_string($title) && '' !== trim($title)) {
+            $update['post_title'] = sanitize_text_field($title);
+        }
+
+        $result = wp_update_post($update, true);
+        if (is_wp_error($result)) {
+            return new WP_Error(
+                'redaquest_apply_content_failed',
+                $result->get_error_message(),
+                array('status' => 500)
+            );
+        }
+
+        return rest_ensure_response(array(
+            'ok'     => true,
+            'postId' => $post_id,
+        ));
+    }
+
+    /**
      * Blog writer: write SEO meta + excerpt + slug onto the post (server-side, so we can target
-     * whichever SEO plugin is active). The article body itself is inserted by the editor (JS).
+     * whichever SEO plugin is active). The article body is persisted via post_blog_apply_content.
      */
     public function post_blog_apply_meta(WP_REST_Request $request) {
         $post_id = (int) $request->get_param('postId');

@@ -1,3 +1,6 @@
+= 3.0.8 =
+* Server-side apply-content endpoint; no client savePost for article body
+
 = 3.0.7 =
 * resetBlocks + savePost for article insertion; image errors surfaced in notices
 
