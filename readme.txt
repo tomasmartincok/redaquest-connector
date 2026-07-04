@@ -4,7 +4,7 @@ Tags: content sync, woocommerce, social media, scheduling
 Requires at least: 5.8
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 3.0.9
+Stable tag: 3.0.11
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -83,6 +83,13 @@ Yes. A RedaQuest account and workspace are required to connect and to schedule s
 
 == Changelog ==
 
+= 3.0.11 =
+* Async image generation with polling — fixes cover and section images failing on 60s proxy timeouts
+
+= 3.0.10 =
+* Server-side HTML apply-content; reload Gutenberg from REST after save (fixes empty article body)
+* Sync editor store after reload so autosave does not wipe content
+
 = 3.0.9 =
 * Auto-save post as draft before article generation — no manual Save required
 * Uses outline title or topic as draft title when the post is still empty
@@ -146,6 +153,9 @@ Yes. A RedaQuest account and workspace are required to connect and to schedule s
 * Optional content writing and default author.
 
 == Upgrade Notice ==
+
+= 3.0.11 =
+Fixes image generation timeouts and empty article body. Update required for Blog Writer.
 
 = 3.0.9 =
 Removes the need to manually save a draft before Generate full article.
