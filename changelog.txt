@@ -1,3 +1,6 @@
+= 3.0.5 =
+* Validate outline before step 3; poll until title + sections exist; fail loudly on pending-only responses
+
 = 3.0.4 =
 * Async blog outline: start job + poll status (fixes invalid JSON on 60s proxy timeouts)
 

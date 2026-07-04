@@ -4,7 +4,7 @@ Tags: content sync, woocommerce, social media, scheduling
 Requires at least: 5.8
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 3.0.4
+Stable tag: 3.0.5
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -83,6 +83,10 @@ Yes. A RedaQuest account and workspace are required to connect and to schedule s
 
 == Changelog ==
 
+= 3.0.5 =
+* Fix empty outline step: validate AI response before showing step 3; poll until outline has title + sections
+* Clear error when plugin/backend mismatch leaves outline pending without polling
+
 = 3.0.4 =
 * Blog outline uses async job + polling — fixes invalid JSON on hosts with 60s proxy timeout
 * Outline start returns in ~1s; editor polls until the AI outline is ready
@@ -126,6 +130,9 @@ Yes. A RedaQuest account and workspace are required to connect and to schedule s
 * Optional content writing and default author.
 
 == Upgrade Notice ==
+
+= 3.0.5 =
+Fixes Blog Writer showing an empty outline form. Update required if Generate outline skips content.
 
 = 3.0.4 =
 Fixes Blog Writer outline on hosts that cut off long requests. Update recommended if Generate Outline shows invalid JSON.
