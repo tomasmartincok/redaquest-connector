@@ -623,6 +623,7 @@ class Redaquest_Proxy {
 
     /**
      * Blog writer: persist generated block markup + title server-side (reliable vs client savePost).
+     * Accepts either pre-serialized `content` or `articleHtml` + optional `faq` (built into blocks here).
      */
     public function post_blog_apply_content(WP_REST_Request $request) {
         $post_id = (int) $request->get_param('postId');
@@ -631,6 +632,14 @@ class Redaquest_Proxy {
         }
 
         $content = $request->get_param('content');
+        $article_html = $request->get_param('articleHtml');
+        $faq = $request->get_param('faq');
+        $faq_schema = $request->get_param('faqSchema');
+
+        if (is_string($article_html) && '' !== trim($article_html)) {
+            $content = $this->build_post_content_from_article($article_html, $faq, $faq_schema);
+        }
+
         if (!is_string($content) || '' === trim($content)) {
             return new WP_Error('redaquest_bad_request', __('Missing article content.', 'redaquest-connector'), array('status' => 400));
         }
@@ -653,10 +662,61 @@ class Redaquest_Proxy {
             );
         }
 
+        $saved = get_post($post_id);
+        $saved_len = $saved && isset($saved->post_content) ? strlen((string) $saved->post_content) : 0;
+
         return rest_ensure_response(array(
-            'ok'     => true,
-            'postId' => $post_id,
+            'ok'            => true,
+            'postId'        => $post_id,
+            'contentLength' => $saved_len,
         ));
+    }
+
+    /**
+     * Build Gutenberg block markup from AI HTML + FAQ (server-side — avoids fragile client serialize).
+     *
+     * @param string       $article_html Article body HTML.
+     * @param array|null   $faq          FAQ items with q/a keys.
+     * @param string|null  $faq_schema   Optional JSON-LD string for FAQPage schema.
+     */
+    private function build_post_content_from_article($article_html, $faq, $faq_schema = null) {
+        $parts = array();
+
+        $html = wp_kses_post((string) $article_html);
+        if ('' !== $html) {
+            $parts[] = "<!-- wp:html -->\n" . $html . "\n<!-- /wp:html -->";
+        }
+
+        if (is_array($faq) && count($faq) > 0) {
+            $parts[] = '<!-- wp:heading {"level":2} -->';
+            $parts[] = '<h2>' . esc_html__('Často kladené otázky', 'redaquest-connector') . '</h2>';
+            $parts[] = '<!-- /wp:heading -->';
+
+            foreach ($faq as $item) {
+                if (!is_array($item)) {
+                    continue;
+                }
+                $q = isset($item['q']) ? wp_kses_post((string) $item['q']) : '';
+                $a = isset($item['a']) ? wp_kses_post((string) $item['a']) : '';
+                if ('' !== $q) {
+                    $parts[] = '<!-- wp:heading {"level":3} -->';
+                    $parts[] = '<h3>' . $q . '</h3>';
+                    $parts[] = '<!-- /wp:heading -->';
+                }
+                if ('' !== $a) {
+                    $parts[] = '<!-- wp:paragraph -->';
+                    $parts[] = '<p>' . $a . '</p>';
+                    $parts[] = '<!-- /wp:paragraph -->';
+                }
+            }
+        }
+
+        if (is_string($faq_schema) && '' !== trim($faq_schema) && current_user_can('unfiltered_html')) {
+            $schema_json = trim($faq_schema);
+            $parts[] = "<!-- wp:html -->\n<script type=\"application/ld+json\">" . $schema_json . "</script>\n<!-- /wp:html -->";
+        }
+
+        return implode("\n", $parts);
     }
 
     /**

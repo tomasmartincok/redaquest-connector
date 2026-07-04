@@ -17,7 +17,7 @@ import { PluginDocumentSettingPanel, PluginPrePublishPanel } from '@wordpress/ed
 import { useState, useEffect, createRoot, render as wpRender } from '@wordpress/element';
 import { createReduxStore, register, useSelect, useDispatch, select as dataSelect, dispatch as dataDispatch, subscribe } from '@wordpress/data';
 import { addFilter } from '@wordpress/hooks';
-import { rawHandler, createBlock, serialize } from '@wordpress/blocks';
+import { rawHandler, createBlock, serialize, parse } from '@wordpress/blocks';
 import apiFetch from '@wordpress/api-fetch';
 import { __ } from '@wordpress/i18n';
 import { Spinner, Button, ButtonGroup, Tooltip, Notice, TextareaControl, TextControl, SelectControl, CheckboxControl, ToggleControl, Modal } from '@wordpress/components';
@@ -639,13 +639,101 @@ function htmlToEditorBlocks( html ) {
 	return [ createBlock( 'core/html', { content: trimmed } ) ];
 }
 
-/** Persist block markup via PHP (wp_update_post) — avoids fragile client savePost from modal. */
+/** Persist article HTML + FAQ via PHP, then reload Gutenberg from the saved post. */
+async function persistArticleHtmlToPost( postId, payload, resetBlocksFn ) {
+	const { articleHtml, faq, faqSchema, title } = payload;
+	if ( ! postId || ! String( articleHtml || '' ).trim() ) {
+		throw new Error( __( 'Cannot save article: missing post or content.', 'redaquest-connector' ) );
+	}
+	const resp = await apiFetch( {
+		path: '/redaquest/v2/blog/apply-content',
+		method: 'POST',
+		data: {
+			postId,
+			articleHtml,
+			faq: Array.isArray( faq ) ? faq : undefined,
+			faqSchema: faqSchema || undefined,
+			title: title || undefined,
+		},
+	} );
+	if ( ! resp || ! resp.ok ) {
+		throw new Error( __( 'Could not save article content to the post.', 'redaquest-connector' ) );
+	}
+	await reloadEditorFromPost( postId, resetBlocksFn );
+}
+
+async function reloadEditorFromPost( postId, resetBlocksFn ) {
+	const post = await apiFetch( {
+		path: `/wp/v2/posts/${ postId }?context=edit&_fields=content,title`,
+	} );
+	const raw = post?.content?.raw || '';
+	if ( ! String( raw ).trim() ) {
+		throw new Error( __( 'Article content was not saved to the post.', 'redaquest-connector' ) );
+	}
+	const blocks = parse( raw );
+	if ( ! blocks.length ) {
+		throw new Error( __( 'Could not load article blocks in the editor.', 'redaquest-connector' ) );
+	}
+	if ( resetBlocksFn ) {
+		resetBlocksFn( blocks );
+	}
+	const edits = { content: raw };
+	if ( post.title?.raw ) {
+		edits.title = post.title.raw;
+	}
+	dataDispatch( 'core/editor' ).editPost( edits );
+}
+
+/** Sync current editor blocks back to the post (e.g. after inserting section images). */
+async function syncEditorBlocksToPost( postId, title ) {
+	const blocks = dataSelect( 'core/block-editor' ).getBlocks();
+	if ( ! blocks.length ) {
+		return;
+	}
+	const markup = serialize( blocks );
+	await apiFetch( {
+		path: '/redaquest/v2/blog/apply-content',
+		method: 'POST',
+		data: { postId, content: markup, title: title || undefined },
+	} );
+}
+
+function sectionBodyFromArticleHtml( html, h2Title, briefFallback ) {
+	const target = stripHtml( String( h2Title || '' ) ).trim().toLowerCase();
+	if ( ! target || typeof DOMParser === 'undefined' ) {
+		return ( briefFallback || h2Title || '' ).slice( 0, 1500 );
+	}
+	try {
+		const doc = new DOMParser().parseFromString( String( html || '' ), 'text/html' );
+		const headings = doc.querySelectorAll( 'h2, h3' );
+		for ( const heading of headings ) {
+			if ( stripHtml( heading.textContent ).trim().toLowerCase() !== target ) {
+				continue;
+			}
+			let text = '';
+			let el = heading.nextElementSibling;
+			while ( el && ! /^H[23]$/i.test( el.tagName ) ) {
+				text += ` ${ el.textContent || '' }`;
+				el = el.nextElementSibling;
+			}
+			const body = text.trim();
+			if ( body ) {
+				return body.slice( 0, 1500 );
+			}
+		}
+	} catch ( e ) {
+		// fall through
+	}
+	return ( briefFallback || h2Title || '' ).slice( 0, 1500 );
+}
+
+/** Legacy: persist pre-built block markup (section-image resync). */
 async function persistArticleToPost( postId, blocks, title, { resetBlocks: resetBlocksFn } ) {
 	if ( ! postId || ! blocks.length ) {
 		throw new Error( __( 'Cannot save article: missing post or content.', 'redaquest-connector' ) );
 	}
 	const markup = serialize( blocks );
-	await apiFetch( {
+	const resp = await apiFetch( {
 		path: '/redaquest/v2/blog/apply-content',
 		method: 'POST',
 		data: {
@@ -654,8 +742,11 @@ async function persistArticleToPost( postId, blocks, title, { resetBlocks: reset
 			title: title || undefined,
 		},
 	} );
+	if ( ! resp || ! resp.ok ) {
+		throw new Error( __( 'Could not save article content to the post.', 'redaquest-connector' ) );
+	}
 	if ( resetBlocksFn ) {
-		resetBlocksFn( blocks );
+		await reloadEditorFromPost( postId, resetBlocksFn );
 	}
 }
 
@@ -958,22 +1049,17 @@ function RedaQuestBlogModal() {
 				},
 			} );
 			const res = await fetchDraftResult( start );
-			let bodyBlocks = htmlToEditorBlocks( res.articleHtml );
-			const faqBlocks = [];
+			if ( ! String( res.articleHtml || '' ).trim() ) {
+				throw new Error( __( 'Article content could not be converted to editor blocks.', 'redaquest-connector' ) );
+			}
+
+			let faqSchemaJson = '';
 			if ( Array.isArray( res.faq ) && res.faq.length ) {
-				faqBlocks.push( createBlock( 'core/heading', { level: 2, content: __( 'Často kladené otázky', 'redaquest-connector' ) } ) );
-				res.faq.forEach( ( f ) => {
-					if ( f && f.q ) faqBlocks.push( createBlock( 'core/heading', { level: 3, content: f.q } ) );
-					if ( f && f.a ) faqBlocks.push( createBlock( 'core/paragraph', { content: f.a } ) );
-				} );
-				// FAQ schema (FAQPage JSON-LD) as a core/html block, so search engines and AI engines
-				// read the Q&A as structured data — the same mechanism Yoast/Rank Math use.
 				const faqEntities = res.faq
 					.filter( ( f ) => f && f.q && f.a )
 					.map( ( f ) => ( { '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } } ) );
 				if ( faqEntities.length ) {
-					const faqSchema = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqEntities };
-					faqBlocks.push( createBlock( 'core/html', { content: `<script type="application/ld+json">${ JSON.stringify( faqSchema ) }</script>` } ) );
+					faqSchemaJson = JSON.stringify( { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqEntities } );
 				}
 			}
 			let sectionImgCount = 0;
@@ -981,34 +1067,27 @@ function RedaQuestBlogModal() {
 			const imgErrors = [];
 			const flaggedSections = ( outline.sections || [] ).filter( ( s ) => s && s.image && ( s.h2 || '' ).trim() );
 
-			const contentBlocks = [ ...bodyBlocks, ...faqBlocks ];
-			if ( ! contentBlocks.length ) {
-				throw new Error( __( 'Article content could not be converted to editor blocks.', 'redaquest-connector' ) );
-			}
-
 			const finalTitle = ( outline && outline.title ) ? outline.title : ( res.metaTitle || '' );
 
 			// Close modal so Gutenberg can receive blocks; persist via PHP (savePost from modal is unreliable).
 			setBlogOpen( false );
 			await new Promise( ( resolve ) => requestAnimationFrame( () => requestAnimationFrame( resolve ) ) );
 
-			await persistArticleToPost( savedPostId, contentBlocks, finalTitle, { resetBlocks } );
+			await persistArticleHtmlToPost(
+				savedPostId,
+				{
+					articleHtml: res.articleHtml,
+					faq: res.faq,
+					faqSchema: faqSchemaJson || undefined,
+					title: finalTitle,
+				},
+				resetBlocks
+			);
 
 			// Section images after content is saved — failures no longer block article insertion.
 			if ( flaggedSections.length ) {
-				const norm = ( t ) => stripHtml( String( t || '' ) ).trim().toLowerCase();
 				for ( const s of flaggedSections ) {
-					let secBody = '';
-					const editorBlocks = dataSelect( 'core/block-editor' ).getBlocks();
-					const startI = editorBlocks.findIndex( ( b ) => b.name === 'core/heading' && norm( b.attributes && b.attributes.content ) === norm( s.h2 ) );
-					if ( startI >= 0 ) {
-						for ( let i = startI + 1; i < editorBlocks.length; i++ ) {
-							const b = editorBlocks[ i ];
-							if ( b.name === 'core/heading' && ( ! b.attributes || ( b.attributes.level || 2 ) <= 2 ) ) break;
-							secBody += ' ' + stripHtml( ( b.attributes && b.attributes.content ) || '' );
-						}
-					}
-					secBody = ( secBody.trim() || s.brief || s.h2 ).slice( 0, 1500 );
+					const secBody = sectionBodyFromArticleHtml( res.articleHtml, s.h2, s.brief || s.h2 );
 					try {
 						const imgRes = await apiFetch( {
 							path: '/redaquest/v2/generate-image',
@@ -1017,12 +1096,7 @@ function RedaQuestBlogModal() {
 						} );
 						if ( imgRes && imgRes.mediaUrl ) {
 							const imgBlock = createBlock( 'core/image', { id: imgRes.mediaId, url: imgRes.mediaUrl, alt: imgRes.altText || s.h2, sizeSlug: 'large' } );
-							const at = dataSelect( 'core/block-editor' ).getBlocks().findIndex( ( b ) => b.name === 'core/heading' && norm( b.attributes && b.attributes.content ) === norm( s.h2 ) );
-							if ( at >= 0 ) {
-								insertBlocks( [ imgBlock ], at + 1 );
-							} else {
-								insertBlocks( [ imgBlock ] );
-							}
+							insertBlocks( [ imgBlock ] );
 							sectionImgCount++;
 						} else {
 							imgFailed++;
@@ -1087,12 +1161,8 @@ function RedaQuestBlogModal() {
 			}
 
 			if ( sectionImgCount ) {
-				await persistArticleToPost(
-					savedPostId,
-					dataSelect( 'core/block-editor' ).getBlocks(),
-					finalTitle,
-					{ resetBlocks: null }
-				);
+				await syncEditorBlocksToPost( savedPostId, finalTitle );
+				await reloadEditorFromPost( savedPostId, resetBlocks );
 			}
 
 			const seoNote = seoPlugin ? ` · ${ __( 'SEO saved to', 'redaquest-connector' ) } ${ seoPlugin }` : '';

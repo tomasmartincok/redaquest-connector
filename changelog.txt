@@ -1,3 +1,7 @@
+= 3.0.10 =
+* Server-side HTML→blocks apply-content; reload editor from REST after save (fixes empty body)
+* Sync editor post store after reload so autosave does not wipe content
+
 = 3.0.9 =
 * Auto-save WP draft before article generation (no manual save step)
 

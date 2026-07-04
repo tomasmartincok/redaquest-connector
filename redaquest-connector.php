@@ -3,7 +3,7 @@
  * Plugin Name: Redaquest Connector
  * Plugin URI: https://github.com/tomasmartincok/redaquest-connector
  * Description: Connect WordPress and WooCommerce to RedaQuest: sync content and products, and schedule social posts straight from the article editor.
- * Version: 3.0.9
+ * Version: 3.0.10
  * Requires at least: 5.8
  * Requires PHP: 7.4
  * Author: RedaQuest
@@ -18,7 +18,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-define('REDAQUEST_VERSION', '3.0.9');
+define('REDAQUEST_VERSION', '3.0.10');
 define('REDAQUEST_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('REDAQUEST_PLUGIN_URL', plugin_dir_url(__FILE__));
 define('REDAQUEST_SUPABASE_ANON_KEY', apply_filters('redaquest_supabase_anon_key', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZxbWFlcnFzdnNrcWJ5aWdlZmJlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM1Njk3NTUsImV4cCI6MjA4OTE0NTc1NX0.VaXsFw1i-NBQLRj8VGBnlUv0NaqDo9L2IhZTStifMH0'));
