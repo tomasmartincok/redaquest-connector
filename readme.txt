@@ -4,7 +4,7 @@ Tags: content sync, woocommerce, social media, scheduling
 Requires at least: 5.8
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 3.0.8
+Stable tag: 3.0.9
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -83,6 +83,10 @@ Yes. A RedaQuest account and workspace are required to connect and to schedule s
 
 == Changelog ==
 
+= 3.0.9 =
+* Auto-save post as draft before article generation — no manual Save required
+* Uses outline title or topic as draft title when the post is still empty
+
 = 3.0.8 =
 * Save article via server-side wp_update_post (apply-content) instead of fragile Gutenberg savePost
 * Close modal before insert; clearer error messages when save fails
@@ -142,6 +146,9 @@ Yes. A RedaQuest account and workspace are required to connect and to schedule s
 * Optional content writing and default author.
 
 == Upgrade Notice ==
+
+= 3.0.9 =
+Removes the need to manually save a draft before Generate full article.
 
 = 3.0.8 =
 Fixes title appearing but article body missing after Generate full article. Update required.

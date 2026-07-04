@@ -674,6 +674,28 @@ function formatFlowError( e, fallback ) {
 	return parts.length ? parts.join( ' · ' ) : fallback;
 }
 
+/** Create or update a WP draft silently so image/meta endpoints have a post ID. */
+async function ensureEditorPostSaved( { editPost, savePost, titleHint } ) {
+	const editor = dataSelect( 'core/editor' );
+	let id = editor.getCurrentPostId();
+	const currentTitle = editor.getEditedPostAttribute( 'title' );
+	const hint = String( titleHint || '' ).trim();
+	if ( ! String( currentTitle || '' ).trim() && hint ) {
+		editPost( { title: hint } );
+	}
+	const needsSave = ! id
+		|| ( typeof editor.isEditedPostNew === 'function' && editor.isEditedPostNew() )
+		|| ( typeof editor.isEditedPostDirty === 'function' && editor.isEditedPostDirty() );
+	if ( needsSave ) {
+		await savePost();
+		id = dataSelect( 'core/editor' ).getCurrentPostId();
+	}
+	if ( ! id ) {
+		throw new Error( __( 'Could not save a post draft automatically. Please try again.', 'redaquest-connector' ) );
+	}
+	return id;
+}
+
 async function fetchOutlineResult( startResponse ) {
 	if ( startResponse && startResponse.jobId ) {
 		const deadline = Date.now() + OUTLINE_POLL_MAX_MS;
@@ -745,7 +767,7 @@ function RedaQuestBlogModal() {
 	const { setBlogOpen, setBlogBusy } = useDispatch( STORE );
 	const { createSuccessNotice, createErrorNotice, createWarningNotice } = useDispatch( 'core/notices' );
 	const { insertBlocks, resetBlocks } = useDispatch( 'core/block-editor' );
-	const { editPost } = useDispatch( 'core/editor' );
+	const { editPost, savePost } = useDispatch( 'core/editor' );
 	const { postId, currentTitle } = useSelect( ( select ) => {
 		const ed = select( 'core/editor' );
 		return { postId: ed.getCurrentPostId(), currentTitle: ed.getEditedPostAttribute( 'title' ) };
@@ -919,6 +941,9 @@ function RedaQuestBlogModal() {
 		setBusyDraft( true );
 		setBlogBusy( true );
 		try {
+			const titleHint = ( outline && outline.title ) || base.topic || currentTitle;
+			const savedPostId = await ensureEditorPostSaved( { editPost, savePost, titleHint } );
+
 			const start = await apiFetch( {
 				path: '/redaquest/v2/blog/draft',
 				method: 'POST',
@@ -963,18 +988,14 @@ function RedaQuestBlogModal() {
 
 			const finalTitle = ( outline && outline.title ) ? outline.title : ( res.metaTitle || '' );
 
-			if ( ! postId ) {
-				throw new Error( __( 'Save the post as a draft first, then generate the article.', 'redaquest-connector' ) );
-			}
-
 			// Close modal so Gutenberg can receive blocks; persist via PHP (savePost from modal is unreliable).
 			setBlogOpen( false );
 			await new Promise( ( resolve ) => requestAnimationFrame( () => requestAnimationFrame( resolve ) ) );
 
-			await persistArticleToPost( postId, contentBlocks, finalTitle, { resetBlocks } );
+			await persistArticleToPost( savedPostId, contentBlocks, finalTitle, { resetBlocks } );
 
 			// Section images after content is saved — failures no longer block article insertion.
-			if ( flaggedSections.length && postId ) {
+			if ( flaggedSections.length ) {
 				const norm = ( t ) => stripHtml( String( t || '' ) ).trim().toLowerCase();
 				for ( const s of flaggedSections ) {
 					let secBody = '';
@@ -992,7 +1013,7 @@ function RedaQuestBlogModal() {
 						const imgRes = await apiFetch( {
 							path: '/redaquest/v2/generate-image',
 							method: 'POST',
-							data: { postId, setFeatured: false, article: { title: s.h2, body: secBody, excerpt: s.brief || '' }, type: imageStyle === 'photo' ? 'photo' : '' },
+							data: { postId: savedPostId, setFeatured: false, article: { title: s.h2, body: secBody, excerpt: s.brief || '' }, type: imageStyle === 'photo' ? 'photo' : '' },
 						} );
 						if ( imgRes && imgRes.mediaUrl ) {
 							const imgBlock = createBlock( 'core/image', { id: imgRes.mediaId, url: imgRes.mediaUrl, alt: imgRes.altText || s.h2, sizeSlug: 'large' } );
@@ -1015,11 +1036,11 @@ function RedaQuestBlogModal() {
 			}
 
 			let seoPlugin = '';
-			if ( postId ) {
+			if ( savedPostId ) {
 				const metaRes = await apiFetch( {
 					path: '/redaquest/v2/blog/apply-meta',
 					method: 'POST',
-					data: { postId, metaTitle: res.metaTitle, metaDescription: res.metaDescription, slug: res.slug, excerpt: res.excerpt },
+					data: { postId: savedPostId, metaTitle: res.metaTitle, metaDescription: res.metaDescription, slug: res.slug, excerpt: res.excerpt },
 				} ).catch( () => null );
 				if ( metaRes && metaRes.seoPlugin ) seoPlugin = metaRes.seoPlugin;
 			}
@@ -1027,13 +1048,13 @@ function RedaQuestBlogModal() {
 			// Optional cover illustration (step 4). Reuses the RedaQuest image engine: it derives the
 			// concept from the article, applies brand colors (or photoreal), and sets the featured image.
 			let imgNote = '';
-			if ( genImage && postId ) {
+			if ( genImage && savedPostId ) {
 				try {
 					const imgRes = await apiFetch( {
 						path: '/redaquest/v2/generate-image',
 						method: 'POST',
 						data: {
-							postId,
+							postId: savedPostId,
 							article: { title: finalTitle || base.topic, body: stripHtml( res.articleHtml ), excerpt: res.excerpt },
 							type: imageStyle === 'photo' ? 'photo' : '',
 						},
@@ -1067,7 +1088,7 @@ function RedaQuestBlogModal() {
 
 			if ( sectionImgCount ) {
 				await persistArticleToPost(
-					postId,
+					savedPostId,
 					dataSelect( 'core/block-editor' ).getBlocks(),
 					finalTitle,
 					{ resetBlocks: null }
