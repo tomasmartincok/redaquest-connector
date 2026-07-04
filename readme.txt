@@ -83,6 +83,10 @@ Yes. A RedaQuest account and workspace are required to connect and to schedule s
 
 == Changelog ==
 
+= 3.0.8 =
+* Save article via server-side wp_update_post (apply-content) instead of fragile Gutenberg savePost
+* Close modal before insert; clearer error messages when save fails
+
 = 3.0.7 =
 * Fix article not appearing in Gutenberg: use resetBlocks + savePost instead of insertBlocks from modal
 * HTML fallback to core/html block when rawHandler returns empty
@@ -138,6 +142,9 @@ Yes. A RedaQuest account and workspace are required to connect and to schedule s
 * Optional content writing and default author.
 
 == Upgrade Notice ==
+
+= 3.0.8 =
+Fixes title appearing but article body missing after Generate full article. Update required.
 
 = 3.0.7 =
 Fixes generated article not inserted into the editor and silent image failures. Update recommended.
