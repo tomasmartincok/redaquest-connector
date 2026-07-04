@@ -626,6 +626,19 @@ function isValidDraftResult( res ) {
 	return !! ( res && typeof res.articleHtml === 'string' && res.articleHtml.trim().length > 100 );
 }
 
+/** Convert AI HTML to Gutenberg blocks; fall back to core/html if rawHandler returns nothing. */
+function htmlToEditorBlocks( html ) {
+	const trimmed = String( html || '' ).trim();
+	if ( ! trimmed ) {
+		return [];
+	}
+	const parsed = rawHandler( { HTML: trimmed } );
+	if ( Array.isArray( parsed ) && parsed.length > 0 ) {
+		return parsed;
+	}
+	return [ createBlock( 'core/html', { content: trimmed } ) ];
+}
+
 async function fetchOutlineResult( startResponse ) {
 	if ( startResponse && startResponse.jobId ) {
 		const deadline = Date.now() + OUTLINE_POLL_MAX_MS;
@@ -696,8 +709,8 @@ function RedaQuestBlogModal() {
 	const open = useSelect( ( select ) => select( STORE ).isBlogOpen(), [] );
 	const { setBlogOpen, setBlogBusy } = useDispatch( STORE );
 	const { createSuccessNotice, createErrorNotice, createWarningNotice } = useDispatch( 'core/notices' );
-	const { insertBlocks } = useDispatch( 'core/block-editor' );
-	const { editPost } = useDispatch( 'core/editor' );
+	const { insertBlocks, resetBlocks } = useDispatch( 'core/block-editor' );
+	const { editPost, savePost } = useDispatch( 'core/editor' );
 	const { postId, currentTitle } = useSelect( ( select ) => {
 		const ed = select( 'core/editor' );
 		return { postId: ed.getCurrentPostId(), currentTitle: ed.getEditedPostAttribute( 'title' ) };
@@ -885,7 +898,7 @@ function RedaQuestBlogModal() {
 				},
 			} );
 			const res = await fetchDraftResult( start );
-			let bodyBlocks = res.articleHtml ? rawHandler( { HTML: res.articleHtml } ) : [];
+			let bodyBlocks = htmlToEditorBlocks( res.articleHtml );
 			const faqBlocks = [];
 			if ( Array.isArray( res.faq ) && res.faq.length ) {
 				faqBlocks.push( createBlock( 'core/heading', { level: 2, content: __( 'Často kladené otázky', 'redaquest-connector' ) } ) );
@@ -903,45 +916,63 @@ function RedaQuestBlogModal() {
 					faqBlocks.push( createBlock( 'core/html', { content: `<script type="application/ld+json">${ JSON.stringify( faqSchema ) }</script>` } ) );
 				}
 			}
-			// Section images: generate one per flagged section (from that section's text) and splice it
-			// after the matching H2. Each image bills credits in the engine.
 			let sectionImgCount = 0;
 			let imgFailed = 0;
+			const imgErrors = [];
 			const flaggedSections = ( outline.sections || [] ).filter( ( s ) => s && s.image && ( s.h2 || '' ).trim() );
+
+			const contentBlocks = [ ...bodyBlocks, ...faqBlocks ];
+			if ( ! contentBlocks.length ) {
+				throw new Error( __( 'Article content could not be converted to editor blocks.', 'redaquest-connector' ) );
+			}
+
+			const finalTitle = ( outline && outline.title ) ? outline.title : ( res.metaTitle || '' );
+			if ( finalTitle ) {
+				editPost( { title: finalTitle } );
+			}
+			resetBlocks( contentBlocks );
+			await savePost();
+
+			// Section images after content is saved — failures no longer block article insertion.
 			if ( flaggedSections.length && postId ) {
 				const norm = ( t ) => stripHtml( String( t || '' ) ).trim().toLowerCase();
 				for ( const s of flaggedSections ) {
 					let secBody = '';
-					const startI = bodyBlocks.findIndex( ( b ) => b.name === 'core/heading' && norm( b.attributes && b.attributes.content ) === norm( s.h2 ) );
+					const editorBlocks = dataSelect( 'core/block-editor' ).getBlocks();
+					const startI = editorBlocks.findIndex( ( b ) => b.name === 'core/heading' && norm( b.attributes && b.attributes.content ) === norm( s.h2 ) );
 					if ( startI >= 0 ) {
-						for ( let i = startI + 1; i < bodyBlocks.length; i++ ) {
-							const b = bodyBlocks[ i ];
+						for ( let i = startI + 1; i < editorBlocks.length; i++ ) {
+							const b = editorBlocks[ i ];
 							if ( b.name === 'core/heading' && ( ! b.attributes || ( b.attributes.level || 2 ) <= 2 ) ) break;
 							secBody += ' ' + stripHtml( ( b.attributes && b.attributes.content ) || '' );
 						}
 					}
 					secBody = ( secBody.trim() || s.brief || s.h2 ).slice( 0, 1500 );
-					const imgRes = await apiFetch( {
-						path: '/redaquest/v2/generate-image',
-						method: 'POST',
-						data: { postId, setFeatured: false, article: { title: s.h2, body: secBody, excerpt: s.brief || '' }, type: imageStyle === 'photo' ? 'photo' : '' },
-					} ).catch( () => null );
-					if ( ! ( imgRes && imgRes.mediaUrl ) ) imgFailed++;
-					if ( imgRes && imgRes.mediaUrl ) {
-						const imgBlock = createBlock( 'core/image', { id: imgRes.mediaId, url: imgRes.mediaUrl, alt: imgRes.altText || s.h2, sizeSlug: 'large' } );
-						const at = bodyBlocks.findIndex( ( b ) => b.name === 'core/heading' && norm( b.attributes && b.attributes.content ) === norm( s.h2 ) );
-						if ( at >= 0 ) bodyBlocks.splice( at + 1, 0, imgBlock ); else bodyBlocks.push( imgBlock );
-						sectionImgCount++;
+					try {
+						const imgRes = await apiFetch( {
+							path: '/redaquest/v2/generate-image',
+							method: 'POST',
+							data: { postId, setFeatured: false, article: { title: s.h2, body: secBody, excerpt: s.brief || '' }, type: imageStyle === 'photo' ? 'photo' : '' },
+						} );
+						if ( imgRes && imgRes.mediaUrl ) {
+							const imgBlock = createBlock( 'core/image', { id: imgRes.mediaId, url: imgRes.mediaUrl, alt: imgRes.altText || s.h2, sizeSlug: 'large' } );
+							const at = dataSelect( 'core/block-editor' ).getBlocks().findIndex( ( b ) => b.name === 'core/heading' && norm( b.attributes && b.attributes.content ) === norm( s.h2 ) );
+							if ( at >= 0 ) {
+								insertBlocks( [ imgBlock ], at + 1 );
+							} else {
+								insertBlocks( [ imgBlock ] );
+							}
+							sectionImgCount++;
+						} else {
+							imgFailed++;
+							imgErrors.push( s.h2 || __( 'section', 'redaquest-connector' ) );
+						}
+					} catch ( imgErr ) {
+						imgFailed++;
+						imgErrors.push( ( imgErr && imgErr.message ) || s.h2 || __( 'section', 'redaquest-connector' ) );
 					}
 				}
 			}
-
-			const all = [ ...bodyBlocks, ...faqBlocks ];
-			if ( all.length ) insertBlocks( all );
-
-			// Set the WP post title from the approved outline title (the plugin used to leave it empty).
-			const finalTitle = ( outline && outline.title ) ? outline.title : ( res.metaTitle || '' );
-			if ( finalTitle ) editPost( { title: finalTitle } );
 
 			let seoPlugin = '';
 			if ( postId ) {
@@ -957,30 +988,46 @@ function RedaQuestBlogModal() {
 			// concept from the article, applies brand colors (or photoreal), and sets the featured image.
 			let imgNote = '';
 			if ( genImage && postId ) {
-				const imgRes = await apiFetch( {
-					path: '/redaquest/v2/generate-image',
-					method: 'POST',
-					data: {
-						postId,
-						article: { title: finalTitle || base.topic, body: stripHtml( res.articleHtml ), excerpt: res.excerpt },
-						type: imageStyle === 'photo' ? 'photo' : '',
-					},
-				} ).catch( () => null );
-				if ( ! ( imgRes && imgRes.imageUrl ) ) imgFailed++;
-				if ( imgRes && imgRes.imageUrl ) {
+				try {
+					const imgRes = await apiFetch( {
+						path: '/redaquest/v2/generate-image',
+						method: 'POST',
+						data: {
+							postId,
+							article: { title: finalTitle || base.topic, body: stripHtml( res.articleHtml ), excerpt: res.excerpt },
+							type: imageStyle === 'photo' ? 'photo' : '',
+						},
+					} );
+					if ( imgRes && ( imgRes.featuredMediaId || imgRes.imageUrl ) ) {
 						imgNote = ` · ${ __( 'cover image added', 'redaquest-connector' ) }`;
-						if ( imgRes.featuredMediaId ) {
-							const fid = imgRes.featuredMediaId;
-							const applyFeatured = () => { try { dataDispatch( 'core/editor' ).editPost( { featured_media: fid } ); } catch ( e ) {} };
+						const fid = imgRes.featuredMediaId;
+						if ( fid ) {
+							const applyFeatured = () => { try { editPost( { featured_media: fid } ); } catch ( e ) {} };
 							applyFeatured();
-							// re-assert after a moment: the heavy article insert can trigger an autosave that clobbers the edit
 							setTimeout( applyFeatured, 2500 );
 						}
+					} else {
+						imgFailed++;
+						imgErrors.push( __( 'cover image', 'redaquest-connector' ) );
 					}
+				} catch ( imgErr ) {
+					imgFailed++;
+					imgErrors.push( ( imgErr && imgErr.message ) || __( 'cover image', 'redaquest-connector' ) );
+				}
+			}
 			if ( sectionImgCount ) imgNote += ` · ${ sectionImgCount } ${ __( 'section image(s)', 'redaquest-connector' ) }`;
+
+			if ( imgFailed ) {
+				imgNote += ` · ${ imgFailed } ${ __( 'image(s) failed', 'redaquest-connector' ) }`;
+				if ( imgErrors.length ) {
+					imgNote += `: ${ imgErrors.slice( 0, 3 ).join( ', ' ) }`;
+				}
+				createWarningNotice( __( 'Some images could not be generated.', 'redaquest-connector' ) + imgNote, { id: 'rq-blog-images', type: 'snackbar' } );
 			}
 
-			if ( imgFailed ) imgNote += ` · ${ imgFailed } ${ __( 'image(s) failed (check credits or brand setup)', 'redaquest-connector' ) }`;
+			if ( sectionImgCount || ( genImage && postId ) ) {
+				await savePost();
+			}
 			const seoNote = seoPlugin ? ` · ${ __( 'SEO saved to', 'redaquest-connector' ) } ${ seoPlugin }` : '';
 			if ( ! Array.isArray( res.faq ) || res.faq.length === 0 ) {
 				createWarningNotice( __( 'Article inserted, but no FAQ was generated.', 'redaquest-connector' ) + creditSuffix( res ) + seoNote + imgNote, { id: 'rq-blog', type: 'snackbar' } );

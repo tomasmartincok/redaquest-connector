@@ -4,7 +4,7 @@ Tags: content sync, woocommerce, social media, scheduling
 Requires at least: 5.8
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 3.0.6
+Stable tag: 3.0.7
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -83,6 +83,11 @@ Yes. A RedaQuest account and workspace are required to connect and to schedule s
 
 == Changelog ==
 
+= 3.0.7 =
+* Fix article not appearing in Gutenberg: use resetBlocks + savePost instead of insertBlocks from modal
+* HTML fallback to core/html block when rawHandler returns empty
+* Save article content before generating images; show warnings when image generation fails
+
 = 3.0.6 =
 * Async full article generation with polling — fixes invalid JSON on Generate full article (same 60s proxy issue as outline)
 
@@ -133,6 +138,9 @@ Yes. A RedaQuest account and workspace are required to connect and to schedule s
 * Optional content writing and default author.
 
 == Upgrade Notice ==
+
+= 3.0.7 =
+Fixes generated article not inserted into the editor and silent image failures. Update recommended.
 
 = 3.0.6 =
 Fixes Generate full article invalid JSON timeout. Update if article generation fails after outline works.
