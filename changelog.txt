@@ -1,3 +1,6 @@
+= 3.0.6 =
+* Async article draft: start job + poll status (fixes invalid JSON on long article generation)
+
 = 3.0.5 =
 * Validate outline before step 3; poll until title + sections exist; fail loudly on pending-only responses
 

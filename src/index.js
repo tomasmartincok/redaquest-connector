@@ -619,6 +619,12 @@ function isValidOutline( outline ) {
 
 const OUTLINE_POLL_MS = 2000;
 const OUTLINE_POLL_MAX_MS = 5 * 60 * 1000;
+const DRAFT_POLL_MS = 3000;
+const DRAFT_POLL_MAX_MS = 10 * 60 * 1000;
+
+function isValidDraftResult( res ) {
+	return !! ( res && typeof res.articleHtml === 'string' && res.articleHtml.trim().length > 100 );
+}
 
 async function fetchOutlineResult( startResponse ) {
 	if ( startResponse && startResponse.jobId ) {
@@ -650,6 +656,38 @@ async function fetchOutlineResult( startResponse ) {
 	}
 
 	throw new Error( __( 'Outline generation returned no content.', 'redaquest-connector' ) );
+}
+
+async function fetchDraftResult( startResponse ) {
+	if ( startResponse && startResponse.jobId ) {
+		const deadline = Date.now() + DRAFT_POLL_MAX_MS;
+		while ( Date.now() < deadline ) {
+			const polled = await apiFetch( {
+				path: `/redaquest/v2/blog/draft/status?jobId=${ encodeURIComponent( startResponse.jobId ) }`,
+			} );
+			if ( polled && ( polled.status === 'failed' || polled.error_code ) ) {
+				throw polled;
+			}
+			if ( isValidDraftResult( polled ) ) {
+				return polled;
+			}
+			if ( polled && polled.status === 'done' && ! isValidDraftResult( polled ) ) {
+				throw new Error( __( 'Article generation returned incomplete data.', 'redaquest-connector' ) );
+			}
+			await new Promise( ( resolve ) => setTimeout( resolve, DRAFT_POLL_MS ) );
+		}
+		throw new Error( __( 'Article generation timed out. Please try again.', 'redaquest-connector' ) );
+	}
+
+	if ( isValidDraftResult( startResponse ) ) {
+		return startResponse;
+	}
+
+	if ( startResponse && startResponse.status === 'pending' ) {
+		throw new Error( __( 'Article is still processing. Update the RedaQuest Connector plugin and try again.', 'redaquest-connector' ) );
+	}
+
+	throw new Error( __( 'Article generation returned no content.', 'redaquest-connector' ) );
 }
 
 function RedaQuestBlogModal() {
@@ -833,7 +871,7 @@ function RedaQuestBlogModal() {
 		setBusyDraft( true );
 		setBlogBusy( true );
 		try {
-			const res = await apiFetch( {
+			const start = await apiFetch( {
 				path: '/redaquest/v2/blog/draft',
 				method: 'POST',
 				data: {
@@ -846,6 +884,7 @@ function RedaQuestBlogModal() {
 					sources: research.sources && research.sources.length ? research.sources : undefined,
 				},
 			} );
+			const res = await fetchDraftResult( start );
 			let bodyBlocks = res.articleHtml ? rawHandler( { HTML: res.articleHtml } ) : [];
 			const faqBlocks = [];
 			if ( Array.isArray( res.faq ) && res.faq.length ) {

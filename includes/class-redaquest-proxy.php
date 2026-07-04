@@ -51,6 +51,17 @@ class Redaquest_Proxy {
             ),
         ));
         register_rest_route(self::NS, '/blog/draft', array('methods' => 'POST', 'callback' => array($this, 'post_blog_draft'), 'permission_callback' => $perm));
+        register_rest_route(self::NS, '/blog/draft/status', array(
+            'methods'             => 'GET',
+            'callback'            => array($this, 'get_blog_draft_status'),
+            'permission_callback' => $perm,
+            'args'                => array(
+                'jobId' => array(
+                    'required'          => true,
+                    'sanitize_callback' => 'sanitize_text_field',
+                ),
+            ),
+        ));
         register_rest_route(self::NS, '/blog/apply-meta', array('methods' => 'POST', 'callback' => array($this, 'post_blog_apply_meta'), 'permission_callback' => $perm));
         register_rest_route(self::NS, '/brand/personas', array('methods' => 'GET', 'callback' => array($this, 'get_brand_personas'), 'permission_callback' => $perm));
     }
@@ -565,7 +576,8 @@ class Redaquest_Proxy {
             if ($clean) $payload['sources'] = $clean;
         }
 
-        $r = $this->call_bridge($payload, 240); // long-form generation
+        // Async job: returns { jobId, status: pending } in ~1s; editor polls status endpoint.
+        $r = $this->call_bridge($payload, 30);
         if (is_wp_error($r)) {
             return $r;
         }
@@ -574,6 +586,36 @@ class Redaquest_Proxy {
         }
         if (200 !== $r['status']) {
             return new WP_Error('redaquest_blog_draft_failed', __('Article generation failed, please try again.', 'redaquest-connector') . $this->blog_error_reason($r['body']), array('status' => 502));
+        }
+        return $this->rest_bridge_body($r['body']);
+    }
+
+    /** Poll async draft job started by post_blog_draft. */
+    public function get_blog_draft_status(WP_REST_Request $request) {
+        $job_id = trim((string) $request->get_param('jobId'));
+        if ('' === $job_id) {
+            return new WP_Error('redaquest_bad_request', __('Missing jobId.', 'redaquest-connector'), array('status' => 400));
+        }
+
+        $r = $this->call_bridge(
+            array(
+                'action' => 'blog_draft_poll',
+                'jobId'  => sanitize_text_field($job_id),
+            ),
+            20
+        );
+        if (is_wp_error($r)) {
+            return $r;
+        }
+        if (402 === $r['status']) {
+            return new WP_REST_Response($r['body'], 402);
+        }
+        if (200 !== $r['status']) {
+            return new WP_Error(
+                'redaquest_blog_draft_failed',
+                __('Article generation failed, please try again.', 'redaquest-connector') . $this->blog_error_reason($r['body']),
+                array('status' => 502)
+            );
         }
         return $this->rest_bridge_body($r['body']);
     }
