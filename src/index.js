@@ -613,6 +613,21 @@ function isValidOutline( outline ) {
 	);
 }
 
+function outlineSourceKey( base, webResearch ) {
+	const angle = base && base.angle ? base.angle : {};
+	return JSON.stringify( {
+		topic: ( base && base.topic ) || '',
+		thesis: angle.thesis || '',
+		example: angle.example || '',
+		audience: angle.audience || '',
+		keywords: ( base && base.keywords ) || [],
+		length: ( base && base.length ) || '',
+		sourceUrls: ( base && base.sourceUrls ) || [],
+		sourceContent: ( base && base.sourceContent ) || '',
+		webResearch: !! webResearch,
+	} );
+}
+
 const OUTLINE_POLL_MS = 2000;
 const OUTLINE_POLL_MAX_MS = 5 * 60 * 1000;
 const DRAFT_POLL_MS = 3000;
@@ -764,6 +779,101 @@ function sectionBodyFromArticleHtml( html, h2Title, briefFallback ) {
 	return ( briefFallback || h2Title || '' ).slice( 0, 1500 );
 }
 
+function normalizedHeadingText( value ) {
+	return stripHtml( String( value || '' ) ).trim().replace( /\s+/g, ' ' ).toLowerCase();
+}
+
+function escapeHtmlAttribute( value ) {
+	return String( value || '' )
+		.replace( /&/g, '&amp;' )
+		.replace( /"/g, '&quot;' )
+		.replace( /</g, '&lt;' )
+		.replace( />/g, '&gt;' );
+}
+
+function imageFigureHtml( imgRes, fallbackAlt ) {
+	const src = imgRes && ( imgRes.mediaUrl || imgRes.imageUrl );
+	if ( ! src ) return '';
+	const mediaId = imgRes.mediaId ? parseInt( imgRes.mediaId, 10 ) : 0;
+	const idClass = Number.isFinite( mediaId ) && mediaId > 0 ? `wp-image-${ mediaId }` : '';
+	const classAttr = idClass ? ` class="${ idClass }"` : '';
+	const alt = escapeHtmlAttribute( ( imgRes && imgRes.altText ) || fallbackAlt || '' );
+	return `<figure class="wp-block-image size-large"><img src="${ escapeHtmlAttribute( src ) }" alt="${ alt }"${ classAttr }/></figure>`;
+}
+
+function insertImageHtmlAfterHeading( html, heading, imgRes, fallbackIndex ) {
+	const target = normalizedHeadingText( heading );
+	const figure = imageFigureHtml( imgRes, heading );
+	if ( ! figure || typeof DOMParser === 'undefined' || typeof document === 'undefined' ) {
+		return null;
+	}
+	try {
+		const doc = new DOMParser().parseFromString( String( html || '' ), 'text/html' );
+		const headings = doc.querySelectorAll( 'h2, h3' );
+		if ( target ) {
+			for ( const node of headings ) {
+				if ( normalizedHeadingText( node.textContent ) !== target ) {
+					continue;
+				}
+				const wrapper = document.createElement( 'div' );
+				wrapper.innerHTML = figure;
+				node.parentNode.insertBefore( wrapper.firstElementChild, node.nextSibling );
+				return doc.body.innerHTML;
+			}
+		}
+		if ( Number.isInteger( fallbackIndex ) && fallbackIndex >= 0 && headings[ fallbackIndex ] ) {
+			const node = headings[ fallbackIndex ];
+			const wrapper = document.createElement( 'div' );
+			wrapper.innerHTML = figure;
+			node.parentNode.insertBefore( wrapper.firstElementChild, node.nextSibling );
+			return doc.body.innerHTML;
+		}
+	} catch {
+		// Fall back to reporting the image as not placed.
+	}
+	return null;
+}
+
+function insertSectionImageNearHeading( heading, imgBlock, imgRes, sectionIndex ) {
+	const target = normalizedHeadingText( heading );
+	if ( ! target && ! Number.isInteger( sectionIndex ) ) return false;
+
+	const blocks = dataSelect( 'core/block-editor' ).getBlocks();
+	for ( let i = 0; i < blocks.length; i++ ) {
+		const block = blocks[ i ];
+		if ( target && block.name === 'core/heading' && normalizedHeadingText( block.attributes?.content ) === target ) {
+			dataDispatch( 'core/block-editor' ).insertBlocks( [ imgBlock ], i + 1 );
+			return true;
+		}
+		if ( block.name === 'core/html' && typeof block.attributes?.content === 'string' ) {
+			const nextHtml = insertImageHtmlAfterHeading( block.attributes.content, heading, imgRes, sectionIndex );
+			if ( nextHtml !== null ) {
+				dataDispatch( 'core/block-editor' ).updateBlockAttributes( block.clientId, { content: nextHtml } );
+				return true;
+			}
+		}
+	}
+	if ( Number.isInteger( sectionIndex ) && sectionIndex >= 0 ) {
+		let headingIndex = 0;
+		for ( let i = 0; i < blocks.length; i++ ) {
+			const block = blocks[ i ];
+			if ( block.name !== 'core/heading' ) {
+				continue;
+			}
+			const level = Number( block.attributes?.level || 2 );
+			if ( level !== 2 && level !== 3 ) {
+				continue;
+			}
+			if ( headingIndex === sectionIndex ) {
+				dataDispatch( 'core/block-editor' ).insertBlocks( [ imgBlock ], i + 1 );
+				return true;
+			}
+			headingIndex++;
+		}
+	}
+	return false;
+}
+
 /** Legacy: persist pre-built block markup (section-image resync). */
 async function persistArticleToPost( postId, blocks, title, { resetBlocks: resetBlocksFn } ) {
 	if ( ! postId || ! blocks.length ) {
@@ -894,7 +1004,7 @@ function RedaQuestBlogModal() {
 	const open = useSelect( ( select ) => select( STORE ).isBlogOpen(), [] );
 	const { setBlogOpen, setBlogBusy } = useDispatch( STORE );
 	const { createSuccessNotice, createErrorNotice, createWarningNotice } = useDispatch( 'core/notices' );
-	const { insertBlocks, resetBlocks } = useDispatch( 'core/block-editor' );
+	const { resetBlocks } = useDispatch( 'core/block-editor' );
 	const { editPost, savePost } = useDispatch( 'core/editor' );
 	const { postId, currentTitle } = useSelect( ( select ) => {
 		const ed = select( 'core/editor' );
@@ -925,6 +1035,7 @@ function RedaQuestBlogModal() {
 	const [ loadingPersonas, setLoadingPersonas ] = useState( false );
 	const [ selectedPersonaId, setSelectedPersonaId ] = useState( '' );
 	const [ credits, setCredits ] = useState( { remaining: null, costs: null } ); // balance + per-action costs
+	const [ outlineInputKey, setOutlineInputKey ] = useState( '' );
 
 	const connected = !! ( status && status.connected );
 
@@ -1039,6 +1150,11 @@ function RedaQuestBlogModal() {
 			createErrorNotice( __( 'Add a topic or a post title first.', 'redaquest-connector' ), { id: 'rq-blog', type: 'snackbar' } );
 			return;
 		}
+		const nextOutlineInputKey = outlineSourceKey( base, webResearch );
+		if ( isValidOutline( outline ) && outlineInputKey === nextOutlineInputKey ) {
+			setStep( 3 );
+			return;
+		}
 		setBusyOutline( true );
 		setBlogBusy( true );
 		setOutline( null );
@@ -1051,12 +1167,14 @@ function RedaQuestBlogModal() {
 			} );
 			const res = await fetchOutlineResult( start );
 			setOutline( res.outline );
+			setOutlineInputKey( nextOutlineInputKey );
 			setResearch( { context: res.researchContext || '', sources: res.sources || [] } );
 			setInfo( { brandManualUsed: !! res.brandManualUsed, brandName: res.brandName || '', modelUsed: res.modelUsed || '' } );
 			createSuccessNotice( __( 'Outline ready.', 'redaquest-connector' ) + creditSuffix( res ), { id: 'rq-blog', type: 'snackbar' } );
 		} catch ( e ) {
 			createErrorNotice( creditError( e ) || ( e && ( e.message || e.error ) ) || __( 'Outline generation failed.', 'redaquest-connector' ), { id: 'rq-blog' } );
 			setOutline( null );
+			setOutlineInputKey( '' );
 			setStep( 2 );
 		} finally {
 			setBusyOutline( false );
@@ -1102,7 +1220,9 @@ function RedaQuestBlogModal() {
 			let sectionImgCount = 0;
 			let imgFailed = 0;
 			const imgErrors = [];
-			const flaggedSections = ( outline.sections || [] ).filter( ( s ) => s && s.image && ( s.h2 || '' ).trim() );
+			const flaggedSections = ( outline.sections || [] )
+				.map( ( s, index ) => ( { ...s, sectionIndex: index } ) )
+				.filter( ( s ) => s && s.image && ( s.h2 || '' ).trim() );
 
 			const finalTitle = ( outline && outline.title ) ? outline.title : ( res.metaTitle || '' );
 
@@ -1134,8 +1254,12 @@ function RedaQuestBlogModal() {
 						} );
 						if ( imgRes && imgRes.mediaUrl ) {
 							const imgBlock = createBlock( 'core/image', { id: imgRes.mediaId, url: imgRes.mediaUrl, alt: imgRes.altText || s.h2, sizeSlug: 'large' } );
-							insertBlocks( [ imgBlock ] );
-							sectionImgCount++;
+							if ( insertSectionImageNearHeading( s.h2, imgBlock, imgRes, s.sectionIndex ) ) {
+								sectionImgCount++;
+							} else {
+								imgFailed++;
+								imgErrors.push( s.h2 || __( 'section', 'redaquest-connector' ) );
+							}
 						} else {
 							imgFailed++;
 							imgErrors.push( s.h2 || __( 'section', 'redaquest-connector' ) );
@@ -1208,6 +1332,7 @@ function RedaQuestBlogModal() {
 			// done → reset wizard state (modal already closed before insert)
 			setStep( 1 );
 			setOutline( null );
+			setOutlineInputKey( '' );
 		} catch ( e ) {
 			createErrorNotice( formatFlowError( e, __( 'Article generation failed.', 'redaquest-connector' ) ), { id: 'rq-blog', type: 'snackbar' } );
 		} finally {
