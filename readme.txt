@@ -4,7 +4,7 @@ Tags: content sync, woocommerce, social media, scheduling
 Requires at least: 5.8
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 3.0.11
+Stable tag: 3.0.12
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -83,6 +83,10 @@ Yes. A RedaQuest account and workspace are required to connect and to schedule s
 
 == Changelog ==
 
+= 3.0.12 =
+* Blog Writer reuses the existing outline when inputs are unchanged.
+* Section images are inserted next to their intended article sections instead of being appended to the end.
+
 = 3.0.11 =
 * Async image generation with polling — fixes cover and section images failing on 60s proxy timeouts
 
@@ -153,6 +157,9 @@ Yes. A RedaQuest account and workspace are required to connect and to schedule s
 * Optional content writing and default author.
 
 == Upgrade Notice ==
+
+= 3.0.12 =
+Fixes Blog Writer outline regeneration and section image placement. Update required for generated articles with section images.
 
 = 3.0.11 =
 Fixes image generation timeouts and empty article body. Update required for Blog Writer.

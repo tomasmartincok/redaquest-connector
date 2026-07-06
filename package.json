@@ -1,6 +1,6 @@
 {
   "name": "redaquest-connector",
-  "version": "3.0.0",
+  "version": "3.0.12",
   "private": true,
   "description": "Build tooling for the Redaquest Connector WordPress plugin (Gutenberg sidebar).",
   "license": "GPL-2.0-or-later",
